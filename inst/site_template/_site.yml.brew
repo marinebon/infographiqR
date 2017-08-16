@@ -2,7 +2,7 @@ name: "<%=site_title%>"
 output_dir: "../<%=basename(dir_web)%>"
 lib_dir: libs
 navbar:
-  title: "Sanctuary Status"
+  title: "<%=site_title%>"
   left:
     - text: "Home"
       href: index.html

@@ -40,7 +40,8 @@ create_site = function(
   header           = system.file('site_template/_header.html', package='infographiq'),
   footer           = system.file('site_template/_footer.html', package='infographiq'),
   styles_css       = system.file('site_template/styles.css', package='infographiq'),
-  index            = system.file('site_template/index.Rmd', package='infographiq')){
+  index            = system.file('site_template/index.Rmd', package='infographiq'),
+  render_modals    = T){
   
   library(tidyverse)
   library(brew)
@@ -134,7 +135,8 @@ create_site = function(
     }
     close(f_rmd)
     
-    render(rmd, output_file = sprintf('%s.html', file_path_sans_ext(rmd)))
+    if (render_modals)
+      render(rmd, output_file = sprintf('%s.html', file_path_sans_ext(rmd)))
   }
   
   # render top level pages and copy all in rmd to docs

@@ -31,9 +31,8 @@ d3.xml(svg_path)
 
         // link
         d3.selectAll(d.link_path)
-          //.attr("xlink:href", d.link)
           .attr("xlink:href", './modals/' + d.svg_id + '.html')
-          .attr("xlink:data-title", d.link_title)
+          .attr("xlink:data-title", d.label)
           .attr("xlink:data-remote", "false")
           .attr("xlink:data-toggle", "modal")
           .attr("xlink:data-target", "#myModal")
@@ -41,7 +40,7 @@ d3.xml(svg_path)
             div.transition()
               .duration(200)
               .style("opacity", .9);
-            div.html(d.link_title + "<br/>"  + d.status_text)
+            div.html(d.label + "<br/>"  + d.status_text)
               .style("left", (d3.event.pageX) + "px")
               .style("top", (d3.event.pageY - 28) + "px");
             })
