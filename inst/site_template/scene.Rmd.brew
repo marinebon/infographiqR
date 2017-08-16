@@ -7,7 +7,7 @@ title: "<%=svg_name%>"
 <script>
 var svg = "<%=svg%>";
 var svg_path = "<%=file.path(basename(dir_svg), svg)%>";
-var svg_elements_csv = "<%=svg_elements_csv%>";
+var svg_elements_csv = "<%=basename(svg_elements_csv)%>";
 </script>
 
 <script src="libs/d3-infographiq.js" type="text/javascript"></script>

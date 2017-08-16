@@ -18,7 +18,7 @@
 #' @param index 
 #'
 #' @return nothing returned from the function if no error, except the created site is generated
-#' @import rmarkdown brew tools servr
+#' @import tidyverse rmarkdown brew tools servr stringr
 #' @export
 #'
 #' @examples
@@ -42,10 +42,12 @@ create_site = function(
   styles_css       = system.file('site_template/styles.css', package='infographiq'),
   index            = system.file('site_template/index.Rmd', package='infographiq')){
   
+  library(tidyverse)
   library(brew)
   library(rmarkdown)
   library(tools)
   library(servr)
+  library(stringr)
   
   # assume paths defined relative to dir_root
   dir_svg          = file.path(dir_root, dir_svg)
@@ -73,7 +75,7 @@ create_site = function(
   file.copy(dir_svg, dir_rmd, recursive=T)
   file.copy(svg_elements_csv, file.path(dir_rmd, basename(svg_elements_csv)))
   writeLines('', file.path(dir_rmd, '.nojekyll'))
-  
+   d
   # check svg_*
   if (!length(svg_paths) == length(svg_names)) 
     stop('Length of svg_paths not matching length of svg_names.')
@@ -132,7 +134,9 @@ create_site = function(
     }
     close(f_rmd)
     
-    render(rmd)
+    # TODO: DEBUG all reasons for failing rmarkdown gen including bad CSV & warn but continue on errors
+    if (id %in% 'forage-fish')
+      render(rmd)
   }
   
   # render top level pages and copy all in rmd to docs
