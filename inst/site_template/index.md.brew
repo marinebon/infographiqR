@@ -1,0 +1,10 @@
+---
+title: "<%=site_title%>"
+---
+
+Welcome!
+
+Please check out these interactive scenes:
+<% for (i in seq_along(svg_names)) { %>
+- [<%=svg_names[i]%>](<%=htmls[i]%>)
+<% } %>

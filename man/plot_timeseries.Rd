@@ -5,7 +5,7 @@
 \title{plot timeseries given a path (or URL) to csv}
 \usage{
 plot_timeseries(csv_tv, title, y_label, x_label = "Year", v_label = y_label,
-  filter = NULL, col_t = NULL, col_y = NULL, skip = 2)
+  filter = NULL, col_t = NULL, col_y = NULL, skip = 0)
 }
 \arguments{
 \item{csv_tv}{csv path or URL with time and value}

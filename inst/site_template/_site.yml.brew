@@ -1,0 +1,32 @@
+name: "<%=site_title%>"
+output_dir: "../<%=basename(dir_web)%>"
+lib_dir: libs
+navbar:
+  title: "Sanctuary Status"
+  left:
+    - text: "Home"
+      href: index.html
+<% for (i in seq_along(svg_names)) { -%>
+    - text: "<%=svg_names[i]%>"
+      href: <%=htmls[i]%>
+<% } -%>
+  right:
+    - icon: fa-info-circle fa-lg
+      href: "README.html"
+output:
+  html_document:
+    theme: cosmo
+    highlight: textmate
+<% if (!is.null(header) | !is.null(footer)) { -%>
+    include:
+<% } -%>
+<% if (!is.null(header)) { -%>
+      in_header: <%=basename(header)%>
+<% } -%>
+<% if (!is.null(footer)) { -%>
+      after_body: <%=basename(footer)%>
+<% } -%>
+<% if (!is.null(styles_css)) { -%>
+    css: <%=basename(styles_css)%>
+<% } -%>
+exclude: ["prep.Rmd"]

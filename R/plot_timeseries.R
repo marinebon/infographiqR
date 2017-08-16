@@ -28,7 +28,7 @@ plot_timeseries = function(
   filter  = NULL,
   col_t   = NULL,
   col_y   = NULL,
-  skip    = 2){
+  skip    = 0){
 
   # debug  
   # csv_tv = 'http://oceanview.pfeg.noaa.gov/erddap/tabledap/cciea_MM_pup_count.csv?time,mean_growth_rate'

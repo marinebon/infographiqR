@@ -4,11 +4,32 @@
 \alias{create_site}
 \title{Create site}
 \usage{
-create_site(dir = "./docs")
+create_site(site_title = "Florida Keys Infographics",
+  dir_root = "/Users/bbest/github/info-fk", dir_svg = "svg",
+  dir_web = "docs", indicators_csv = "plot_indicators.csv",
+  svg_paths = list.files(dir_svg, ".*\\\\.svg$", full.names = T),
+  svg_names = tools::file_path_sans_ext(list.files(dir_svg, ".*\\\\.svg$")),
+  site_yml_brew = system.file("site_template/_site.yml.brew", package =
+  "infographiq"), index_md_brew = system.file("site_template/index.md.brew",
+  package = "infographiq"),
+  readme_md_brew = system.file("site_template/README.md.brew", package =
+  "infographiq"), header = system.file("site_template/_header.html", package =
+  "infographiq"), footer = system.file("site_template/_footer.html", package =
+  "infographiq"), styles_css = system.file("site_template/styles.css", package
+  = "infographiq"), index = system.file("site_template/index.Rmd", package =
+  "infographiq"), clean_site = T)
 }
 \arguments{
+\item{indicators_csv}{csv table containing pointers going from svg_id to csv_url with data for plot of indicator...}
+
 \item{dir}{}
+}
+\value{
+nothing returned from the function if no error, except the created site is generated
 }
 \description{
 Create site
+}
+\examples{
+create_site()
 }

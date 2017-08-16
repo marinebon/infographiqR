@@ -1,0 +1,1 @@
+These SVG illustrations were created by Chris Anderson <Chris.Anderson@myfwc.com> and prepared by Tylar Murray @7yl4r per https://marinebon.github.io/cr-metrics/README.html.

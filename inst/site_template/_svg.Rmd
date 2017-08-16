@@ -1,0 +1,83 @@
+
+
+<script>
+  // define div for tooltip
+  var div = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
+  d3.xml("`r params$svg`")
+    .mimeType("image/svg+xml")
+    .get(function(error, xml) {
+      if (error) throw error;
+      //document.body.appendChild(xml.documentElement);
+      //d3.select("#scene").append(xml.documentElement)
+      document.getElementById('scene').appendChild(xml.documentElement);
+
+      // read csv
+      // https://marinebon.github.io/cr-metrics/data/svg_elements.csv Failed to load resource: the server responded with a status of 404 (Not Found)
+      d3.csv("./data/svg_elements.csv", function(error, data) {
+        if (error) throw error;
+        // console.log(data.columns);
+
+        // filter by svg
+        data = data.filter(function(row) {
+          return row['svg'] == '`r params$svg`';
+        })
+
+        // iterate over rows of svg paths
+        data.forEach(function(d) {
+          // console.log(d);
+
+          // color
+          d3.selectAll(d.status_path)
+            .style("fill", d.status_color);
+
+          // link
+          d3.selectAll(d.link_path)
+            .attr("xlink:href", d.link)
+            .attr("xlink:data-title", d.link_title)
+            .attr("xlink:data-remote", "false")
+            .attr("xlink:data-toggle", "modal")
+            .attr("xlink:data-target", "#myModal")
+            .on("mouseover", function(x) {
+              div.transition()
+                .duration(200)
+                .style("opacity", .9);
+              div.html(d.link_title + "<br/>"  + d.status_text)
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
+              })
+            .on("mouseout", function(d) {
+              div.transition()
+              .duration(500)
+              div.style("opacity", 0);
+            });
+        }); // end: data.forEach()
+      }); // end: d3.csv()
+
+  });
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+  <div class="modal-content">
+  <div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+  </div>
+  <div class="modal-body">
+  ...modal body...
+  </div>
+  </div>
+  </div>
+</div>
+
+<script>
+$('#myModal').on('show.bs.modal', function (e) {
+  var link = $(e.relatedTarget);
+  $(this).find(".modal-title").text(link.data("title"));
+  $(this).find(".modal-body").html('<iframe frameborder="0" width="100%" height="850" src="URL">'.replace('URL',link.attr("href")))
+})
+</script>
