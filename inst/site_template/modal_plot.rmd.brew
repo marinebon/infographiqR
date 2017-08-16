@@ -1,11 +1,12 @@
 
 ```{r}
-plot_timeseries(
+tryCatch(plot_timeseries(
 csv_tv  = "<%=csv_url%>",
 title   = "<%=title%>",
 y_label = "<%=y_label%>",
 skip    = <%=ifelse(is.na(skip_lines), 0, skip_lines)%>,
 filter  = <%=ifelse(is.na(filter), 'NULL', sprintf('"%s"', str_replace_all(filter, '"', '\\\\"')))%>,
 col_t   = <%=ifelse(is.na(col_t), 'NULL', sprintf('"%s"', col_t))%>,
-col_y   = <%=ifelse(is.na(col_y), 'NULL', sprintf('"%s"', col_y))%>)
+col_y   = <%=ifelse(is.na(col_y), 'NULL', sprintf('"%s"', col_y))%>),
+error = function(e) e)
 ```

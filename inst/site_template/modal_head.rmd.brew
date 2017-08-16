@@ -9,7 +9,7 @@ params:
 element: "<%=id%>"
 ---
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-knitr::opts_chunk$set(echo=F, message=F)
+```{r, echo=FALSE, message=F, warning=F}
+knitr::opts_chunk$set(echo=F, message=F, warning=F)
 library(infographiq)
 ```

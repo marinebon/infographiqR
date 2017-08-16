@@ -75,7 +75,7 @@ create_site = function(
   file.copy(dir_svg, dir_rmd, recursive=T)
   file.copy(svg_elements_csv, file.path(dir_rmd, basename(svg_elements_csv)))
   writeLines('', file.path(dir_rmd, '.nojekyll'))
-   d
+  
   # check svg_*
   if (!length(svg_paths) == length(svg_names)) 
     stop('Length of svg_paths not matching length of svg_names.')
@@ -134,13 +134,15 @@ create_site = function(
     }
     close(f_rmd)
     
-    # TODO: DEBUG all reasons for failing rmarkdown gen including bad CSV & warn but continue on errors
-    if (id %in% 'forage-fish')
-      render(rmd)
+    render(rmd, output_file = sprintf('%s.html', file_path_sans_ext(rmd)))
   }
   
   # render top level pages and copy all in rmd to docs
   render_site(dir_rmd)
+  
+  # modals: delete rmd from docs, html from rmd
+  file.remove(list.files(file.path(dir_rmd, 'modals'), '.*\\.html$', full.names=T))
+  file.remove(list.files(file.path(dir_web, 'modals'), '.*\\.Rmd$', full.names=T))
   
   # serve site
   servr::httd(dir_web) # servr::httd()
