@@ -1,10 +1,10 @@
-#' Create site
+#' Create infographics web site
 #'
 #' @param indicators_csv csv table containing pointers going from svg_id to csv_url with data for plot of indicator... 
 #' @param site_title 
-#' @param dir_root 
+#' @param path_root 
 #' @param dir_svg 
-#' @param svg_elements_csv 
+#' @param elements_csv 
 #' @param dir_rmd 
 #' @param dir_web 
 #' @param svg_paths 
@@ -17,23 +17,24 @@
 #' @param styles_css 
 #' @param index 
 #'
-#' @return nothing returned from the function if no error, except the created site is generated
+#' @return nothing returned from the function if no error, except the created site is generated. http://rmarkdown.rstudio.com/rmarkdown_websites.html
 #' @import tidyverse rmarkdown brew tools servr stringr
 #' @export
 #'
 #' @examples
-#' create_site()
-create_site = function(
+#' library(infographiq)
+#' create_info_site()
+create_info_site = function(
   # load_all()
   site_title       = 'Florida Keys Infographics', 
-  dir_root         = '/Users/bbest/github/info-fk',
+  path_root        =  '/Users/bbest/github/info-fk',
   dir_svg          = 'svg',
-  svg_elements_csv = 'svg_elements.csv',
+  elements_csv     = 'svg_elements.csv',
   indicators_csv   = 'plot_indicators.csv',
   dir_rmd          = 'rmd',
   dir_web          = 'docs',
-  svg_paths        = list.files(dir_svg, '.*\\.svg$', full.names=T),
-  svg_names        = tools::file_path_sans_ext(list.files(dir_svg, '.*\\.svg$')),
+  svg_paths        = list.files(file.path(path_root, dir_svg), '.*\\.svg$', full.names=T),
+  svg_names        = tools::file_path_sans_ext(basename(svg_paths)),
   site_yml_brew    = system.file('site_template/_site.yml.brew', package='infographiq'),
   index_md_brew    = system.file('site_template/index.md.brew', package='infographiq'),
   readme_md_brew   = system.file('site_template/README.md.brew', package='infographiq'),
@@ -43,6 +44,9 @@ create_site = function(
   index            = system.file('site_template/index.Rmd', package='infographiq'),
   render_modals    = T){
   
+  #devtools::load_all(); create_info_site()
+  #browser()
+  
   library(tidyverse)
   library(brew)
   library(rmarkdown)
@@ -50,32 +54,32 @@ create_site = function(
   library(servr)
   library(stringr)
   
-  # assume paths defined relative to dir_root
-  dir_svg          = file.path(dir_root, dir_svg)
-  dir_rmd          = file.path(dir_root, dir_rmd)
-  dir_web          = file.path(dir_root, dir_web)
-  dir_modals       = file.path(dir_rmd, 'modals')
-  indicators_csv   = file.path(dir_root, indicators_csv)
-  svg_elements_csv = file.path(dir_root, svg_elements_csv)
+  # assume paths defined relative to path_root
+  path_svg         = file.path(path_root, dir_svg)
+  path_rmd         = file.path(path_root, dir_rmd)
+  path_web         = file.path(path_root, dir_web)
+  path_modals      = file.path(path_rmd, 'modals')
+  path_indicators  = file.path(path_root, indicators_csv)
+  path_elements    = file.path(path_root, elements_csv)
   
   # get package templates
   scene_brew      = system.file('site_template/scene.rmd.brew', package='infographiq')
   modal_head_brew = system.file('site_template/modal_head.rmd.brew', package='infographiq')
   modal_plot_brew = system.file('site_template/modal_plot.rmd.brew', package='infographiq')
-  dir_libs        = system.file('site_template/libs', package='infographiq')
+  path_libs        = system.file('site_template/libs', package='infographiq')
   
   # check paths
-  for (arg in c('dir_svg','indicators_csv')){
+  for (arg in c('path_svg','path_indicators','path_elements')){
     val = get(arg)
-    if (!file.exists(indicators_csv)) 
+    if (!file.exists(val)) 
       stop(sprintf('The %s does not exist: %s', arg, val))
   }
-  if (!dir.exists(dir_rmd)) dir.create(dir_rmd)
-  if (!dir.exists(dir_web)) dir.create(dir_web)
-  file.copy(dir_libs, dir_rmd, recursive=T)
-  file.copy(dir_svg, dir_rmd, recursive=T)
-  file.copy(svg_elements_csv, file.path(dir_rmd, basename(svg_elements_csv)))
-  writeLines('', file.path(dir_rmd, '.nojekyll'))
+  if (!dir.exists(path_rmd)) dir.create(path_rmd)
+  if (!dir.exists(path_web)) dir.create(path_web)
+  file.copy(path_libs, path_rmd, recursive=T)
+  file.copy(path_svg, path_rmd, recursive=T)
+  file.copy(path_elements, file.path(path_rmd, elements_csv))
+  writeLines('', file.path(path_rmd, '.nojekyll'))
   
   # check svg_*
   if (!length(svg_paths) == length(svg_names)) 
@@ -85,42 +89,42 @@ create_site = function(
     f = get(arg)
     if (!is.null(f)){
       if (!file.exists(f)) stop(sprintf('The %s file does not exist: %s', arg, f))
-      file.copy(f, file.path(dir_rmd, basename(f)))
+      file.copy(f, file.path(path_rmd, basename(f)))
     }
   }
   
-  # brew _site.yml into dir_rmd
+  # brew _site.yml into path_rmd
   svgs  = basename(svg_paths)
-  rmds  = sprintf('%s.rmd', file_path_sans_ext(svgs))
+  rmds  = sprintf( '%s.rmd', file_path_sans_ext(svgs))
   htmls = sprintf('%s.html', file_path_sans_ext(svgs))
   if (is.null(site_yml_brew)) stop('The argument site_yml_brew can not be null.')
   for (arg in c('site_yml_brew','index_md_brew', 'readme_md_brew')){ # arg='site_yml_brew'
     f_brew = get(arg)
-    if (file_ext(f_brew) != 'brew') 
-      stop(sprintf('Argument %s requires a .brew file extension: %s', arg, f_brew))
-    f = file_path_sans_ext(f_brew)
     if (!is.null(f_brew)){
-      if (!file.exists(f_brew)) stop(sprintf('The %s file does not exist: %s', arg, f))
-      brew(f_brew, file.path(dir_rmd, basename(f)))
+      f = file_path_sans_ext(f_brew)
+      if (file_ext(f_brew) != 'brew') 
+        stop(sprintf('Argument %s requires a .brew file extension: %s', arg, f_brew))
+      if (!file.exists(f_brew)) 
+        stop(sprintf('The %s file does not exist: %s', arg, f))
+      brew(f_brew, file.path(path_rmd, basename(f)))
     }  
   }
 
-  # filter indicators to element from parameter
-  d = read_csv(indicators_csv) %>%
-    filter(!is.na(csv_url)) # View(d)
-  
   # generate scene pages
+  #browser()
   for (i in seq_along(svgs)){ # i = 3
     svg = svgs[i]
     svg_name = svg_names[i]
-    brew(scene_brew, file.path(dir_rmd, rmds[i]))
+    brew(scene_brew, file.path(path_rmd, rmds[i]))
   }
   
   # generate modal pages
-  dir.create(dir_modals, showWarnings = F)
+  dir.create(path_modals, showWarnings = F)
+  d = read_csv(path_indicators) %>%
+    filter(!is.na(csv_url)) # View(d)
   for (id in unique(d$svg_id)){ # id = unique(d$svg_id)[3]
     d_id = filter(d, svg_id == id)
-    rmd = sprintf('%s/%s.Rmd', dir_modals, id)
+    rmd = sprintf('%s/%s.Rmd', path_modals, id)
     
     brew(modal_head_brew, rmd)
     
@@ -140,12 +144,14 @@ create_site = function(
   }
   
   # render top level pages and copy all in rmd to docs
-  render_site(dir_rmd)
+  # NOTE: wipes out dir_web first
+  render_site(path_rmd)
   
-  # modals: delete rmd from docs, html from rmd
-  file.remove(list.files(file.path(dir_rmd, 'modals'), '.*\\.html$', full.names=T))
-  file.remove(list.files(file.path(dir_web, 'modals'), '.*\\.Rmd$', full.names=T))
+  # cd svg; gzip -S .svgz *.svg
+  
+  # modals: delete rmd from docs, keep html from rmd so use cached copy when render_modals = F
+  file.remove(list.files(file.path(path_web, 'modals'),  '.*\\.Rmd$', full.names=T))
   
   # serve site
-  servr::httd(dir_web) # servr::httd()
+  servr::httd(path_web) # servr::httd('/Users/bbest/github/info-fk/docs')
 }

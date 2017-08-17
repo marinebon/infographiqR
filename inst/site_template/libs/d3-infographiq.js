@@ -1,3 +1,5 @@
+var debug_mode = false;
+
 // define div for tooltip
 var div = d3.select("body").append("div")
   .attr("class", "tooltip")
@@ -13,25 +15,42 @@ d3.xml(svg_path)
 
     // read csv
     d3.csv(svg_elements_csv, function(error, data) {
+      
       if (error) throw error;
-      console.log(data.columns);
+      
+      if (debug_mode){
+        console.log('all svg element csv data..');
+        console.log(data);
+      }
+      //debugger;
 
       // filter by svg
       data = data.filter(function(row) {
-        return row['svg'] == svg;
-      })
+        return row.svg == svg;
+      });
+      
+      if (debug_mode){
+        console.log('selected svg element csv data...');
+        console.log(data);
+      }
 
       // iterate over rows of svg paths
       data.forEach(function(d) {
-        console.log(d);
+        var d_path = '#' + d.svg_id;
+        var d_link = './modals/' + d.svg_id + '.html';
+
+        if (debug_mode){
+          console.log('forEach d...' + d);
+          console.log(d);
+        }
 
         // color
-        d3.selectAll(d.status_path)
+        d3.selectAll(d_path)
           .style("fill", d.status_color);
 
         // link
-        d3.selectAll(d.link_path)
-          .attr("xlink:href", './modals/' + d.svg_id + '.html')
+        d3.selectAll(d_path)
+          .attr("xlink:href", d_link)
           .attr("xlink:data-title", d.label)
           .attr("xlink:data-remote", "false")
           .attr("xlink:data-toggle", "modal")
@@ -39,17 +58,16 @@ d3.xml(svg_path)
           .on("mouseover", function(x) {
             div.transition()
               .duration(200)
-              .style("opacity", .9);
+              .style("opacity", 0.9);
             div.html(d.label + "<br/>"  + d.status_text)
               .style("left", (d3.event.pageX) + "px")
               .style("top", (d3.event.pageY - 28) + "px");
             })
           .on("mouseout", function(d) {
             div.transition()
-            .duration(500)
+            .duration(500);
             div.style("opacity", 0);
           });
       }); // end: data.forEach()
     }); // end: d3.csv()
 });
-
