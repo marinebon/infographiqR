@@ -27,7 +27,8 @@
 create_info_site = function(
   # load_all()
   site_title       = 'Florida Keys Infographics', 
-  path_root        =  '/Users/bbest/github/info-fk',
+  #path_root        =  '/Users/bbest/github/info-fk',
+  path_root        =  '.',
   dir_svg          = 'svg',
   elements_csv     = 'svg_elements.csv',
   indicators_csv   = 'plot_indicators.csv',

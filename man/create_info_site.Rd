@@ -4,13 +4,12 @@
 \alias{create_info_site}
 \title{Create infographics web site}
 \usage{
-create_info_site(site_title = "Florida Keys Infographics",
-  dir_root = "/Users/bbest/github/info-fk", dir_svg = "svg",
-  svg_elements_csv = "svg_elements.csv",
+create_info_site(site_title = "Florida Keys Infographics", path_root = ".",
+  dir_svg = "svg", elements_csv = "svg_elements.csv",
   indicators_csv = "plot_indicators.csv", dir_rmd = "rmd",
-  dir_web = "docs", svg_paths = list.files(dir_svg, ".*\\\\.svgz$",
-  full.names = T), svg_names = tools::file_path_sans_ext(list.files(dir_svg,
-  ".*\\\\.svgz$")),
+  dir_web = "docs", svg_paths = list.files(file.path(path_root, dir_svg),
+  ".*\\\\.svg$", full.names = T),
+  svg_names = tools::file_path_sans_ext(basename(svg_paths)),
   site_yml_brew = system.file("site_template/_site.yml.brew", package =
   "infographiq"), index_md_brew = system.file("site_template/index.md.brew",
   package = "infographiq"),
@@ -19,16 +18,16 @@ create_info_site(site_title = "Florida Keys Infographics",
   "infographiq"), footer = system.file("site_template/_footer.html", package =
   "infographiq"), styles_css = system.file("site_template/styles.css", package
   = "infographiq"), index = system.file("site_template/index.Rmd", package =
-  "infographiq"), render_modals = F)
+  "infographiq"), render_modals = T)
 }
 \arguments{
 \item{site_title}{}
 
-\item{dir_root}{}
+\item{path_root}{}
 
 \item{dir_svg}{}
 
-\item{svg_elements_csv}{}
+\item{elements_csv}{}
 
 \item{indicators_csv}{csv table containing pointers going from svg_id to csv_url with data for plot of indicator...}
 
@@ -61,5 +60,6 @@ nothing returned from the function if no error, except the created site is gener
 Create infographics web site
 }
 \examples{
-create_site()
+library(infographiq)
+create_info_site()
 }
