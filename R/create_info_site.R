@@ -146,7 +146,7 @@ create_info_site = function(
     
     f_rmd = file(rmd, 'a') # file connection in append mode
     for (i in 1:nrow(d_id)){ # i = 1
-      attach(d_id[1,], name='d_id_i')
+      attach(d_id[i,], name='d_id_i')
       
       brew(modal_plot_brew, f_rmd)
       
