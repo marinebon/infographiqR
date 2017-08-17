@@ -4,9 +4,9 @@
 \alias{create_info_site}
 \title{Create infographics web site}
 \usage{
-create_info_site(site_title = "Florida Keys Infographics", path_root = ".",
-  dir_svg = "svg", elements_csv = "svg_elements.csv",
-  indicators_csv = "plot_indicators.csv", dir_rmd = "rmd",
+create_info_site(path_root = ".", dir_svg = "svg",
+  elements_csv = "svg_elements.csv", indicators_csv = "plot_indicators.csv",
+  site_title = "Florida Keys Infographics", dir_rmd = "rmd",
   dir_web = "docs", svg_paths = list.files(file.path(path_root, dir_svg),
   ".*\\\\.svg$", full.names = T),
   svg_names = tools::file_path_sans_ext(basename(svg_paths)),
@@ -17,44 +17,45 @@ create_info_site(site_title = "Florida Keys Infographics", path_root = ".",
   "infographiq"), header = system.file("site_template/_header.html", package =
   "infographiq"), footer = system.file("site_template/_footer.html", package =
   "infographiq"), styles_css = system.file("site_template/styles.css", package
-  = "infographiq"), index = system.file("site_template/index.Rmd", package =
-  "infographiq"), render_modals = T)
+  = "infographiq"), render_modals = T, preview_site = T)
 }
 \arguments{
-\item{site_title}{}
+\item{path_root}{root path for repository, from which other directories are relatively positioned.}
 
-\item{path_root}{}
+\item{dir_svg}{directory within path_root containing SVG files.}
 
-\item{dir_svg}{}
+\item{elements_csv}{csv within path_root containing SVG identifiers and having these columns: svg (filename of svg, eg pelagic.svg), svg_id (SVG id of element), label (shows on hover and in modal title), status_text (shows on hover, optional), status_color (hexadecimal color to fill shape, optional).}
 
-\item{elements_csv}{}
+\item{indicators_csv}{csv table containing pointers going from svg_id to csv_url with data for plot of indicator for use with plot_timeseries() function.}
 
-\item{indicators_csv}{csv table containing pointers going from svg_id to csv_url with data for plot of indicator...}
+\item{site_title}{title of site to show up in navigation menu.}
 
-\item{dir_rmd}{}
+\item{dir_rmd}{directory within path_root to output Rmarkdown files for staging website.}
 
-\item{dir_web}{}
+\item{dir_web}{directory within path_root to output html files for final website. Defaults to 'docs' in order to comply with Github Pages repository configuration.}
 
-\item{svg_paths}{}
+\item{svg_paths}{paths to specific svg files. Defaults to all svg files in dir_svg.}
 
-\item{svg_names}{}
+\item{svg_names}{names for each svg scene that becomes a menu item in site. Defaults to name of svg with file extension (.svg) stripped.}
 
-\item{site_yml_brew}{}
+\item{site_yml_brew}{brew template for site menu to render the Rmarkdown website (see http://rmarkdown.rstudio.com/rmarkdown_websites.html).}
 
-\item{index_md_brew}{}
+\item{index_md_brew}{brew template for home page of site}
 
-\item{readme_md_brew}{}
+\item{readme_md_brew}{brew template for README of site, accessible via upper right "?" icon in menu}
 
-\item{header}{}
+\item{header}{header for site}
 
-\item{footer}{}
+\item{footer}{footer for site}
 
-\item{styles_css}{}
+\item{styles_css}{cascading style sheet (css) for site}
 
-\item{index}{}
+\item{render_modals}{True/False on whether to render the modal time series plots for site. Can be time consuming and gets cached in the dir_rmd folder, so set this to False if working on other parts of already generated site.}
+
+\item{preview_site}{True/False on whether to launch website in RStudio. Because of cross-browser security restrictions some SVG functionality of the site does not work just opening the html files locally from the filesystem, so requires a hosted web server either remotely (eg Github.io) or locally (ie servr::httd()).}
 }
 \value{
-nothing returned from the function if no error, except the created site is generated. http://rmarkdown.rstudio.com/rmarkdown_websites.html
+nothing returned from the function if no error, except the created site is generated.
 }
 \description{
 Create infographics web site
