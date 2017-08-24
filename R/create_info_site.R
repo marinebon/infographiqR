@@ -91,11 +91,10 @@ create_info_site = function(
     path_elements,
     c('svg','svg_id','label','status_text','status_color')
   )
-  # cols_elements = read_csv(path_elements) %>% names()
-  # cols_missing = setdiff(cols_required[['elements']], cols_elements)
-  # if (length(cols_missing) > 0)
-  #   stop(sprintf('Missing these columns in elements_csv: %s', paste(cols_missing, collapse=', ')))
-  # TODO: do same for indicators_csv
+  check_csv_columns(
+    path_indicators,
+    c('svg_id', 'title', 'y_label', 'col_t', 'col_y', 'filter', 'group_by', 'csv_url')
+  )
 
   # prep files
   if (!dir.exists(path_rmd)) dir.create(path_rmd)
