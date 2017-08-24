@@ -81,7 +81,7 @@ create_info_site = function(
   # === columns required in csv's
   cols_required = list(
     elements   = c('svg','svg_id','label','status_text','status_color'),
-    indicators = c('svg_id', 'title', 'y_label', 'col_t', 'col_y',
+    indicators = c('svg_id', 'plot_title', 'y_label', 'col_t', 'col_y',
         'filter', 'group_by', 'csv_url'
     )
   )
@@ -93,7 +93,7 @@ create_info_site = function(
   )
   check_csv_columns(
     path_indicators,
-    c('svg_id', 'title', 'y_label', 'col_t', 'col_y', 'filter', 'group_by', 'csv_url')
+    c('svg_id', 'plot_title', 'y_label', 'col_t', 'col_y', 'filter', 'group_by', 'csv_url')
   )
 
   # prep files
