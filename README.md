@@ -15,6 +15,8 @@ See `./inst/example_fk` for example files.
 
 ```R
 # install
+install.packages(c("tidyverse", "stringr", "rmarkdown", "dygraphs", "xts", "lubridate", "geojsonio", "RColorBrewer", "leaflet", "crosstalk", "servr", "roxygen2"))
+
 if (!require('devtools')) install.packages('devtools')
 devtools::install_github('marinebon/infographiq')
 

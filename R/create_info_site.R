@@ -47,6 +47,8 @@ create_info_site = function(
   #setwd('/Users/bbest/github/info-fk'); devtools::load_all('/Users/bbest/github/infographiq'); create_info_site()
   #browser()
 
+  sprintf("\n\n ### INFOGRAPHIQ SITE GENERATOR ### \n\n")
+
   library(tidyverse)
   library(brew)
   library(rmarkdown)
