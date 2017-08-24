@@ -65,30 +65,31 @@ create_info_site = function(
   path_elements    = file.path(path_root, elements_csv)
   path_indicators  = file.path(path_root, indicators_csv)
 
-  # get package templates
+  # === get package templates
   scene_brew      = system.file('site_template/scene.rmd.brew', package='infographiq')
   modal_head_brew = system.file('site_template/modal_head.rmd.brew', package='infographiq')
   modal_plot_brew = system.file('site_template/modal_plot.rmd.brew', package='infographiq')
   path_libs        = system.file('site_template/libs', package='infographiq')
 
-  # columns required in csv's
-  cols_required = list(
-    elements   = c('svg','svg_id','label','status_text','status_color'),
-    indicators = c(''))
-
-  # check paths
+  # === check paths
   for (var in c('path_svg','path_indicators','path_elements')){
     path = get(var)
     if (!file.exists(path))
       stop(sprintf('The %s does not exist: %s', var, path))
   }
 
-  # check csv files (indicators, elements) for required columns
-  cols_elements = read_csv(path_elements) %>% names()
-  cols_missing = setdiff(cols_required[['elements']], cols_elements)
-  if (length(cols_missing) > 0)
-    stop(sprintf('Missing these columns in elements_csv: %s', paste(cols_missing, collapse=', ')))
-  # TODO: do same for indicators_csv
+  # === check csv files (indicators, elements) for required columns
+  check_csv_columns(
+    path_elements,
+    c('svg','svg_id','label','status_text','status_color')
+  )
+  check_csv_columns(
+    path_indicators,
+    c(
+      'svg_id', 'plot_title', 'y_label', 'col_t', 'col_y', 'filter', 'group_by',
+      'csv_url', 'skip_lines'
+     )
+  )
 
   # prep files
   if (!dir.exists(path_rmd)) dir.create(path_rmd)
@@ -161,6 +162,7 @@ create_info_site = function(
 
     if (render_modals)
       #if (id=='forage-fish') browser()
+      print(sprintf("rendering modal %s", rmd))
       render(rmd, output_file = htm)
   }
 

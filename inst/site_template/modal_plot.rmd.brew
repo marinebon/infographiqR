@@ -2,7 +2,7 @@
 ```{r}
 tryCatch(plot_timeseries(
 csv_tv  = "<%=csv_url%>",
-title   = "<%=title%>",
+title   = "<%=plot_title%>",
 y_label = "<%=y_label%>",
 skip    = <%=ifelse(is.na(skip_lines), 0, skip_lines)%>,
 filter  = <%=ifelse(is.na(filter), 'NULL', sprintf('"%s"', str_replace_all(filter, '"', '\\\\"')))%>,
