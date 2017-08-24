@@ -78,14 +78,6 @@ create_info_site = function(
       stop(sprintf('The %s does not exist: %s', var, path))
   }
 
-  # === columns required in csv's
-  cols_required = list(
-    elements   = c('svg','svg_id','label','status_text','status_color'),
-    indicators = c('svg_id', 'plot_title', 'y_label', 'col_t', 'col_y',
-        'filter', 'group_by', 'csv_url'
-    )
-  )
-
   # === check csv files (indicators, elements) for required columns
   check_csv_columns(
     path_elements,
