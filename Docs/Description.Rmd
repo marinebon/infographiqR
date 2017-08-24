@@ -15,7 +15,7 @@ output: html_document
 1. Columns needed in svg_elements 
 - svg
 - svg_id (lower case no spaces - **MUST MATCH** svg_id in plot_indicators.csv)
-- module_title
+- label
 - status_text
 - status_color
 
@@ -35,6 +35,7 @@ Example
 - filter (to filter from csv_url)
 - group_by (to group from csv_url)
 - csv_url (needs to be in github repository)
+- skip_lines
 
 Example: 
 
