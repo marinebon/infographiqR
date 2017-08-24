@@ -47,7 +47,7 @@ create_info_site = function(
   #setwd('/Users/bbest/github/info-fk'); devtools::load_all('/Users/bbest/github/infographiq'); create_info_site()
   #browser()
 
-  sprintf("\n\n ### INFOGRAPHIQ SITE GENERATOR ### \n\n")
+  print(sprintf("\n\n ### INFOGRAPHIQ SITE GENERATOR ### \n\n"))
 
   library(tidyverse)
   library(brew)
@@ -133,7 +133,7 @@ create_info_site = function(
     svg = svgs[i]
     svg_name = svg_names[i]
     rmd_path = file.path(path_rmd, rmds[i])
-    sprintf('Brewing scene %s', rmd_path)
+    print(sprintf('Brewing scene %s', rmd_path))
     brew(scene_brew, rmd_path)
   }
 
