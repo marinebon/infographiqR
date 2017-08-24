@@ -85,7 +85,10 @@ create_info_site = function(
   )
   check_csv_columns(
     path_indicators,
-    c('svg_id', 'plot_title', 'y_label', 'col_t', 'col_y', 'filter', 'group_by', 'csv_url')
+    c(
+      'svg_id', 'plot_title', 'y_label', 'col_t', 'col_y', 'filter', 'group_by',
+      'csv_url', 'skip_lines'
+     )
   )
 
   # prep files
