@@ -1,7 +1,7 @@
 var debug_mode = false;
 
 // define div for tooltip
-var div = d3.select("body").append("div")
+var tooltip_div = d3.select("body").append("div")
   .attr("class", "tooltip")
   .style("opacity", 0);
 
@@ -65,18 +65,18 @@ d3.xml(svg_path)
           .attr("xlink:data-toggle", "modal")
           .attr("xlink:data-target", "#myModal")
           .on("mouseover", function(x) {
-            div.transition()
+            tooltip_div.transition()
               .duration(200)
               .style("opacity", 0.9);
-            div.html(d.label + "<br/>"  + d.status_text)
+            tooltip_div.html(d.label + "<br/>"  + d.status_text)
               .style("left", (d3.event.pageX) + "px")
               .style("top", (d3.event.pageY - 28) + "px");
             }
           )
           .on("mouseout", function(d) {
-            div.transition()
+            tooltip_div.transition()
             .duration(500);
-            div.style("opacity", 0);
+            tooltip_div.style("opacity", 0);
           });
       }); // end: data.forEach()
     }); // end: d3.csv()
