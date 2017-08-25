@@ -160,10 +160,11 @@ create_info_site = function(
     }
     close(f_rmd)
 
-    if (render_modals)
+    if (render_modals){
       #if (id=='forage-fish') browser()
       print(sprintf("rendering modal %s", rmd))
       render(rmd, output_file = htm)
+    }
   }
 
   # === render top level pages and copy all in rmd to docs
