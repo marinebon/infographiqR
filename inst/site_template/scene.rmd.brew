@@ -3,6 +3,9 @@ title: "<%=svg_name%>"
 ---
 
 <div id="scene"></div>
+<div id="svg_id_list_div">
+  <ul id="svg_id_list"></ul>
+</div>
 
 <script>
 var svg = "<%=svg%>";

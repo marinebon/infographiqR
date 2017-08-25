@@ -15,9 +15,9 @@ d3.xml(svg_path)
 
     // read csv
     d3.csv(svg_elements_csv, function(error, data) {
-      
+
       if (error) throw error;
-      
+
       if (debug_mode){
         console.log('all svg element csv data..');
         console.log(data);
@@ -28,7 +28,7 @@ d3.xml(svg_path)
       data = data.filter(function(row) {
         return row.svg == svg;
       });
-      
+
       if (debug_mode){
         console.log('selected svg element csv data...');
         console.log(data);
@@ -48,7 +48,16 @@ d3.xml(svg_path)
         d3.selectAll(d_path)
           .style("fill", d.status_color);
 
-        // link
+        // create list of species in the infographic
+        d3.select("#svg_id_list").append("li").append("a")
+          .text(d.label)
+          .attr("xlink:href", d_link)
+          .attr("xlink:data-title", d.label)
+          .attr("xlink:data-remote", "false")
+          .attr("xlink:data-toggle", "modal")
+          .attr("xlink:data-target", "#myModal");
+
+        // link svgs to modals
         d3.selectAll(d_path)
           .attr("xlink:href", d_link)
           .attr("xlink:data-title", d.label)
