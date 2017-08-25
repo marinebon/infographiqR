@@ -36,7 +36,7 @@ d3.xml(svg_path)
 
       // iterate over rows of svg paths
       data.forEach(function(d) {
-        var d_path = '#' + d.svg_id;
+        var d_path = 'g#' + d.svg_id + ' path';
         var d_link = './modals/' + d.svg_id + '.html';
 
         if (debug_mode){
@@ -48,6 +48,14 @@ d3.xml(svg_path)
         d3.selectAll(d_path)
           .style("fill", d.status_color);
 
+        function highlight(){
+          d3.selectAll(d_path).style("stroke", "white");
+          d3.selectAll(d_path).style("stroke-width", 1);
+        }
+        function unhighlight(){
+          d3.selectAll(d_path).style("stroke-width", 0);
+        }
+
         // create list of species in the infographic
         d3.select("#svg_id_list").append("li").append("a")
           .text(d.label)
@@ -55,7 +63,9 @@ d3.xml(svg_path)
           .attr("xlink:data-title", d.label)
           .attr("xlink:data-remote", "false")
           .attr("xlink:data-toggle", "modal")
-          .attr("xlink:data-target", "#myModal");
+          .attr("xlink:data-target", "#myModal")
+          .on("mouseover", highlight)
+          .on("mouseout", unhighlight);
 
         // link svgs to modals
         d3.selectAll(d_path)
@@ -71,13 +81,15 @@ d3.xml(svg_path)
             tooltip_div.html(d.label + "<br/>"  + d.status_text)
               .style("left", (d3.event.pageX) + "px")
               .style("top", (d3.event.pageY - 28) + "px");
-            }
-          )
+            highlight();
+          })
           .on("mouseout", function(d) {
             tooltip_div.transition()
             .duration(500);
             tooltip_div.style("opacity", 0);
-          });
+            unhighlight();
+          })
+        ;
       }); // end: data.forEach()
     }); // end: d3.csv()
 });
