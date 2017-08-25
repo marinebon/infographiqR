@@ -91,7 +91,7 @@ create_info_site = function(
      )
   )
 
-  # prep files
+  # === prep files
   if (!dir.exists(path_rmd)) dir.create(path_rmd)
   if (!dir.exists(path_web)) dir.create(path_web)
   file.copy(path_libs, path_rmd, recursive=T)
@@ -99,7 +99,7 @@ create_info_site = function(
   file.copy(path_elements, file.path(path_rmd, elements_csv))
   writeLines('', file.path(path_rmd, '.nojekyll'))
 
-  # check svg_*
+  # === check svg_*
   if (!length(svg_paths) == length(svg_names))
     stop('Length of svg_paths not matching length of svg_names.')
 
@@ -111,7 +111,7 @@ create_info_site = function(
     }
   }
 
-  # brew _site.yml into path_rmd
+  # === brew _site.yml into path_rmd
   svgs  = basename(svg_paths)
   rmds  = sprintf( '%s.rmd', file_path_sans_ext(svgs))
   htmls = sprintf('%s.html', file_path_sans_ext(svgs))
@@ -128,7 +128,7 @@ create_info_site = function(
     }
   }
 
-  # generate scene pages
+  # === generate scene pages
   #browser()
   for (i in seq_along(svgs)){ # i = 3
     svg = svgs[i]
@@ -138,7 +138,7 @@ create_info_site = function(
     brew(scene_brew, rmd_path)
   }
 
-  # generate modal pages
+  # === generate modal pages
   dir.create(path_modals, showWarnings = F)
   d = read_csv(path_indicators) %>%
     filter(!is.na(csv_url)) # View(d)
@@ -166,14 +166,14 @@ create_info_site = function(
       render(rmd, output_file = htm)
   }
 
-  # render top level pages and copy all in rmd to docs
+  # === render top level pages and copy all in rmd to docs
   # NOTE: wipes out path_web first
   render_site(path_rmd)
 
   # modals: delete rmd from docs, keep html from rmd so use cached copy when render_modals = F
   file.remove(list.files(file.path(path_web, 'modals'),  '.*\\.Rmd$', full.names=T))
 
-  # serve site
+  # === serve site
   if (preview_site)
     servr::httd(path_web) # servr::httd('/Users/bbest/github/info-fk/docs')
 }
