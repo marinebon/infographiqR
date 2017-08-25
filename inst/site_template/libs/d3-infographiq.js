@@ -71,7 +71,8 @@ d3.xml(svg_path)
             div.html(d.label + "<br/>"  + d.status_text)
               .style("left", (d3.event.pageX) + "px")
               .style("top", (d3.event.pageY - 28) + "px");
-            })
+            }
+          )
           .on("mouseout", function(d) {
             div.transition()
             .duration(500);
