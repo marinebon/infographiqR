@@ -20,7 +20,7 @@
 #   title   = 'Female sea lion pup growth rate',
 #   y_label = 'Mean growth rate')
 plot_timeseries = function(
-  csv_tv, 
+  csv_tv,
   title,
   y_label,
   x_label = 'Year',
@@ -30,7 +30,7 @@ plot_timeseries = function(
   col_y   = NULL,
   skip    = 0){
 
-  # debug  
+  # debug
   # csv_tv = 'http://oceanview.pfeg.noaa.gov/erddap/tabledap/cciea_MM_pup_count.csv?time,mean_growth_rate'
   # title  = 'Female sea lion pup growth rate'
   # y_label = 'Mean growth rate'
@@ -50,7 +50,7 @@ plot_timeseries = function(
   # filter  = "group == Algal farmer"
   # col_t   = "year"
   # col_y   = "q_mean"
-  # 
+  #
   # x_label = 'Year'
   # v_label = y_label
 
@@ -65,15 +65,15 @@ plot_timeseries = function(
   if (!is.null(filter)){
     d = eval(parse(text=sprintf('filter(d, %s)', filter)))
   }
-  
+
   stopifnot(is.null(col_t) == is.null(col_y))
-  
+
   if(!is.null(col_t)){
     d = d[,c(col_t, col_y)]
   }
-  
+
   #stopifnot(ncol(d) == 2)
-  
+
   colnames(d) = c('t','v')
 
   if (all(nchar(as.character(d$t))==4)){
@@ -91,7 +91,7 @@ plot_timeseries = function(
       sd_lo   = mean(v)-sd,
       ci95_hi = mean(v)+2*se,
       ci95_lo = mean(v)-2*se)
-  
+
   w = d %>%
     select(-t) %>%
     as.xts(., order.by=d$t) %>%
@@ -108,6 +108,6 @@ plot_timeseries = function(
     #dyRangeSelector()
   #w
   #htmlwidgets::saveWidget(w, file = "w.html", selfcontained = FALSE)
-  
+
   return(w)
 }

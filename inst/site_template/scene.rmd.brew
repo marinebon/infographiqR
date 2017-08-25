@@ -2,10 +2,14 @@
 title: "<%=svg_name%>"
 ---
 
-<div id="scene"></div>
-<div id="svg_id_list_div">
-  <ul id="svg_id_list"></ul>
-</div>
+<div class="container">
+  <div class="row">
+   <div class="col-sm-9" id="scene"></div>
+   <div class="col-sm-3" id="svg_id_list_div">
+   <ul id="svg_id_list"></ul>
+   </div>
+  </div> <!-- row -->
+</div> <!-- container -->
 
 <script>
 var svg = "<%=svg%>";
