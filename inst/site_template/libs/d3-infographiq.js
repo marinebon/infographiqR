@@ -1,4 +1,5 @@
 var debug_mode = false;
+var CLICKED_FILL = "#29264A"
 
 // define div for tooltip
 var tooltip_div = d3.select("body").append("div")
@@ -55,6 +56,9 @@ d3.xml(svg_path)
         function unhighlight(){
           d3.selectAll(d_path).style("stroke-width", 0);
         }
+        function mark_as_visited(){
+          d3.selectAll(d_path).style("fill", CLICKED_FILL);
+        }
 
         // create list of species in the infographic
         d3.select("#svg_id_list").append("li").append("a")
@@ -65,7 +69,8 @@ d3.xml(svg_path)
           .attr("xlink:data-toggle", "modal")
           .attr("xlink:data-target", "#myModal")
           .on("mouseover", highlight)
-          .on("mouseout", unhighlight);
+          .on("mouseout", unhighlight)
+          .on("click", mark_as_visited);
 
         // link svgs to modals
         d3.selectAll(d_path)
@@ -89,7 +94,7 @@ d3.xml(svg_path)
             tooltip_div.style("opacity", 0);
             unhighlight();
           })
-        ;
+          .on("click", mark_as_visited);
       }); // end: data.forEach()
     }); // end: d3.csv()
 });
