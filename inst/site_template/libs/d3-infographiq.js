@@ -37,7 +37,8 @@ d3.xml(svg_path)
 
       // iterate over rows of svg paths
       data.forEach(function(d) {
-        var d_path = 'g#' + d.svg_id + ' path';
+        var group_selector      = 'g#' + d.svg_id;
+        var g_children_selector = 'g#' + d.svg_id + ' path,' + group_selector;
         var d_link = './modals/' + d.svg_id + '.html';
 
         if (debug_mode){
@@ -46,18 +47,18 @@ d3.xml(svg_path)
         }
 
         // color
-        d3.selectAll(d_path)
+        d3.selectAll(g_children_selector)
           .style("fill", d.status_color);
 
         function highlight(){
-          d3.selectAll(d_path).style("stroke", "white");
-          d3.selectAll(d_path).style("stroke-width", 1);
+          d3.selectAll(g_children_selector).style("stroke", "white");
+          d3.selectAll(g_children_selector).style("stroke-width", 1);
         }
         function unhighlight(){
-          d3.selectAll(d_path).style("stroke-width", 0);
+          d3.selectAll(g_children_selector).style("stroke-width", 0);
         }
         function mark_as_visited(){
-          d3.selectAll(d_path).style("fill", CLICKED_FILL);
+          d3.selectAll(g_children_selector).style("fill", CLICKED_FILL);
         }
 
         // create list of species in the infographic
@@ -72,8 +73,8 @@ d3.xml(svg_path)
           .on("mouseout", unhighlight)
           .on("click", mark_as_visited);
 
-        // link svgs to modals
-        d3.selectAll(d_path)
+        // link each group in svg to modals
+        d3.selectAll('g#' + d.svg_id)
           .attr("xlink:href", d_link)
           .attr("xlink:data-title", d.label)
           .attr("xlink:data-remote", "false")
