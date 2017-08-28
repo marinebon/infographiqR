@@ -142,7 +142,9 @@ create_info_site = function(
   dir.create(path_modals, showWarnings = F)
   d = read_csv(path_indicators) %>%
     filter(!is.na(csv_url)) # View(d)
-  for (id in unique(d$svg_id)){ # id = unique(d$svg_id)[3]
+  d_elements = read_csv(path_elements)
+
+  for (id in d_elements$svg_id){ # id = unique(d$svg_id)[3]
     d_id = filter(d, svg_id == id)
     rmd = sprintf('%s/%s.Rmd', path_modals, id)
     htm = sprintf('%s.html', file_path_sans_ext(rmd))
@@ -159,6 +161,13 @@ create_info_site = function(
       detach('d_id_i')
     }
     close(f_rmd)
+
+    # insert modal caption from file
+    modal_caption = d_elements$modal_text[which(d_elements$svg_id == id)]
+    if (!is.na(modal_caption)){
+      file.append(rmd, modal_caption)
+      # TODO: if this is raw text instead of file... append that instead
+    }
 
     if (render_modals){
       #if (id=='forage-fish') browser()
