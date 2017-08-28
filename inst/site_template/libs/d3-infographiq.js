@@ -62,6 +62,7 @@ d3.xml(svg_path)
         }
 
         // create list of species in the infographic
+        list_text = d.label ? d.label : d.svg_id  // fall back on id if label not set
         d3.select("#svg_id_list").append("li").append("a")
           .text(d.label)
           .attr("xlink:href", d_link)
