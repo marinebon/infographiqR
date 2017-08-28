@@ -18,6 +18,7 @@ output: html_document
 - label
 - status_text
 - status_color
+- modal_text : optional row specifying location of a caption text to include at the bottom of the modal
 
 Example 
 
