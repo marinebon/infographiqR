@@ -9,7 +9,10 @@ R library for creation of interactive infographics for data-driven storytelling
 * `./plot_indicators.csv`
 * `./svg/*.svg`
 
-See `./inst/example_fk` for example files.
+For example files see [the info-demo repository](https://github.com/USF-IMARS/info-demo), or one of the following regional infographics that have been generated using the infographiq package:
+
+* [Florida Keys infographics](https://github.com/marinebon/info-fk/)
+* [Monterray Bay Infographics](https://github.com/marinebon/info-mb)
 
 2. Use infographiq from an R console to generate the website:
 
