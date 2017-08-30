@@ -1,11 +1,4 @@
----
-title: "Description"
-author: "Megan Hepner"
-date: "August 24, 2017"
-output: html_document
----
-
-# Outputs
+# Required Files
 1. svg_elements.csv
 1. plot_indicators.csv 
 1. infographic.svg
