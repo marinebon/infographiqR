@@ -1,9 +1,14 @@
 # Required Files
-1. svg_elements.csv
-1. plot_indicators.csv 
-1. infographic.svg
+1. svg/my_infographic.svg - scalable vector graphic file that defines the image shown in your scene
+1. svg_elements.csv       - tells infographiq about the shapes to use from your svg(s)
+1. plot_indicators.csv    - defines plots to show in the modal for each svg element
 
-# svg_elements.csv
+## infographic.svg
+Scalable Vector Graphic (SVG) files can be created using the free, cross-platform program Inkscape or exported from Adobe Illustrator. This file format is a human-readable subset of xml. For example files see the [info-demo/svg](https://github.com/USF-IMARS/info-demo/tree/master/svg). 
+
+svg files must be placed in a directory named `svg` in order to be found by infographiq.
+
+## svg_elements.csv
 
 1. Columns needed in svg_elements 
 - svg
@@ -18,7 +23,8 @@ Example
 |**svg**   |**svg_id**      |**module_title**       |**status_text**|**status_color**|
 |----------|----------------|-----------------------|---------------|----------------|
 |corals.svg|sea-turtle      | Sea Turtle (focal)    |               |                |
-# plot_indicators.csv
+
+## plot_indicators.csv
 
 1. Columns needed in plot_indicators.csv 
 - svg_id (lower case no spaces - **MUST MATCH** svg_id in svg_elements.csv)
