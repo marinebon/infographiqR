@@ -29,7 +29,9 @@ plot_timeseries = function(
   col_t   = NULL,
   col_y   = NULL,
   skip    = 0,
-  use_kmb = T){
+  use_kmb = T,
+  group_by= NULL
+){
 
   # debug
   # csv_tv = 'http://oceanview.pfeg.noaa.gov/erddap/tabledap/cciea_MM_pup_count.csv?time,mean_growth_rate'
@@ -54,7 +56,6 @@ plot_timeseries = function(
   #
   # x_label = 'Year'
   # v_label = y_label
-
 
   library(tidyverse)
   library(dygraphs) # devtools::install_github("rstudio/dygraphs")
@@ -81,34 +82,38 @@ plot_timeseries = function(
     d$t = as.Date(sprintf('%d-01-01', d$t))
   }
 
-  m = d %>%
-    summarize(
-      mean    = mean(v),
-      sd      = sd(v),
-      se      = sd(v)/sqrt(length(v)),
-      se_hi   = mean(v)+se,
-      se_lo   = mean(v)-se,
-      sd_hi   = mean(v)+sd,
-      sd_lo   = mean(v)-sd,
-      ci95_hi = mean(v)+2*se,
-      ci95_lo = mean(v)-2*se)
-
   w = d %>%
     select(-t) %>%
     as.xts(., order.by=d$t) %>%
-    dygraph(
-      main=title) %>%
-      #width=488, height=480) %>%
-    dySeries('v', color='red', strokeWidth=2, label=v_label) %>%
-    dyAxis(
-      'x', label=x_label, valueRange=c(as.Date(min(d$t)), today()),
-      pixelsPerLabel=50  # TODO: cleverly set this for better tickmark spacing
-    ) %>%
-    dyAxis('y', label=y_label) %>%
-    dyShading(from=max(d$t) - years(5), to=max(d$t), color='#CCEBD6') %>%
-    dyLimit(m$sd_hi, color='green', label='+1sd', strokePattern='solid') %>%
-    dyLimit(m$mean,  color='green', label='mean', strokePattern='dashed') %>%
-    dyLimit(m$sd_lo, color='green', label='-1sd', strokePattern='solid')
+    dygraph(main=title) #width=488, height=480)
+
+  if (is.null(group_by)){  # single series w/ mean & +/- std dev
+    m = d %>%
+      summarize(
+        mean    = mean(v),
+        sd      = sd(v),
+        se      = sd(v)/sqrt(length(v)),
+        se_hi   = mean(v)+se,
+        se_lo   = mean(v)-se,
+        sd_hi   = mean(v)+sd,
+        sd_lo   = mean(v)-sd,
+        ci95_hi = mean(v)+2*se,
+        ci95_lo = mean(v)-2*se)
+
+    w = dySeries(w, 'v', color='red', strokeWidth=2, label=v_label) %>%
+      dyLimit(m$sd_hi, color='green', label='+1sd', strokePattern='solid') %>%
+      dyLimit(m$mean,  color='green', label='mean', strokePattern='dashed') %>%
+      dyLimit(m$sd_lo, color='green', label='-1sd', strokePattern='solid')
+  } else {  # multiple series
+    # TODO
+  }
+
+  dyAxis(
+    w, 'x', label=x_label, valueRange=c(as.Date(min(d$t)), today()),
+    pixelsPerLabel=50  # TODO: cleverly set this for better tickmark spacing
+  ) %>%
+  dyAxis('y', label=y_label) %>%
+  dyShading(from=max(d$t) - years(5), to=max(d$t), color='#CCEBD6')
 
   # This next piece is a goofy workaround to avoid label/axis-title overlap
   # https://github.com/marinebon/infographiq/issues/7
