@@ -13,3 +13,5 @@ element: "<%=id%>"
 knitr::opts_chunk$set(echo=F, message=F, warning=F)
 library(infographiq)
 ```
+
+<base target="_parent">
