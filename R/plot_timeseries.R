@@ -70,24 +70,24 @@ plot_timeseries = function(
 
   stopifnot(is.null(col_t) == is.null(col_y))
 
-  if(!is.null(col_t)){
-    d = d[,c(col_t, col_y)]
-  }
-
-  #stopifnot(ncol(d) == 2)
-
-  colnames(d) = c('t','v')
-
-  if (all(nchar(as.character(d$t))==4)){
-    d$t = as.Date(sprintf('%d-01-01', d$t))
-  }
-
-  w = d %>%
-    select(-t) %>%
-    as.xts(., order.by=d$t) %>%
-    dygraph(main=title) #width=488, height=480)
-
   if (is.null(group_by)){  # single series w/ mean & +/- std dev
+    if(!is.null(col_t)){
+      d = d[,c(col_t, col_y)]
+    }
+
+    #stopifnot(ncol(d) == 2)
+
+    colnames(d) = c('t','v')
+
+    if (all(nchar(as.character(d$t))==4)){
+      d$t = as.Date(sprintf('%d-01-01', d$t))
+    }
+
+    w = d %>%
+      select(-t) %>%
+      as.xts(., order.by=d$t) %>%
+      dygraph(main=title) #width=488, height=480)
+
     m = d %>%
       summarize(
         mean    = mean(v),
@@ -105,7 +105,23 @@ plot_timeseries = function(
       dyLimit(m$mean,  color='green', label='mean', strokePattern='dashed') %>%
       dyLimit(m$sd_lo, color='green', label='-1sd', strokePattern='solid')
   } else {  # multiple series
-    # TODO
+    if(!is.null(col_t)){
+      d = d[,c(col_t, col_y, group_by)]
+    }
+
+    #stopifnot(ncol(d) == 2)
+
+    colnames(d) = c('t','v', 'group_by')
+
+    if (all(nchar(as.character(d$t))==4)){
+      d$t = as.Date(sprintf('%d-01-01', d$t))
+    }
+
+    dd = spread(d, group_by, v, fill=0)
+    w = as.xts(ts(start = c(min(d$t)), end=c(max(d$t)),
+      data = select(dd, -t)
+    )) %>%
+      dygraph(main=title) #width=488, height=480)
   }
 
   dyAxis(
