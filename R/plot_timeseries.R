@@ -132,9 +132,9 @@ plot_timeseries = function(
       dygraph(main=title) #width=488, height=480)
   }
 
-  dyAxis(
+  w = dyAxis(
     w, 'x', label=x_label, valueRange=c(as.Date(min(d$t)), today()),
-    pixelsPerLabel=50  # TODO: cleverly set this for better tickmark spacing
+    pixelsPerLabel=50
   ) %>%
   dyAxis('y', label=y_label) %>%
   dyShading(from=max(d$t) - years(5), to=max(d$t), color='#CCEBD6')
