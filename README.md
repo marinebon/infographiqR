@@ -18,7 +18,7 @@ For example files see [the info-demo repository](https://github.com/USF-IMARS/in
 
 ```R
 # install
-install.packages(c("tidyverse", "stringr", "rmarkdown", "dygraphs", "xts", "lubridate", "geojsonio", "RColorBrewer", "leaflet", "crosstalk", "servr", "roxygen2"))
+install.packages(c("tidyverse", "stringr", "rmarkdown", "dygraphs", "xts", "lubridate", "geojsonio", "RColorBrewer", "leaflet", "crosstalk", "servr", "roxygen2", "futile.logger"))
 
 if (!require('devtools')) install.packages('devtools')
 devtools::install_github('marinebon/infographiq')

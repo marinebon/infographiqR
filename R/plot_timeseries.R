@@ -61,6 +61,8 @@ plot_timeseries = function(
   library(dygraphs) # devtools::install_github("rstudio/dygraphs")
   library(xts)
   library(lubridate)
+  library(futile.logger)
+  flog.threshold(WARN)
 
   d = read_csv(csv_tv, skip=skip)
 
@@ -71,6 +73,7 @@ plot_timeseries = function(
   stopifnot(is.null(col_t) == is.null(col_y))
 
   if (is.null(group_by)){  # single series w/ mean & +/- std dev
+    flog.debug("single series")
     if(!is.null(col_t)){
       d = d[,c(col_t, col_y)]
     }
@@ -105,11 +108,12 @@ plot_timeseries = function(
       dyLimit(m$mean,  color='green', label='mean', strokePattern='dashed') %>%
       dyLimit(m$sd_lo, color='green', label='-1sd', strokePattern='solid')
   } else {  # multiple series
+    flog.debug("multi-series")
     if(!is.null(col_t)){
       d = d[,c(col_t, col_y, group_by)]
     }
 
-    #stopifnot(ncol(d) == 2)
+    #stopifnot(ncol(d) == 3)
 
     colnames(d) = c('t','v', 'group_by')
 
@@ -118,9 +122,13 @@ plot_timeseries = function(
     }
 
     dd = spread(d, group_by, v, fill=0)
-    w = as.xts(ts(start = c(min(d$t)), end=c(max(d$t)),
-      data = select(dd, -t)
-    )) %>%
+    o_by = dd$t #rep(d$t, nrow(dd))
+
+    flog.trace("dd  is %sx%s", nrow(dd),   ncol(dd))
+    flog.trace("oby is %sx%s", nrow(o_by), ncol(o_by))
+
+    w = select(dd, -t) %>%
+      as.xts( order.by=o_by) %>%
       dygraph(main=title) #width=488, height=480)
   }
 
