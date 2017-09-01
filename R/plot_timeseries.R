@@ -134,10 +134,11 @@ plot_timeseries = function(
 
   w = dyAxis(
     w, 'x', label=x_label, valueRange=c(as.Date(min(d$t)), today()),
-    pixelsPerLabel=50
+    pixelsPerLabel=30,
+    axisLabelFormatter="function(d) { return d.getFullYear() }"
   ) %>%
-  dyAxis('y', label=y_label) %>%
-  dyShading(from=max(d$t) - years(5), to=max(d$t), color='#CCEBD6')
+    dyAxis('y', label=y_label) %>%
+    dyShading(from=max(d$t) - years(5), to=max(d$t), color='#CCEBD6')
 
   # This next piece is a goofy workaround to avoid label/axis-title overlap
   # https://github.com/marinebon/infographiq/issues/7
