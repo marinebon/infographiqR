@@ -10,9 +10,9 @@ d3.xml(svg_path)
   .mimeType("image/svg+xml")
   .get(function(error, xml) {
     if (error) throw error;
-    //document.body.appendChild(xml.documentElement);
-    //d3.select("#scene").append(xml.documentElement)
-    document.getElementById('scene').appendChild(xml.documentElement);
+
+    var svg_el = document.getElementById('scene').appendChild(xml.documentElement);
+    d3.select(svg_el).attr('width', '100%');
 
     // read csv
     d3.csv(svg_elements_csv, function(error, data) {
