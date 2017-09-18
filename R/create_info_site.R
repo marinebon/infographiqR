@@ -30,7 +30,7 @@ create_info_site = function(
   dir_svg          = 'svg',
   elements_csv     = 'svg_elements.csv',
   indicators_csv   = 'plot_indicators.csv',
-  site_title       = 'Florida Keys Infographics',
+  site_title       = 'MBON Interactive Infographics',
   dir_rmd          = 'rmd',
   dir_web          = 'docs',
   svg_paths        = list.files(file.path(path_root, dir_svg), '.*\\.svg$', full.names=T),
