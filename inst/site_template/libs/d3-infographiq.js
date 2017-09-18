@@ -13,6 +13,7 @@ d3.xml(svg_path)
 
     var svg_el = document.getElementById('scene').appendChild(xml.documentElement);
     d3.select(svg_el).attr('width', '100%');
+    d3.select(svg_el).attr('height', '100%');
 
     // read csv
     d3.csv(svg_elements_csv, function(error, data) {
