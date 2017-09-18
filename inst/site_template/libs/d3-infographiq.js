@@ -37,8 +37,8 @@ d3.xml(svg_path)
 
       // iterate over rows of svg paths
       data.forEach(function(d) {
-        var group_selector      = 'g#' + d.svg_id;
-        var g_children_selector = 'g#' + d.svg_id + ' path,' + group_selector;
+        var group_selector      = '#' + d.svg_id;
+        var g_children_selector = '#' + d.svg_id + ' path,' + group_selector;
         var d_link = './modals/' + d.svg_id + '.html';
 
         if (debug_mode){
@@ -75,7 +75,7 @@ d3.xml(svg_path)
           .on("click", mark_as_visited);
 
         // link each group in svg to modals
-        d3.selectAll('g#' + d.svg_id)
+        d3.selectAll(group_selector)
           .attr("xlink:href", d_link)
           .attr("xlink:data-title", d.label)
           .attr("xlink:data-remote", "false")
