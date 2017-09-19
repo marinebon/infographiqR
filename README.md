@@ -27,9 +27,7 @@ devtools::install_github('marinebon/infographiq')
 library(infographiq)
 
 # run i.e.
-create_info_site(
-+ site_title = "Monterey Bay Infographics",
-+ render_modals = T)
+create_info_site(site_title = "Monterey Bay Infographics", render_modals = T)
 ```
 
 # dev workflow
