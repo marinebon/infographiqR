@@ -12,7 +12,7 @@ R library for creation of interactive infographics for data-driven storytelling
 For example files see [the info-demo repository](https://github.com/marinebon/info-demo), or one of the following regional infographics that have been generated using the infographiq package:
 
 * [Florida Keys infographics](https://github.com/marinebon/info-fk/)
-* [Monterray Bay Infographics](https://github.com/marinebon/info-mb)
+* [Monterey Bay Infographics](https://github.com/marinebon/info-mb)
 
 2. Use infographiq from an R console to generate the website:
 
@@ -26,8 +26,10 @@ devtools::install_github('marinebon/infographiq')
 # load
 library(infographiq)
 
-# run
-create_info_site()
+# run i.e.
+create_info_site(
++ site_title = "Monterey Bay Infographics",
++ render_modals = T)
 ```
 
 # dev workflow
