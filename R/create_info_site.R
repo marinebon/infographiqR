@@ -151,6 +151,13 @@ create_info_site = function(
 
     brew(modal_head_brew, rmd)
 
+    # insert modal_before caption from file
+    modal_before_caption = d_elements$modal_before[which(d_elements$svg_id == id)]
+    if (!is.na(modal_before_caption)){
+      file.append(rmd, modal_before_caption)
+    }
+
+    # insert plots
     f_rmd = file(rmd, 'a') # file connection in append mode
     for (i in 1:nrow(d_id)){ # i = 1
       attach(d_id[i,], name='d_id_i')
@@ -162,11 +169,10 @@ create_info_site = function(
     }
     close(f_rmd)
 
-    # insert modal caption from file
-    modal_caption = d_elements$modal_text[which(d_elements$svg_id == id)]
-    if (!is.na(modal_caption)){
-      file.append(rmd, modal_caption)
-      # TODO: if this is raw text instead of file... append that instead
+    # insert modal_after caption from file
+    modal_after_caption = d_elements$modal_after[which(d_elements$svg_id == id)]
+    if (!is.na(modal_after_caption)){
+      file.append(rmd, modal_after_caption)
     }
 
     if (render_modals){
