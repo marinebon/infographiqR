@@ -162,8 +162,11 @@ create_info_site = function(
     for (i in 1:nrow(d_id)){ # i = 1
       attach(d_id[i,], name='d_id_i')
 
-      # plot_caption = d_elements$plot_caption[which(d_elements$svg_id == id)]
-      if (!is.na(plot_caption)){
+      plot_caption = d_id$plot_caption[i]
+      #if (is.null(plot_caption) || is.na(plot_caption) || !exists("plot_caption")){
+      if (is.null(plot_caption) || is.na(plot_caption)){
+        # pass
+      } else {
         file.append(rmd, plot_caption)
       }
 
