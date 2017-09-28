@@ -134,7 +134,7 @@ plot_timeseries = function(
 
   w = dyAxis(
     w, 'x', label=x_label, valueRange=c(as.Date(min(d$t)), today()),
-    pixelsPerLabel=30,
+    pixelsPerLabel=35,
     axisLabelFormatter="function(d) { return d.getFullYear() }"
   ) %>%
     dyAxis('y', label=y_label) %>%
