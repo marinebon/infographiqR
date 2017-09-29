@@ -154,7 +154,9 @@ create_info_site = function(
     # insert modal_before caption from file
     modal_before_caption = d_elements$modal_before[which(d_elements$svg_id == id)]
     # NULL if column DNE, NA if row value is bad
-    if (!is.null(modal_before_caption) && !is.na(modal_before_caption)){
+    if (any(is.null(modal_before_caption)) || any(is.na(modal_before_caption))){
+      print("no modal_before")
+    }else{
       file.append(rmd, modal_before_caption)
     }
 
@@ -165,7 +167,9 @@ create_info_site = function(
 
       plot_caption = d_id$plot_caption[i]
       # NULL if column DNE, NA if row value is bad
-      if (!is.null(plot_caption) && !is.na(plot_caption)){
+      if (any(is.null(plot_caption)) || any(is.na(plot_caption))){
+        print("no plot_caption")
+      }else{
         file.append(rmd, plot_caption)
       }
 
@@ -179,7 +183,9 @@ create_info_site = function(
     # insert modal_after caption from file
     modal_after_caption = d_elements$modal_after[which(d_elements$svg_id == id)]
     # NULL if column DNE, NA if row value is bad
-    if (!is.null(modal_after_caption) && !is.na(modal_after_caption)){
+    if (any(is.null(modal_after_caption)) || any(is.na(modal_after_caption))){
+      print("no modal_after")
+    }else{
       file.append(rmd, modal_after_caption)
     }
 
