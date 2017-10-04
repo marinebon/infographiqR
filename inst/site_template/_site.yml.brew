@@ -1,5 +1,5 @@
 name: "<%=site_title%>"
-output_dir: "../<%=dir_web%>"
+output_dir: "<%=file.path("..", dir_web)%>"
 lib_dir: libs
 navbar:
   title: "<%=site_title%>"
