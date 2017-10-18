@@ -65,20 +65,26 @@ create_info_site = function(
   path_elements    = file.path(path_root, elements_csv)
   path_indicators  = file.path(path_root, indicators_csv)
 
-  # === get package templates
+  # ============================================================================
+  # get package templates
+  # ============================================================================
   scene_brew      = system.file('site_template/scene.rmd.brew', package='infographiq')
   modal_head_brew = system.file('site_template/modal_head.rmd.brew', package='infographiq')
   modal_plot_brew = system.file('site_template/modal_plot.rmd.brew', package='infographiq')
   path_libs        = system.file('site_template/libs', package='infographiq')
 
-  # === check paths
+  # ============================================================================
+  # check paths
+  # ============================================================================
   for (var in c('path_svg','path_indicators','path_elements')){
     path = get(var)
     if (!file.exists(path))
       stop(sprintf('The %s does not exist: %s', var, path))
   }
 
-  # === check csv files (indicators, elements) for required columns
+  # ============================================================================
+  # check csv files (indicators, elements) for required columns
+  # ============================================================================
   check_csv_columns(
     path_elements,
     c('svg','svg_id','label','status_text','status_color')
@@ -91,7 +97,9 @@ create_info_site = function(
      )
   )
 
-  # === prep files
+  # ============================================================================
+  # prep files
+  # ============================================================================
   if (!dir.exists(path_rmd)) dir.create(path_rmd)
   if (!dir.exists(path_web)) dir.create(path_web)
   file.copy(path_libs, path_rmd, recursive=T)
@@ -99,7 +107,9 @@ create_info_site = function(
   file.copy(path_elements, file.path(path_rmd, elements_csv))
   writeLines('', file.path(path_rmd, '.nojekyll'))
 
-  # === check svg_*
+  # ============================================================================
+  # check svg_*
+  # ============================================================================
   if (!length(svg_paths) == length(svg_names))
     stop('Length of svg_paths not matching length of svg_names.')
 
@@ -111,7 +121,9 @@ create_info_site = function(
     }
   }
 
-  # === brew _site.yml into path_rmd
+  # ============================================================================
+  # brew _site.yml into path_rmd
+  # ============================================================================
   svgs  = basename(svg_paths)
   rmds  = sprintf( '%s.rmd', file_path_sans_ext(svgs))
   htmls = sprintf('%s.html', file_path_sans_ext(svgs))
@@ -128,8 +140,9 @@ create_info_site = function(
     }
   }
 
-  # === generate scene pages
-  #browser()
+  # ============================================================================
+  # generate scene pages
+  # ============================================================================
   for (i in seq_along(svgs)){ # i = 3
     svg = svgs[i]
     svg_name = svg_names[i]
@@ -138,7 +151,9 @@ create_info_site = function(
     brew(scene_brew, rmd_path)
   }
 
-  # === generate modal pages
+  # ============================================================================
+  # generate modal pages
+  # ============================================================================
   dir.create(path_modals, showWarnings = F)
   d = read_csv(path_indicators) %>%
     filter(!is.na(csv_url)) # View(d)
@@ -151,7 +166,7 @@ create_info_site = function(
 
     brew(modal_head_brew, rmd)
 
-    # insert modal_before caption from file
+    # === insert modal_before caption from file
     modal_before_caption = d_elements$modal_before[which(d_elements$svg_id == id)]
     # NULL if column DNE, NA if row value is bad
     if (any(is.null(modal_before_caption)) || any(is.na(modal_before_caption))){
@@ -160,7 +175,7 @@ create_info_site = function(
       file.append(rmd, modal_before_caption)
     }
 
-    # insert plots
+    # === insert plots
     f_rmd = file(rmd, 'a') # file connection in append mode
     for (i in 1:nrow(d_id)){ # i = 1
       attach(d_id[i,], name='d_id_i')
@@ -180,7 +195,7 @@ create_info_site = function(
     }
     close(f_rmd)
 
-    # insert modal_after caption from file
+    # === insert modal_after caption from file
     modal_after_caption = d_elements$modal_after[which(d_elements$svg_id == id)]
     # NULL if column DNE, NA if row value is bad
     if (any(is.null(modal_after_caption)) || any(is.na(modal_after_caption))){
@@ -196,14 +211,18 @@ create_info_site = function(
     }
   }
 
-  # === render top level pages and copy all in rmd to docs
+  # ============================================================================
+  #  render top level pages and copy all in rmd to docs
+  # ============================================================================
   # NOTE: wipes out path_web first
   render_site(path_rmd)
 
   # modals: delete rmd from docs, keep html from rmd so use cached copy when render_modals = F
   file.remove(list.files(file.path(path_web, 'modals'),  '.*\\.Rmd$', full.names=T))
 
-  # === serve site
+  # ============================================================================
+  # serve site locally for debugging
+  # ============================================================================
   if (preview_site)
     servr::httd(path_web) # servr::httd('/Users/bbest/github/info-fk/docs')
 }
