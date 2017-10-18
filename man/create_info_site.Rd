@@ -26,7 +26,7 @@ create_info_site(path_root = ".", dir_svg = "svg",
 
 \item{elements_csv}{csv within path_root containing SVG identifiers and having these columns: svg (filename of svg, eg pelagic.svg), svg_id (SVG id of element), label (shows on hover and in modal title), status_text (shows on hover, optional), status_color (hexadecimal color to fill shape, optional).}
 
-\item{indicators_csv}{csv table containing pointers going from svg_id to csv_url with data for plot of indicator for use with plot_timeseries() function.}
+\item{indicators_csv}{csv table containing pointers going from svg_id to csv_url with data for plot of indicator for use with plot_dygraph_timeseries() function.}
 
 \item{site_title}{title of site to show up in navigation menu.}
 

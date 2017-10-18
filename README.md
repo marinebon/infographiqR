@@ -37,4 +37,10 @@ create_info_site(site_title = "Monterey Bay Infographics", render_modals = T)
 # you must install from local source
 require('devtools')
 install_local('../infographiq')
+
+# or
+devtools::install("~/infographiq")
 ```
+
+## building documentation
+documentation is generated using roxygen2...

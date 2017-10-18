@@ -17,17 +17,17 @@
 get_plotting_function_brew = function(
   plotting_function_call
 ){
-  DEFAULT_BREW = 'site_template/plotting_functions/plot_timeseries.rmd.brew'
+  DEFAULT_BREW = 'site_template/plotting_functions/plot_dygraph_timeseries.rmd.brew'
 
   # if value is valid
   if (any(is.null(plotting_function_call)) || any(is.na(plotting_function_call))){
     # TODO: use the value of plotting_function_call like:
-    # if (plotting_function_call == plot_timeseries){
+    # if (plotting_function_call == plot_dygraph_timeseries){
     modal_plot_brew = system.file(
-      'site_template/plotting_functions/plot_timeseries.rmd.brew',
+      'site_template/plotting_functions/plot_dygraph_timeseries.rmd.brew',
       package='infographiq'
     )
-    
+
   } else {
     # use the default plotter
     modal_plot_brew = system.file(

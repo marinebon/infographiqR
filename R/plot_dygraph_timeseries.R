@@ -15,11 +15,11 @@
 #' @export
 #'
 #' @examples
-#' plot_timeseries(
+#' plot_dygraph_timeseries(
 #   csv_tv  = 'http://oceanview.pfeg.noaa.gov/erddap/tabledap/cciea_MM_pup_count.csv?time,mean_growth_rate',
 #   title   = 'Female sea lion pup growth rate',
 #   y_label = 'Mean growth rate')
-plot_timeseries = function(
+plot_dygraph_timeseries = function(
   csv_tv,
   title,
   y_label,
@@ -41,7 +41,7 @@ plot_timeseries = function(
   # v_label = y_label
   # skip = 2
   #
-  # plot_timeseries(
+  # plot_dygraph_timeseries(
   #   csv_tv  = 'http://oceanview.pfeg.noaa.gov/erddap/tabledap/cciea_MM_pup_count.csv?time,mean_growth_rate',
   #   title   = 'Female sea lion pup growth rate',
   #   y_label = 'Mean growth rate')

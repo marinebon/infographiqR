@@ -3,7 +3,7 @@
 #' @param path_root root path for repository, from which other directories are relatively positioned.
 #' @param dir_svg directory within path_root containing SVG files.
 #' @param elements_csv csv within path_root containing SVG identifiers and having these columns: svg (filename of svg, eg pelagic.svg), svg_id (SVG id of element), label (shows on hover and in modal title), status_text (shows on hover, optional), status_color (hexadecimal color to fill shape, optional).
-#' @param indicators_csv csv table containing pointers going from svg_id to csv_url with data for plot of indicator for use with plot_timeseries() function.
+#' @param indicators_csv csv table containing pointers going from svg_id to csv_url with data for plot of indicator for use with plot_dygraph_timeseries() function.
 #' @param site_title title of site to show up in navigation menu.
 #' @param dir_rmd directory within path_root to output Rmarkdown files for staging website.
 #' @param dir_web directory within path_root to output html files for final website. Defaults to 'docs' in order to comply with Github Pages repository configuration.

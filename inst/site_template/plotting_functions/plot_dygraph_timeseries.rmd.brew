@@ -1,7 +1,7 @@
 
 ```{r}
 tryCatch(
-    plot_timeseries(
+    plot_dygraph_timeseries(
         csv_tv  = "<%=csv_url%>",
         title   = "<%=plot_title%>",
         y_label = "<%=y_label%>",
