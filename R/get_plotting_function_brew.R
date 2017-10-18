@@ -26,7 +26,8 @@ get_plotting_function_brew = function(
 
   # if value is not valid
   if (any(is.null(plotting_function_call)) || any(is.na(plotting_function_call))){
-    print(sprintf("using default plotter '%s'", DEFAULT_BREW))
+    print("using default plotter")
+    print(sprintf("    '%s'", DEFAULT_BREW))
     # use the default plotter
     return(system.file(
       DEFAULT_BREW,
@@ -50,6 +51,7 @@ get_plotting_function_brew = function(
 
     if (plotting_function_call %in% built_in_plotters){
       # checks for full plotter template file names
+      print(paste("using built-in plotter", plotting_function_call))
       return(system.file(
         paste(BASE_PATH, plotting_function_call, sep=''),
         package='infographiq'
@@ -58,6 +60,7 @@ get_plotting_function_brew = function(
     } else if (plotting_function_call %in% built_in_plotter_bases){
       # checks for plotter function base names
       # NOTE: this assumes that all brew templates end in ".rmd.brew"
+      print(sprintf("using built-in plot %s.rmd.brew", plotting_function_call))
       return(system.file(
         paste(BASE_PATH, plotting_function_call, ".rmd.brew", sep=''),
         package='infographiq'
