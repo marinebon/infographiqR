@@ -187,12 +187,7 @@ create_info_site = function(
         file.append(rmd, plot_caption)
       }
 
-      # TODO: modal_plot_brew = get_plot_function_brew()
-      modal_plot_brew = system.file(
-        'site_template/plotting_functions/plot_timeseries.rmd.brew',
-        package='infographiq'
-      )
-
+      modal_plot_brew = get_plotting_function_brew(d_id$plotting_function_call[i])
       brew(modal_plot_brew, f_rmd)
 
       flush(f_rmd)
