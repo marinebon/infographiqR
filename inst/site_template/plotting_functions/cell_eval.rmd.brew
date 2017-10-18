@@ -1,0 +1,9 @@
+
+```{r}
+# This stuffs the contents of plot_indicators.csv$plotting_function_call
+# cell into this template and evaluates them directly. Seems reckless and
+# kludgy? Well we could put this in a sandbox... but... :shipit:
+
+<%=plotting_function_call%>
+
+```

@@ -156,7 +156,7 @@ create_info_site = function(
   dir.create(path_modals, showWarnings = F)
   # TODO: use trim_ws=TRUE in read_csv calls?
   d = read_csv(path_indicators) %>%
-    filter(!is.na(csv_url)) # View(d)
+    filter(!is.na(csv_url)) # TODO: rm this so that we *can* use NA csv_url (like for plot_none)
   d_elements = read_csv(path_elements)
 
   for (id in d_elements$svg_id){ # id = unique(d$svg_id)[3]

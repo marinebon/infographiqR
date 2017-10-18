@@ -22,6 +22,7 @@ get_plotting_function_brew = function(
 
   BASE_PATH = 'site_template/plotting_functions/'
   DEFAULT_BREW = paste(BASE_PATH, 'plot_dygraph_timeseries.rmd.brew', sep='')
+  CELL_EVAL_BREW = paste(BASE_PATH, 'cell_eval.rmd.brew', sep='')
 
   # if value is not valid
   if (any(is.null(plotting_function_call)) || any(is.na(plotting_function_call))){
@@ -60,12 +61,15 @@ get_plotting_function_brew = function(
     # } else if( plotting_function_call is a valid brew file ){
     #   return(system.file(plotting_function_call))
     # }
-    } else {  # shove cell contents into a tmp brew file and eval it
+    } else {  # shove cell contents into brew wrapper file and eval it
       print(sprintf(
         "\n\nWARN: Using eval on plotting_function_call directly for cell content:\n\n%s\n\n",
         plotting_function_call
       ))
-      # TODO
+      return(system.file(
+        CELL_EVAL_BREW,
+        package='infographiq'
+      ))
     }
   }
 }
