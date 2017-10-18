@@ -44,24 +44,32 @@ get_plotting_function_brew = function(
       strsplit(built_in_plotters, ".", fixed=TRUE),
       FUN=function(d){ paste(d[1]) }
     )
-    print(sprintf("brew-opt: %s || %s", built_in_plotters, built_in_plotter_bases))
+
+    # for debugging built-in options:
+    # print(sprintf("brew-opt: %s || %s", built_in_plotters, built_in_plotter_bases))
 
     if (plotting_function_call %in% built_in_plotters){
+      # checks for full plotter template file names
       return(system.file(
         paste(BASE_PATH, plotting_function_call, sep=''),
         package='infographiq'
       ))
+
     } else if (plotting_function_call %in% built_in_plotter_bases){
+      # checks for plotter function base names
       # NOTE: this assumes that all brew templates end in ".rmd.brew"
       return(system.file(
         paste(BASE_PATH, plotting_function_call, ".rmd.brew", sep=''),
         package='infographiq'
       ))
-    # TODO:
-    # } else if( plotting_function_call is a valid brew file ){
-    #   return(system.file(plotting_function_call))
-    # }
-    } else {  # shove cell contents into brew wrapper file and eval it
+
+    } else if( file.exists(plotting_function_call) && !dir.exists(plotting_function_call) ){
+      # custom plotter in a brew template
+      print(sprintf("using custom template: %s", plotting_function_call))
+      return(plotting_function_call)
+
+    } else {
+      # shove cell contents into brew wrapper file and eval it
       print(sprintf(
         "\n\nWARN: Using eval on plotting_function_call directly for cell content:\n\n%s\n\n",
         plotting_function_call
