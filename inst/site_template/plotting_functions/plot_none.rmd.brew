@@ -1,0 +1,6 @@
+
+```{r}
+# use this plotting function to have no plot at all for a given indicator.
+# this is useful if you want a text blurb with no plot eg: issue #30 :
+# https://github.com/marinebon/infographiq/issues/30
+```

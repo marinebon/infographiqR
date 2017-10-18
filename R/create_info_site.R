@@ -154,6 +154,7 @@ create_info_site = function(
   # generate modal pages
   # ============================================================================
   dir.create(path_modals, showWarnings = F)
+  # TODO: use trim_ws=TRUE in read_csv calls?
   d = read_csv(path_indicators) %>%
     filter(!is.na(csv_url)) # View(d)
   d_elements = read_csv(path_elements)
@@ -179,6 +180,9 @@ create_info_site = function(
     for (i in 1:nrow(d_id)){ # i = 1
       attach(d_id[i,], name='d_id_i')
 
+      print(sprintf("creating plot %s - %s", d_id$svg_id[i], d_id$plot_title[i]))
+      # print(sprintf("creating plot %s - %s", svg_id, plot_title))
+
       plot_caption = d_id$plot_caption[i]
       # NULL if column DNE, NA if row value is bad
       if (any(is.null(plot_caption)) || any(is.na(plot_caption))){
@@ -188,6 +192,7 @@ create_info_site = function(
       }
 
       modal_plot_brew = get_plotting_function_brew(d_id$plotting_function_call[i])
+      print(modal_plot_brew)
       brew(modal_plot_brew, f_rmd)
 
       flush(f_rmd)
