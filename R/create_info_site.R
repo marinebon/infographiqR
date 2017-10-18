@@ -70,7 +70,6 @@ create_info_site = function(
   # ============================================================================
   scene_brew      = system.file('site_template/scene.rmd.brew', package='infographiq')
   modal_head_brew = system.file('site_template/modal_head.rmd.brew', package='infographiq')
-  modal_plot_brew = system.file('site_template/modal_plot.rmd.brew', package='infographiq')
   path_libs        = system.file('site_template/libs', package='infographiq')
 
   # ============================================================================
@@ -187,6 +186,12 @@ create_info_site = function(
       }else{
         file.append(rmd, plot_caption)
       }
+
+      # TODO: modal_plot_brew = get_plot_function_brew()
+      modal_plot_brew = system.file(
+        'site_template/plotting_functions/plot_timeseries.rmd.brew',
+        package='infographiq'
+      )
 
       brew(modal_plot_brew, f_rmd)
 
