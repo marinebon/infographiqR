@@ -1,0 +1,11 @@
+
+<%#
+Use this plotting function to embed a pre-made static image (eg: png or jpg).
+The csv_url is used as a path to the pre-made image file.
+%>
+
+<%=plot_title%>
+--------------------------
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics('<%=csv_url%>')
+```

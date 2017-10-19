@@ -1,10 +1,14 @@
 
 <%#
-Use this plotting function to embed the contents of an html file directly.
+Use this plotting function to embed the contents of a pre-made html file directly.
 The csv_url is used as a path to the pre-made html file.
-Note that any javascript or css must be embedded in the file or hosted somewhere
-externally (cdn links are your friend here).
+Note that the file must be hosted & accessible at site-compile-time at the given
+csv_url - just like when using csv_url for data (so you may need to push the
+files before building the site or host them elsewhere).
 %>
+
+<%=plot_title%>
+--------------------------
 
 <%# NOTE: the attempt at resizing height dynamically onload below doesn't always work %>
 <iframe src="<%=csv_url%>" width="100%" height="480px" onload="this.style.height=this.contentDocument.body.scrollHeight +'px';"></iframe>
