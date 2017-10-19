@@ -11,11 +11,12 @@ tryCatch(
         csv_tv  = "<%=csv_url%>",
         title   = "<%=plot_title%>",
         y_label = "<%=y_label%>",
-        skip    = <%=ifelse(is.na(skip_lines), 0, skip_lines)%>,
-        filter  = <%=ifelse(is.na(filter), 'NULL', sprintf('"%s"', str_replace_all(filter, '"', '\\\\"')))%>,
-        col_t   = <%=ifelse(is.na(col_t), 'NULL', sprintf('"%s"', col_t))%>,
-        col_y   = <%=ifelse(is.na(col_y), 'NULL', sprintf('"%s"', col_y))%>,
-        group_by= <%=ifelse(is.na(group_by), 'NULL', sprintf('"%s"', group_by))%>
+        col_t   = "<%=col_t%>",
+        col_y   = "<%=col_y%>"
+        <%=ifelse(exists('skip_lines') && !is.na(skip_lines), sprintf(', skip    ="%s"', skip_lines), "#skip_lines")%>
+        <%=ifelse(exists('group_by'  ) && !is.na(group_by  ), sprintf(', group_by="%s"', group_by  ), "#group_by  ")%>
+        <%=ifelse(exists('std_err'   ) && !is.na(std_err   ), sprintf(', std_err ="%s"',  std_err  ), "#std_err   ")%>
+        <%=ifelse(exists('filter'    ) && !is.na(filter    ), sprintf(', filter  ="%s"', str_replace_all(filter, '"', '\\\\"')),"#filter")%>
     ),
     error = function(e) e
 )
