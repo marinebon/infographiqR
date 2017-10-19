@@ -1,4 +1,11 @@
+<%#
+This is the default plotter for infographiq.
+It uses our custom plot_dygraph_timeseries function & dygraphs to create a
+line plot from raw csv data provided by the csv_url column in
+plot_indicators.csv.
+%>
 
+<%# TODO: use ```{r out.width='100%'} here? %>
 ```{r}
 tryCatch(
     plot_dygraph_timeseries(
