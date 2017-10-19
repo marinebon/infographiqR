@@ -30,7 +30,8 @@ plot_dygraph_timeseries = function(
   col_y   = NULL,
   skip    = 0,
   use_kmb = T,
-  group_by= NULL
+  group_by= NULL,
+  std_err= NULL
 ){
 
   # debug
@@ -75,23 +76,18 @@ plot_dygraph_timeseries = function(
   if (is.null(group_by)){  # single series w/ mean & +/- std dev
     flog.debug("single series")
     if(!is.null(col_t)){
-      d = d[,c(col_t, col_y)]
+      d_s = d[,c(col_t, col_y)] # d_subset
     }
 
     #stopifnot(ncol(d) == 2)
 
-    colnames(d) = c('t','v')
+    colnames(d_s) = c('t','v')
 
-    if (all(nchar(as.character(d$t))==4)){
-      d$t = as.Date(sprintf('%d-01-01', d$t))
+    if (all(nchar(as.character(d_s$t))==4)){
+      d_s$t = as.Date(sprintf('%d-01-01', d_s$t))
     }
 
-    w = d %>%
-      select(-t) %>%
-      as.xts(., order.by=d$t) %>%
-      dygraph(main=title) #width=488, height=480)
-
-    m = d %>%
+    m = d_s %>%
       summarize(
         mean    = mean(v),
         sd      = sd(v),
@@ -103,25 +99,39 @@ plot_dygraph_timeseries = function(
         ci95_hi = mean(v)+2*se,
         ci95_lo = mean(v)-2*se)
 
-    w = dySeries(w, 'v', color='red', strokeWidth=2, label=v_label) %>%
+    if (is.null(std_err)){
+      y_arg = "v"
+    } else {
+      d_s = add_column(d_s, v_upper = (d[,col_y] + d[,std_err])[,col_y]) %>%
+            add_column(     v_lower = (d[,col_y] - d[,std_err])[,col_y])
+      y_arg = c("v_lower", "v", "v_upper")
+    }
+
+    # TODO: change format to more colorblind-friendly color scheme (#19)
+    w = d_s %>%
+      select(-t) %>%
+      as.xts(., order.by=d_s$t) %>%
+      dygraph(main=title) %>% #width=488, height=480)
+      dySeries(y_arg, color='red', strokeWidth=2, label=v_label) %>%
       dyLimit(m$sd_hi, color='green', label='+1sd', strokePattern='solid') %>%
       dyLimit(m$mean,  color='green', label='mean', strokePattern='dashed') %>%
       dyLimit(m$sd_lo, color='green', label='-1sd', strokePattern='solid')
+
   } else {  # multiple series
     flog.debug("multi-series")
     if(!is.null(col_t)){
-      d = d[,c(col_t, col_y, group_by)]
+      d_s = d[,c(col_t, col_y, group_by)]
     }
 
-    #stopifnot(ncol(d) == 3)
+    #stopifnot(ncol(d_s) == 3)
 
-    colnames(d) = c('t','v', 'group_by')
+    colnames(d_s) = c('t','v', 'group_by')
 
-    if (all(nchar(as.character(d$t))==4)){
-      d$t = as.Date(sprintf('%d-01-01', d$t))
+    if (all(nchar(as.character(d_s$t))==4)){
+      d_s$t = as.Date(sprintf('%d-01-01', d_s$t))
     }
 
-    dd = spread(d, group_by, v, fill=0)
+    dd = spread(d_s, group_by, v, fill=0)
     o_by = dd$t #rep(d$t, nrow(dd))
 
     flog.trace("dd  is %sx%s", nrow(dd),   ncol(dd))
@@ -133,7 +143,7 @@ plot_dygraph_timeseries = function(
   }
 
   w = dyAxis(
-    w, 'x', label=x_label, valueRange=c(as.Date(min(d$t)), today()),
+    w, 'x', label=x_label, valueRange=c(as.Date(min(d_s$t)), today()),
     pixelsPerLabel=35,
     axisLabelFormatter="function(d) { return d.getFullYear() }"
   ) %>%
