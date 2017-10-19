@@ -5,8 +5,7 @@ line plot from raw csv data provided by the csv_url column in
 plot_indicators.csv.
 %>
 
-<%# TODO: use ```{r out.width='100%'} here? %>
-```{r}
+```{r out.width='100%'}
 tryCatch(
     plot_dygraph_timeseries(
         csv_tv  = "<%=csv_url%>",
