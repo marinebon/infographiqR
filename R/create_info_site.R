@@ -176,29 +176,33 @@ create_info_site = function(
     }
 
     # === insert plots
-    f_rmd = file(rmd, 'a') # file connection in append mode
-    for (i in 1:nrow(d_id)){ # i = 1
-      attach(d_id[i,], name='d_id_i')
+    if (nrow(d_id) > 0){  # if there are plots (because i in 1:0 runs twice rather than 0 times)
+      f_rmd = file(rmd, 'a') # file connection in append mode
+      for (i in 1:nrow(d_id)){ # i = 1
+        attach(d_id[i,], name='d_id_i')
 
-      print(sprintf("creating plot %s - %s", d_id$svg_id[i], d_id$plot_title[i]))
-      # print(sprintf("creating plot %s - %s", svg_id, plot_title))
+        print(sprintf("creating plot %s - %s", d_id$svg_id[i], d_id$plot_title[i]))
+        # print(sprintf("creating plot %s - %s", svg_id, plot_title))
 
-      plot_caption = d_id$plot_caption[i]
-      # NULL if column DNE, NA if row value is bad
-      if (any(is.null(plot_caption)) || any(is.na(plot_caption))){
-        print("no plot_caption")
-      }else{
-        file.append(rmd, plot_caption)
+        plot_caption = d_id$plot_caption[i]
+        # NULL if column DNE, NA if row value is bad
+        if (any(is.null(plot_caption)) || any(is.na(plot_caption))){
+          print("no plot_caption")
+        }else{
+          file.append(rmd, plot_caption)
+        }
+
+        modal_plot_brew = get_plotting_function_brew(d_id$plotting_function_call[i])
+        print(modal_plot_brew)
+        brew(modal_plot_brew, f_rmd)
+
+        flush(f_rmd)
+        detach('d_id_i')
       }
-
-      modal_plot_brew = get_plotting_function_brew(d_id$plotting_function_call[i])
-      print(modal_plot_brew)
-      brew(modal_plot_brew, f_rmd)
-
-      flush(f_rmd)
-      detach('d_id_i')
+      close(f_rmd)
+    } else {
+      print(sprintf("WARN: no plot indicators for element with svg_id '%s'", id))
     }
-    close(f_rmd)
 
     # === insert modal_after caption from file
     modal_after_caption = d_elements$modal_after[which(d_elements$svg_id == id)]
