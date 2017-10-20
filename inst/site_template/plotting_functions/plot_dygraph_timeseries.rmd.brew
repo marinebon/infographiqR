@@ -13,10 +13,10 @@ tryCatch(
         y_label = "<%=y_label%>",
         col_t   = "<%=col_t%>",
         col_y   = "<%=col_y%>"
-        <%=ifelse(exists('skip_lines') && !is.na(skip_lines), sprintf(', skip    ="%s"', skip_lines), "#skip_lines")%>
+        <%=ifelse(exists('skip_lines') && !is.na(skip_lines), sprintf(', skip=%s'      , skip_lines), "#skip_lines")%>
         <%=ifelse(exists('group_by'  ) && !is.na(group_by  ), sprintf(', group_by="%s"', group_by  ), "#group_by  ")%>
-        <%=ifelse(exists('std_err'   ) && !is.na(std_err   ), sprintf(', std_err ="%s"',  std_err  ), "#std_err   ")%>
-        <%=ifelse(exists('filter'    ) && !is.na(filter    ), sprintf(', filter  ="%s"', str_replace_all(filter, '"', '\\\\"')),"#filter")%>
+        <%=ifelse(exists('std_err'   ) && !is.na(std_err   ), sprintf(', std_err="%s"' ,  std_err  ), "#std_err   ")%>
+        <%=ifelse(exists('filter'    ) && !is.na(filter    ), sprintf(', filter="%s"'  , str_replace_all(filter, '"', '\\\\"')),"#filter")%>
     ),
     error = function(e) e
 )
