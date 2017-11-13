@@ -1,5 +1,13 @@
 # infographiq
-R library for creation of interactive infographics for data-driven storytelling
+R library for creation of interactive infographics for data-driven storytelling.
+This tool will help you build your own interactive infographics website from only csv files and svg images.
+Please contact us by opening an issue if you need help getting started with this tool.
+
+## Demos
+The following regional infographics were generated using the infographiq package:
+
+* [Florida Keys Marine Sanctuary Infographics](https://marinebon.github.io/info-fk/corals.html) - [github repo](https://github.com/marinebon/info-fk/)
+* [Monterey Bay Infographics](https://marinebon.github.io/info-mb/pelagic.html) - [github repo](https://github.com/marinebon/info-mb)
 
 # usage overview
 
@@ -9,10 +17,7 @@ R library for creation of interactive infographics for data-driven storytelling
 * `./plot_indicators.csv`
 * `./svg/*.svg`
 
-For example files see [the info-demo repository](https://github.com/marinebon/info-demo), or one of the following regional infographics that have been generated using the infographiq package:
-
-* [Florida Keys infographics](https://github.com/marinebon/info-fk/)
-* [Monterey Bay Infographics](https://github.com/marinebon/info-mb)
+For example files see [the info-demo repository](https://github.com/marinebon/info-demo), or one of the examples cited above.
 
 2. Use infographiq from an R console to generate the website:
 
