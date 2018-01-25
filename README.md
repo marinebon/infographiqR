@@ -66,3 +66,18 @@ We will be actively developing this package (2017-11 to 2018-04), so please chec
 
 * [https://marinebon.github.io/cr-metrics/README.html](https://marinebon.github.io/cr-metrics/README.html)
 * [Help & Documentation for the Marine Biodiversity Observation Network (MBON)](https://marinebon.github.io/help/apps.html#interactive-infographics)
+
+
+### Dependencies
+
+
+```r
+pkgs <- c(
+  "tidyverse", "brew", "rmarkdown", 
+  "tools", "servr", "futile.logger",
+  "dygraphs", "xts")
+for (p in pkgs){
+  devtools::use_package(p)
+}
+```
+
