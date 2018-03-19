@@ -134,6 +134,11 @@ create_info_site = function(
     rmd_path = file.path(path_rmd, rmds[i])
     print(sprintf('Brewing scene %s', rmd_path))
     brew(scene_brew, rmd_path)
+    # append scene caption
+    file.append(
+      rmd_path,
+      sprintf('captions/%s.md', file_path_sans_ext(svgs[i]))
+    )
   }
 
   # generate modal pages ----

@@ -8,8 +8,11 @@ title: "<%=svg_name%>"
    <div class="col-sm-3" id="svg_id_list_div">
    <ul id="svg_id_list"></ul>
    </div>
-  </div> <!-- row -->
-</div> <!-- container -->
+  </div> <!-- /row -->
+  <div class="row">
+   
+  </div> <!-- /row -->
+</div> <!-- /container -->
 
 <script>
 var svg = "<%=svg%>";
