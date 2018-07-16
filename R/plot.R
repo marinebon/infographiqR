@@ -167,3 +167,37 @@ plot_dygraph_timeseries = function(
 
   return(w)
 }
+
+#' Plot Intertidal Timeseries for National Marine Sanctuaries
+#'
+#' @param d_csv csv file of timeseries data containing fields: site, date, pct_cover
+#' @param nms abbreviation for national marine sanctuary, also included as a site averaged over others
+#' @param sp species code
+#' @param sp_name species name
+#'
+#' @return timeseries plot
+#' @export
+#'
+#' @examples
+plot_intertidal_nms <- function(d_csv, nms, sp, sp_name){
+
+  # read in csv with fields site, date, pct_cover
+  d <- read_csv(d_csv) %>%
+    spread(site, pct_cover) # View(d_sites)
+  
+  # line colors
+  ln_colors <- c(colorRampPalette(brewer.pal(11, "Set3"))(ncol(d)-2), "black")
+  
+  # convert to xts time object
+  x <- select(d, -date) %>%
+    as.xts(order.by=d$date)
+  
+  # plot dygraph
+  dygraph(x, main=glue("{sp_name} in {nms}")) %>%
+    dyOptions(
+      connectSeparatedPoints = TRUE,
+      colors = ln_colors) %>%
+    dySeries(NMS, strokeWidth = 3) %>%
+    dyHighlight(highlightSeriesOpts = list(strokeWidth = 2)) %>%
+    dyRangeSelector()
+}

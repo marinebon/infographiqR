@@ -70,7 +70,6 @@ We will be actively developing this package (2017-11 to 2018-04), so please chec
 
 ### Dependencies
 
-
 ```r
 pkgs <- c(
   "tidyverse", "brew", "rmarkdown", 
@@ -81,3 +80,17 @@ for (p in pkgs){
 }
 ```
 
+### Updating website
+
+To update the website for the R package, update documentation and regenerate the website outputs into the `docs/` folder:
+
+```R
+devtools::document()
+pkgdown::build_site()
+```
+
+### Vignettes
+
+```R
+devtools::use_vignette("quick-start")
+```

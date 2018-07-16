@@ -17,6 +17,7 @@
 #' @param styles_css cascading style sheet (css) for site
 #' @param render_modals True/False on whether to render the modal time series plots for site. Can be time consuming and gets cached in the dir_rmd folder, so set this to False if working on other parts of already generated site.
 #' @param preview_site True/False on whether to launch website in RStudio. Because of cross-browser security restrictions some SVG functionality of the site does not work just opening the html files locally from the filesystem, so requires a hosted web server either remotely (eg Github.io) or locally (ie servr::httd()).
+#' @param plot_function plot function to use (defaults to plot_dygraph_timeseries)
 #'
 #' @return nothing returned from the function if no error, except the created site is generated.
 #' @import tidyverse rmarkdown brew tools servr stringr
@@ -31,6 +32,7 @@ create_info_site = function(
   elements_csv     = 'svg_elements.csv',
   indicators_csv   = 'plot_indicators.csv',
   site_title       = 'MBON Interactive Infographics',
+  plot_function    = 'plot_dygraph_timeseries',
   dir_rmd          = 'rmd',
   dir_web          = 'docs',
   svg_paths        = list.files(file.path(path_root, dir_svg), '.*\\.svg$', full.names=T),
@@ -80,15 +82,18 @@ create_info_site = function(
   # check csv files (indicators, elements) for required columns ----
   check_csv_columns(
     path_elements,
-    c('svg','svg_id','label','status_text','status_color')
-  )
-  check_csv_columns(
-    path_indicators,
-    c(
-      'svg_id', 'plot_title', 'y_label', 'col_t', 'col_y', 'filter', 'group_by',
-      'csv_url', 'skip_lines'
-     )
-  )
+    c('svg','svg_id','label','status_text','status_color'))
+  if (plot_function == "plot_dygraph_timeseries"){
+    check_csv_columns(
+      path_indicators,
+      c('svg_id', 'plot_title', 'y_label', 'col_t', 'col_y', 'filter', 'group_by',
+        'csv_url', 'skip_lines'))
+  } else {
+    # plot_function == "plot_intertidal_nms"
+    check_csv_columns(
+      path_indicators,
+      c('svg_id', 'plot_title', 'plot_caption', 'nms', 'sp', 'sp_name', 'd_csv'))
+  }
 
   # prep files ----
   if (!dir.exists(path_rmd)) dir.create(path_rmd)
@@ -144,8 +149,14 @@ create_info_site = function(
   # generate modal pages ----
   dir.create(path_modals, showWarnings = F)
   # TODO: use trim_ws=TRUE in read_csv calls?
-  d = read_csv(path_indicators) %>%
-    filter(!is.na(csv_url)) # TODO: rm this so that we *can* use NA csv_url (like for plot_none)
+  
+  if (plot_function == "plot_dygraph_timeseries"){
+    d = read_csv(path_indicators) %>%
+      filter(!is.na(csv_url)) # TODO: rm this so that we *can* use NA csv_url (like for plot_none)
+  } else {
+    # plot_function == "plot_intertidal_nms"
+    d = read_csv(path_indicators)
+  }
   d_elements = read_csv(path_elements)
 
   for (id in d_elements$svg_id){ # id = unique(d$svg_id)[3]
@@ -181,6 +192,7 @@ create_info_site = function(
           file.append(rmd, plot_caption)
         }
 
+        plotting_function_call
         modal_plot_brew = get_plotting_function_brew(d_id$plotting_function_call[i])
         print(modal_plot_brew)
         brew(modal_plot_brew, f_rmd)

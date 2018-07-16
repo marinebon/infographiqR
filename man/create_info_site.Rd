@@ -6,7 +6,8 @@
 \usage{
 create_info_site(path_root = ".", dir_svg = "svg",
   elements_csv = "svg_elements.csv", indicators_csv = "plot_indicators.csv",
-  site_title = "Florida Keys Infographics", dir_rmd = "rmd",
+  site_title = "MBON Interactive Infographics",
+  plot_function = "plot_dygraph_timeseries", dir_rmd = "rmd",
   dir_web = "docs", svg_paths = list.files(file.path(path_root, dir_svg),
   ".*\\\\.svg$", full.names = T),
   svg_names = tools::file_path_sans_ext(basename(svg_paths)),
@@ -29,6 +30,8 @@ create_info_site(path_root = ".", dir_svg = "svg",
 \item{indicators_csv}{csv table containing pointers going from svg_id to csv_url with data for plot of indicator for use with plot_dygraph_timeseries() function.}
 
 \item{site_title}{title of site to show up in navigation menu.}
+
+\item{plot_function}{plot function to use (defaults to plot_dygraph_timeseries)}
 
 \item{dir_rmd}{directory within path_root to output Rmarkdown files for staging website.}
 

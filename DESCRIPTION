@@ -13,3 +13,6 @@ Imports: tidyverse,
     rmarkdown,
     tools,
     servr
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
