@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/marinebon/infographiq.svg?branch=master)](https://travis-ci.org/marinebon/infographiq) 
+
 # infographiq
 R library for creation of interactive infographics for data-driven storytelling.
 This tool will help you build your own interactive infographics website from only csv files and svg images.
