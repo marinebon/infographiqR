@@ -176,6 +176,7 @@ plot_dygraph_timeseries = function(
 #' @param sp_name species name
 #'
 #' @return timeseries plot
+#' @import dygraphs
 #' @export
 #'
 #' @examples
