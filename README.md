@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/marinebon/infographiq.svg?branch=master)](https://travis-ci.org/marinebon/infographiq) 
+[![Coverage Status](https://codecov.io/github/marinebon/infographiq/coverage.svg?branch=master)](https://codecov.io/github/marinebon/infographiq?branch=master)
 
 # infographiq
 R library for creation of interactive infographics for data-driven storytelling.
