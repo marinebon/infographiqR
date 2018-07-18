@@ -163,11 +163,23 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>plot_dygraph_timeseries(
-</div><div class='output co'>#&gt; <span class='error'>Error: &lt;text&gt;:3:0: unexpected end of input</span>
-#&gt; <span class='error'>1: plot_dygraph_timeseries(</span>
-#&gt; <span class='error'>2: </span>
-#&gt; <span class='error'>  ^</span></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>plot_dygraph_timeseries</span>(
+  <span class='kw'>csv_tv</span>  <span class='kw'>=</span> <span class='st'>'http://oceanview.pfeg.noaa.gov/erddap/tabledap/cciea_MM_pup_count.csv?time,mean_growth_rate'</span>,
+  <span class='kw'>title</span>   <span class='kw'>=</span> <span class='st'>'Female sea lion pup growth rate'</span>,
+  <span class='kw'>y_label</span> <span class='kw'>=</span> <span class='st'>'Mean growth rate'</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: zoo</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘zoo’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    as.Date, as.Date.numeric</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘xts’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:dplyr’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    first, last</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘lubridate’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:base’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    date</span></div><div class='output co'>#&gt; <span class='message'>Parsed with column specification:</span>
+#&gt; <span class='message'>cols(</span>
+#&gt; <span class='message'>  time = col_character(),</span>
+#&gt; <span class='message'>  mean_growth_rate = col_character()</span>
+#&gt; <span class='message'>)</span></div><div class='output co'>#&gt; <span class='error'>Error in colnames(d_s) = c("t", "v"): object 'd_s' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

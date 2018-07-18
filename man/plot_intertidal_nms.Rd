@@ -21,3 +21,6 @@ timeseries plot
 \description{
 Plot Intertidal Timeseries for National Marine Sanctuaries
 }
+\examples{
+# TODO: example plot_intertidal_nms(d_csv, nms, sp, sp_name)
+}

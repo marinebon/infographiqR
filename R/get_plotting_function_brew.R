@@ -6,8 +6,7 @@
 #         that gives us a hint at what brew to return.
 #'
 #' @return returns brew file object that can be passed to brew()
-#' @import ...
-#' @export ...
+#' @export
 #'
 #' @examples
 #'  plot_brew = get_plotting_function_brew(

@@ -16,9 +16,9 @@
 #'
 #' @examples
 #' plot_dygraph_timeseries(
-#   csv_tv  = 'http://oceanview.pfeg.noaa.gov/erddap/tabledap/cciea_MM_pup_count.csv?time,mean_growth_rate',
-#   title   = 'Female sea lion pup growth rate',
-#   y_label = 'Mean growth rate')
+#'   csv_tv  = 'http://oceanview.pfeg.noaa.gov/erddap/tabledap/cciea_MM_pup_count.csv?time,mean_growth_rate',
+#'   title   = 'Female sea lion pup growth rate',
+#'   y_label = 'Mean growth rate')
 plot_dygraph_timeseries = function(
   csv_tv,
   title,
@@ -179,6 +179,7 @@ plot_dygraph_timeseries = function(
 #' @export
 #'
 #' @examples
+#' # TODO: example plot_intertidal_nms(d_csv, nms, sp, sp_name)
 plot_intertidal_nms <- function(d_csv, nms, sp, sp_name){
 
   # read in csv with fields site, date, pct_cover

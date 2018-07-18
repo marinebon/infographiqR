@@ -35,4 +35,7 @@ plot timeseries given a path (or URL) to csv
 }
 \examples{
 plot_dygraph_timeseries(
+  csv_tv  = 'http://oceanview.pfeg.noaa.gov/erddap/tabledap/cciea_MM_pup_count.csv?time,mean_growth_rate',
+  title   = 'Female sea lion pup growth rate',
+  y_label = 'Mean growth rate')
 }
