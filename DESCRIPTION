@@ -12,7 +12,12 @@ Imports: tidyverse,
     brew,
     rmarkdown,
     tools,
-    servr
+    servr,
+    dygraphs,
+    lubridate,
+    stringr,
+    xts,
+    futile.logger
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr

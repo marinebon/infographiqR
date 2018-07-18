@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/marinebon/infographiq.svg?branch=master)](https://travis-ci.org/marinebon/infographiq) 
-[![Coverage Status](https://codecov.io/github/marinebon/infographiq/coverage.svg?branch=master)](https://codecov.io/github/marinebon/infographiq?branch=master)
+[![Coverage Status](https://codecov.io/gh/marinebon/infographiq/coverage.svg?branch=master)](https://codecov.io/gh/marinebon/infographiq?branch=master)
 
 # infographiq
 R library for creation of interactive infographics for data-driven storytelling.
@@ -75,9 +75,8 @@ We will be actively developing this package (2017-11 to 2018-04), so please chec
 
 ```r
 pkgs <- c(
-  "tidyverse", "brew", "rmarkdown", 
-  "tools", "servr", "futile.logger",
-  "dygraphs", "xts")
+  "brew", "dygraphs", "futile.logger", "lubridate", "rmarkdown", "servr", "stringr",
+  "tidyverse", "tools", "xts")
 for (p in pkgs){
   devtools::use_package(p)
 }
