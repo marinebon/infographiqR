@@ -25,7 +25,7 @@
 #'
 #' @examples
 #' library(infographiq)
-#' create_info_site()
+#' #create_info_site()
 create_info_site = function(
   path_root        =  '.',
   dir_svg          = 'svg',
