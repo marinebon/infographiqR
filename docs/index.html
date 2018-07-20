@@ -107,38 +107,30 @@
 <li>Use infographiq from an R console to generate the website:</li>
 </ol>
 <p>Install the infographiq R package and those it depends on. You only need to do this once.</p>
-<p>```R</p>
-</div>
-<div id="install-required-packages" class="section level1">
-<h1 class="hasAnchor">
-<a href="#install-required-packages" class="anchor"></a>install required packages</h1>
-<p>install.packages(c(“tidyverse”, “stringr”, “rmarkdown”, “dygraphs”, “xts”, “lubridate”, “geojsonio”, “RColorBrewer”, “leaflet”, “crosstalk”, “servr”, “roxygen2”, “futile.logger”))</p>
-</div>
-<div id="install-infographiq-from-github" class="section level1">
-<h1 class="hasAnchor">
-<a href="#install-infographiq-from-github" class="anchor"></a>install infographiq from Github</h1>
-<p>if (!require(‘devtools’)) install.packages(‘devtools’) devtools::install_github(‘marinebon/infographiq’)</p>
-<pre><code>
-  Load the library and create the site.
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install required packages</span>
+<span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"stringr"</span>, <span class="st">"rmarkdown"</span>, <span class="st">"dygraphs"</span>, <span class="st">"xts"</span>, <span class="st">"lubridate"</span>, <span class="st">"geojsonio"</span>, <span class="st">"RColorBrewer"</span>, <span class="st">"leaflet"</span>, <span class="st">"crosstalk"</span>, <span class="st">"servr"</span>, <span class="st">"roxygen2"</span>, <span class="st">"futile.logger"</span>))
 
-  ```R
-# load
-library(infographiq)
+<span class="co"># install infographiq from Github</span>
+if (!<span class="kw">require</span>(<span class="st">'devtools'</span>)) <span class="kw">install.packages</span>(<span class="st">'devtools'</span>)
+devtools::<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">'marinebon/infographiq'</span>)</code></pre></div>
+<p>Load the library and create the site.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load</span>
+<span class="kw">library</span>(infographiq)
 
-# run i.e.
-create_info_site(site_title = "Monterey Bay Infographics", render_modals = T)</code></pre>
+<span class="co"># run i.e.</span>
+<span class="kw"><a href="reference/create_info_site.html">create_info_site</a></span>(<span class="dt">site_title =</span> <span class="st">"Monterey Bay Infographics"</span>, <span class="dt">render_modals =</span> T)</code></pre></div>
 </div>
 <div id="developer-workflow" class="section level1">
 <h1 class="hasAnchor">
 <a href="#developer-workflow" class="anchor"></a>Developer workflow</h1>
 <p>We developed this R package using the excellent <a href="https://www.rstudio.com/products/rpackages/devtools/"><code>devtools</code></a> package. If you are actively changing your local copy of the infographiq package, ie functions contained in it, you can reload with:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">'devtools'</span>)
-<span class="kw">install_local</span>(<span class="st">'../infographiq'</span>)
+<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_local">install_local</a></span>(<span class="st">'../infographiq'</span>)
 
 <span class="co"># or</span>
-<span class="kw">install</span>(<span class="st">'../infographiq")</span></code></pre></div>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install">install</a></span>(<span class="st">'../infographiq")</span></code></pre></div>
 <p>To build documentation (using roxygen2, and assuming working directory is in ‘infographiq’)…</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">document</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/document">document</a></span>()</code></pre></div>
 </div>
 <div id="more-background" class="section level1">
 <h1 class="hasAnchor">
@@ -155,20 +147,20 @@ create_info_site(site_title = "Monterey Bay Infographics", render_modals = T)</c
   <span class="st">"brew"</span>, <span class="st">"dygraphs"</span>, <span class="st">"futile.logger"</span>, <span class="st">"lubridate"</span>, <span class="st">"rmarkdown"</span>, <span class="st">"servr"</span>, <span class="st">"stringr"</span>,
   <span class="st">"tidyverse"</span>, <span class="st">"tools"</span>, <span class="st">"xts"</span>)
 for (p in pkgs){
-  devtools::<span class="kw">use_package</span>(p)
+  devtools::<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/use_package">use_package</a></span>(p)
 }</code></pre></div>
 </div>
 <div id="updating-website" class="section level3">
 <h3 class="hasAnchor">
 <a href="#updating-website" class="anchor"></a>Updating website</h3>
 <p>To update the website for the R package, update documentation and regenerate the website outputs into the <code>docs/</code> folder:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">document</span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/document">document</a></span>()
 pkgdown::<span class="kw">build_site</span>()</code></pre></div>
 </div>
 <div id="vignettes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#vignettes" class="anchor"></a>Vignettes</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">use_vignette</span>(<span class="st">"quick-start"</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/infrastructure">use_vignette</a></span>(<span class="st">"quick-start"</span>)</code></pre></div>
 </div>
 </div>
 

@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/marinebon/infographiq.svg?branch=master)](https://travis-ci.org/marinebon/infographiq) 
+[![Build Status](https://travis-ci.org/marinebon/infographiq.svg?branch=master)](https://travis-ci.org/marinebon/infographiq)
 [![Coverage Status](https://codecov.io/gh/marinebon/infographiq/coverage.svg?branch=master)](https://codecov.io/gh/marinebon/infographiq?branch=master)
 
 # infographiq
@@ -26,7 +26,7 @@ The following regional infographics were generated using the infographiq package
 
   Install the infographiq R package and those it depends on. You only need to do this once.
 
-  ```R
+```R
 # install required packages
 install.packages(c("tidyverse", "stringr", "rmarkdown", "dygraphs", "xts", "lubridate", "geojsonio", "RColorBrewer", "leaflet", "crosstalk", "servr", "roxygen2", "futile.logger"))
 
@@ -37,7 +37,7 @@ devtools::install_github('marinebon/infographiq')
 
   Load the library and create the site.
 
-  ```R
+```R
 # load
 library(infographiq)
 
