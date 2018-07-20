@@ -2,5 +2,6 @@ pandoc: 1.16.0.2
 pkgdown: 1.1.0
 pkgdown_sha: ~
 articles:
+  captions: captions.html
   quick-start: quick-start.html
 

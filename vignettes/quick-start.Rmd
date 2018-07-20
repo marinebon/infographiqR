@@ -1,5 +1,6 @@
 ---
 title: "Quick Start"
+author: "Tylar Murray, Megan Hepner"
 date: "2017-07-17"
 output: rmarkdown::html_vignette
 vignette: >
