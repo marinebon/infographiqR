@@ -3,5 +3,6 @@ pkgdown: 1.1.0
 pkgdown_sha: ~
 articles:
   captions: captions.html
+  plotting_function_call: plotting_function_call.html
   quick-start: quick-start.html
 
