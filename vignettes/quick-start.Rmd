@@ -1,10 +1,9 @@
 ---
-title: "Vignette Title"
-author: "Vignette Author"
-date: "`r Sys.Date()`"
+title: "Quick Start"
+date: "2017-07-17"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Quick Start}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,51 +14,48 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+# Required Files
+1. svg/my_infographic.svg - scalable vector graphic file that defines the image shown in your scene
+1. svg_elements.csv       - tells infographiq about the shapes to use from your svg(s)
+1. plot_indicators.csv    - defines plots to show in the modal for each svg element
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+## infographic.svg
+Scalable Vector Graphic (SVG) files can be created using the free, cross-platform program Inkscape or exported from Adobe Illustrator. This file format is a human-readable subset of xml. For example files see the [info-demo/svg](https://github.com/USF-IMARS/info-demo/tree/master/svg).
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+svg files must be placed in a directory named `svg` in order to be found by infographiq.
 
-## Vignette Info
+## svg_elements.csv
 
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+1. Columns needed in svg_elements
+- svg
+- svg_id (lower case no spaces - **MUST MATCH** svg_id in plot_indicators.csv)
+- label
+- status_text
+- status_color
+- modal_before : optional row specifying a caption text file to include at the top of the modal
+- modal_after  : same as modal_before, but caption for the bottom of the modal
 
-## Styles
+Example
 
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+|**svg**   |**svg_id**      |**module_title**       |**status_text**|**status_color**|
+|----------|----------------|-----------------------|---------------|----------------|
+|corals.svg|sea-turtle      | Sea Turtle (focal)    |               |                |
 
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
+## plot_indicators.csv
 
-## Figures
+1. Columns needed in plot_indicators.csv
+- svg_id (lower case no spaces - **MUST MATCH** svg_id in svg_elements.csv)
+- plot_title (title on plot)
+- y_label (y label on plot)
+- col_t (calls column from csv_url)
+- col_y (calls column from csv_url)
+- filter (to filter from csv_url)
+- group_by (to group from csv_url)
+- csv_url (needs to be in github repository)
+- skip_lines
 
-The figure sizes have been customised so that you can easily put two images side-by-side. 
+Example:
 
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
-```
-
-You can enable figure captions by `fig_caption: yes` in YAML:
-
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
-
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
-```
-
-Also a quote using `>`:
-
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+| **svg_id** |**plot_title**      |**y_label**       |**col_t**|**col_y**|**filter**|**group_by**|**csv_url**|
+|------------|--------------------|------------------|---------|---------|----------|------------|-----------|
+|sea-turtle  | Sea Turtle Richness| Species Richness | year    | richness| NA       | NA         | github.com/marinebon/info-fk/blob/master/plot_indicators.csv

@@ -65,5 +65,5 @@ Create infographics web site
 }
 \examples{
 library(infographiq)
-create_info_site()
+#create_info_site()
 }
