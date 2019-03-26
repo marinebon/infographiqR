@@ -7,8 +7,9 @@ Depends: R (>= 3.4.0)
 License: MIT License
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
-Imports: tidyverse,
+RoxygenNote: 6.1.1
+Imports: 
+    tidyverse,
     brew,
     rmarkdown,
     tools,
@@ -17,7 +18,10 @@ Imports: tidyverse,
     lubridate,
     stringr,
     xts,
-    futile.logger
+    futile.logger,
+    bsplus,
+    htmltools,
+    r2d3
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
