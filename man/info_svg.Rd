@@ -2,13 +2,13 @@
 % Please edit documentation in R/svg.R
 \name{info_svg}
 \alias{info_svg}
-\title{Make SVG interactive with links and/or modals based on data.frame linked by id}
+\title{Make SVG interactive with modal (popup) or nonmodal (normal) links based on data.frame linked by id}
 \usage{
 info_svg(df, svg, color_default = "black", color_hover = "yellow",
   width = NULL, height = NULL, modal_id = "modal")
 }
 \arguments{
-\item{df}{data.frame containing fields \code{id}, \code{title}, \code{link}, \code{modal}}
+\item{df}{data.frame containing fields \code{id}, \code{title}, \code{link_nonmodal}, \code{link_modal}}
 
 \item{svg}{path to svg relative to generated html}
 
@@ -21,8 +21,8 @@ info_svg(df, svg, color_default = "black", color_hover = "yellow",
 \item{height}{height of output svg (TODO)}
 }
 \value{
-linked interactive infographic using svg illustration with links for \code{link}, which using modal window if applicable
+linked interactive infographic using svg illustration with links included
 }
 \description{
-Make SVG interactive with links and/or modals based on data.frame linked by id
+Make SVG interactive with modal (popup) or nonmodal (normal) links based on data.frame linked by id
 }

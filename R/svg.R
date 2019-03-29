@@ -1,13 +1,13 @@
-#' Make SVG interactive with links and/or modals based on data.frame linked by id
+#' Make SVG interactive with modal (popup) or nonmodal (normal) links based on data.frame linked by id
 #'
-#' @param df data.frame containing fields \code{id}, \code{title}, \code{link}, \code{modal}
+#' @param df data.frame containing fields \code{id}, \code{title}, \code{link_nonmodal}, \code{link_modal}
 #' @param svg path to svg relative to generated html
 #' @param color_default default color, defaults to black
 #' @param color_hover default color on hover, defaults to yellow
 #' @param width width of output svg (TODO)
 #' @param height height of output svg (TODO)
 #'
-#' @return linked interactive infographic using svg illustration with links for \code{link}, which using modal window if applicable
+#' @return linked interactive infographic using svg illustration with links included
 #' @export
 #' @import r2d3 htmltools bsplus
 #'
@@ -24,10 +24,10 @@ info_svg <- function(
   # checks
   stopifnot(file.exists(svg))
   stopifnot(is.data.frame(df))
-  stopifnot(all(c("id", "title", "link", "modal") %in% names(df)))
+  stopifnot(all(c("id", "title", "link_nonmodal", "link_modal") %in% names(df)))
   # TODO: c("svg", "modal_before", "modal_after", "status_text", "status_color")
-  if (any(as.numeric(!is.na(df$link)) + as.numeric(!is.na(df$modal)) > 1)){
-    stop("Link and modal in df are mutually exclusive, so cannot define both; one should be empty, ie NA.")
+  if (any(as.numeric(!is.na(df$link_nonmodal)) + as.numeric(!is.na(df$link_modal)) > 1)){
+    stop("The link_nonmodal and link_modal in df are mutually exclusive, so cannot define both; one should be empty, ie NA.")
   }
 
   # library(tidyverse)
@@ -42,8 +42,8 @@ info_svg <- function(
   #   filter(svg == "overview.svg")
   
   tags <- list()
-  # if only links and no modals, skip modal
-  if (sum(as.numeric(!is.na(df$modal))) > 0){
+  # if only link_nonmodal and no link_modal, skip modal
+  if (sum(as.numeric(!is.na(df$link_modal))) > 0){
     # setup generic modal, with values to be replaced with infographiq.js
     
     tags <- bsplus::bs_modal(

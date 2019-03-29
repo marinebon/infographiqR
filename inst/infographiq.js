@@ -34,12 +34,12 @@ d3.svg(options.svg).then((f) => {
       .on("click", function() {
         //debugger;
         
-        if (d.link > ''){
-          window.location = d.link;
+        if (d.link_nonmodal > ''){
+          window.location = d.link_nonmodal;
         } else {
           $('#'+ options.modal_id).find('iframe')
-            .prop('src', function(){ return d.modal })
-            .prop('src', function(){ return d.modal });
+            .prop('src', function(){ return d.link_modal })
+            .prop('src', function(){ return d.link_modal });
           
           $('#'+ options.modal_id + '-title').html( d.title );
           

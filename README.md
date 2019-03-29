@@ -12,6 +12,11 @@ The following regional infographics were generated using the infographiq package
 * [Florida Keys Marine Sanctuary Infographics](https://marinebon.github.io/info-fk/corals.html) - [github repo](https://github.com/marinebon/info-fk/)
 * [Monterey Bay Infographics](https://marinebon.github.io/info-mb/pelagic.html) - [github repo](https://github.com/marinebon/info-mb)
 
+# New Architecture
+
+- knit_modals(): iterate over unique modal_id to render parameterized rmd
+  - knit_modal_plots(): iterate over plots within modal
+
 # Usage overview
 
 1. Define your infographic by creating the following files:

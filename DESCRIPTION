@@ -2,7 +2,7 @@ Package: infographiq
 Title: Create interactive infographics for data-driven storytelling
 Version: 0.0.0.9000
 Authors@R: person("Ben", "Best", email = "ben@ecoquants.com", role = c("aut", "cre"))
-Description: "Given a scalable vector graphic (*.svg) illustration, link elements (with click and hover) to a modal window (similar to a popup without, but without web browser restriction) that lists plotted objects. These plots could be any plot output (ggplot2, leaflet, dygraphs, etc.). This R package is being developed for the Marine Biodiversity Observation Network project."
+Description: "Given a scalable vector graphic (*.svg) illustration, link elements, possibly with a modal popup."
 Depends: R (>= 3.4.0)
 License: MIT License
 Encoding: UTF-8
@@ -11,6 +11,7 @@ RoxygenNote: 6.1.1
 Imports: 
     tidyverse,
     brew,
+    knitr,
     rmarkdown,
     tools,
     servr,
@@ -22,6 +23,5 @@ Imports:
     bsplus,
     htmltools,
     r2d3
-Suggests: knitr,
-    rmarkdown
+Suggests: 
 VignetteBuilder: knitr
