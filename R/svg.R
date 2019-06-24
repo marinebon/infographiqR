@@ -23,7 +23,7 @@ info_svg <- function(
   
   # checks
   stopifnot(file.exists(svg))
-  stopifnot(is.data.frame(df))
+  stopifnot(nrow(df) > 0)
   stopifnot(all(c("id", "title", "link_nonmodal", "link_modal") %in% names(df)))
   # TODO: c("svg", "modal_before", "modal_after", "status_text", "status_color")
   if (any(as.numeric(!is.na(df$link_nonmodal)) + as.numeric(!is.na(df$link_modal)) > 1)){
