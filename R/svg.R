@@ -22,7 +22,7 @@ info_svg <- function(
   library(bsplus)
   
   # checks
-  stopifnot(file.exists(svg))
+  #stopifnot(file.exists(svg))
   stopifnot(nrow(df) > 0)
   stopifnot(all(c("id", "title", "link_nonmodal", "link_modal") %in% names(df)))
   # TODO: c("svg", "modal_before", "modal_after", "status_text", "status_color")
