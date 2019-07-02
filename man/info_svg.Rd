@@ -5,7 +5,7 @@
 \title{Make SVG interactive with modal (popup) or nonmodal (normal) links based on data.frame linked by id}
 \usage{
 info_svg(df, svg, color_default = "black", color_hover = "yellow",
-  width = NULL, height = NULL, modal_id = "modal")
+  width = NULL, height = NULL, modal_id = "modal", debug = FALSE)
 }
 \arguments{
 \item{df}{data.frame containing fields \code{id}, \code{title}, \code{link_nonmodal}, \code{link_modal}}
@@ -19,6 +19,10 @@ info_svg(df, svg, color_default = "black", color_hover = "yellow",
 \item{width}{width of output svg (TODO)}
 
 \item{height}{height of output svg (TODO)}
+
+\item{modal_id}{used by JavaScript for turning on/off modal window; defaults to "modal"}
+
+\item{debug}{add debug messages to JavaScript console; defaults to FALSE}
 }
 \value{
 linked interactive infographic using svg illustration with links included
