@@ -6,6 +6,8 @@
 #' @param color_hover default color on hover, defaults to yellow
 #' @param width width of output svg (TODO)
 #' @param height height of output svg (TODO)
+#' @param modal_id used by JavaScript for turning on/off modal window; defaults to "modal"
+#' @param debug add debug messages to JavaScript console; defaults to FALSE
 #'
 #' @return linked interactive infographic using svg illustration with links included
 #' @export
@@ -15,14 +17,16 @@
 info_svg <- function(
   df, svg, 
   color_default="black", color_hover="yellow", 
-  width = NULL, height = NULL, modal_id="modal"){
+  width = NULL, height = NULL, modal_id="modal",
+  debug = FALSE){
   
   library(r2d3)
   library(htmltools)
   library(bsplus)
+  library(rmarkdown)
   
   # checks
-  stopifnot(file.exists(svg))
+  #stopifnot(file.exists(svg))
   stopifnot(nrow(df) > 0)
   stopifnot(all(c("id", "title", "link_nonmodal", "link_modal") %in% names(df)))
   # TODO: c("svg", "modal_before", "modal_after", "status_text", "status_color")
@@ -63,14 +67,23 @@ info_svg <- function(
       color_hover   = color_hover,
       modal_id      = modal_id,
       width         = width,
-      height        = height),
+      height        = height,
+      debug         = debug),
     d3_version = "5")
   tags <- htmltools::tagList(tags, tag_svg)
   
-  deps = htmltools::htmlDependency(
+  deps = list(htmltools::htmlDependency(
     'infographiq-css', '0.1', 
     src = system.file(package = "infographiq"),
-    stylesheet = 'infographiq.css')
+    stylesheet = 'infographiq.css'))
+  
+  # add jquery and bootstrap dependencies
+  deps = append(
+    deps, 
+    list(
+      rmarkdown::html_dependency_jquery(),
+      rmarkdown::html_dependency_bootstrap("default"))) # theme = NULL # Error: invalid version specification 'NULL'
+  
   tags <- htmltools::attachDependencies(tags, deps)
   
   tags
