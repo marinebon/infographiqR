@@ -1,6 +1,6 @@
 Package: infographiq
 Title: Create interactive infographics for data-driven storytelling
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: c(person("Ben", "Best", email = "ben@ecoquants.com", role = c("aut", "cre")),
              person("Tylar", "Murray", email = "tylarmurray@mail.usf.edu", role = c("aut")))
 Description: "Given a scalable vector graphic (*.svg) illustration, link elements, possibly with a modal popup."
