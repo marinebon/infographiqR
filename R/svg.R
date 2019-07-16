@@ -1,7 +1,7 @@
 #' Make SVG interactive with modal (popup) or nonmodal (normal) links based on data.frame linked by id
 #'
 #' @param df data.frame containing fields \code{id}, \code{title}, \code{link_nonmodal}, \code{link_modal}
-#' @param svg path to svg relative to generated html
+#' @param svg url to svg relative to generated html
 #' @param color_default default color, defaults to black
 #' @param color_hover default color on hover, defaults to yellow
 #' @param width width of output svg (TODO)
