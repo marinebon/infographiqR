@@ -1,5 +1,7 @@
 // !preview r2d3 data=read.csv("svg/svg_elements.csv", strip.white=T), svg = "svg/overview.svg"
 
+var d3 = d3v5;
+
 // define div for tooltip
 var tooltip_div = d3.select("body").append("div")
   .attr("class", "tooltip")

@@ -16,9 +16,13 @@
 #' @examples
 info_svg <- function(
   df, svg, 
-  color_default="black", color_hover="yellow", 
-  width = NULL, height = NULL, modal_id="modal",
-  debug = FALSE){
+  width = NULL, height = NULL,
+  color_default = "black", color_hover = "yellow", modal_id = "modal", debug = FALSE){
+  
+  # df = readr::read_csv("~/github/fk-iea/content/svg_links.csv")
+  # svg = "file:///Users/bbest/github/fk-iea/content/svg/fl-keys.svg"
+  # width = NULL; height = NULL
+  # color_default="black"; color_hover="yellow"; modal_id="modal"; debug = F
   
   library(r2d3)
   library(htmltools)
@@ -34,17 +38,6 @@ info_svg <- function(
     stop("The link_nonmodal and link_modal in df are mutually exclusive, so cannot define both; one should be empty, ie NA.")
   }
 
-  # library(tidyverse)
-  # library(r2d3)
-  # library(htmltools)
-  # library(bsplus)
-  # library(here)
-  # devtools::load_all("~/github/infographiq")
-  # here <- here::here
-  # 
-  # df <- read_csv("~/github/cinms/docs/svg/svg_elements.csv") %>% 
-  #   filter(svg == "overview.svg")
-  
   tags <- list()
   # if only link_nonmodal and no link_modal, skip modal
   if (sum(as.numeric(!is.na(df$link_modal))) > 0){
@@ -58,8 +51,16 @@ info_svg <- function(
   }
   
   # operate on svg using data in df
-  tag_svg <- r2d3::r2d3(
+  w <- r2d3::r2d3(
     script = system.file("infographiq.js", package = "infographiq"),
+    d3_version = "5",
+    dependencies = list(
+      rmarkdown::html_dependency_jquery(),
+      rmarkdown::html_dependency_bootstrap("default"),
+      htmltools::htmlDependency(
+        'infographiq-css', '0.1', 
+        src = system.file(package = "infographiq"),
+        stylesheet = 'infographiq.css')),
     data = df, 
     options = list(
       svg           = svg,
@@ -68,23 +69,10 @@ info_svg <- function(
       modal_id      = modal_id,
       width         = width,
       height        = height,
-      debug         = debug),
-    d3_version = "5")
-  tags <- htmltools::tagList(tags, tag_svg)
+      debug         = debug))
   
-  deps = list(htmltools::htmlDependency(
-    'infographiq-css', '0.1', 
-    src = system.file(package = "infographiq"),
-    stylesheet = 'infographiq.css'))
+  # add modal id
+  w <- htmlwidgets::prependContent(w, tags)
   
-  # add jquery and bootstrap dependencies
-  deps = append(
-    deps, 
-    list(
-      rmarkdown::html_dependency_jquery(),
-      rmarkdown::html_dependency_bootstrap("default"))) # theme = NULL # Error: invalid version specification 'NULL'
-  
-  tags <- htmltools::attachDependencies(tags, deps)
-  
-  tags
+  w
 }
