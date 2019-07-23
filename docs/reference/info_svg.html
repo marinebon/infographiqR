@@ -136,7 +136,7 @@ data.frame linked by id</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>info_svg</span>(<span class='no'>df</span>, <span class='no'>svg</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>info_svg</span>(<span class='no'>df</span>, <span class='no'>svg</span>, <span class='kw'>svg_url_pfx</span> <span class='kw'>=</span> <span class='st'>"/"</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>color_default</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>color_hover</span> <span class='kw'>=</span> <span class='st'>"yellow"</span>,
   <span class='kw'>modal_id</span> <span class='kw'>=</span> <span class='st'>"modal"</span>, <span class='kw'>modal_html_provided</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>debug</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
@@ -150,7 +150,11 @@ data.frame linked by id</p>
     </tr>
     <tr>
       <th>svg</th>
-      <td><p>url to svg relative to generated html</p></td>
+      <td><p>basename of svg</p></td>
+    </tr>
+    <tr>
+      <th>svg_url_pfx</th>
+      <td><p>prefix URL, ie directory, to locate svg</p></td>
     </tr>
     <tr>
       <th>width</th>

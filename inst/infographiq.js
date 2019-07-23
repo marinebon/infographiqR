@@ -7,7 +7,7 @@ var tooltip_div = d3.select("body").append("div")
   .attr("class", "tooltip")
   .style("opacity", 0);
 
-d3.svg(options.svg).then((f) => {
+d3.svg(options.svg_url_pfx + options.svg).then((f) => {
   // https://gist.github.com/mbostock/1014829#gistcomment-2692594
   
   var f_child = svg.node().appendChild(f.documentElement);

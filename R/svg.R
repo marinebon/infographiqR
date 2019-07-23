@@ -3,7 +3,8 @@
 #'
 #' @param df data.frame containing fields \code{id}, \code{title},
 #'   \code{link_nonmodal}, \code{link_modal}
-#' @param svg url to svg relative to generated html
+#' @param svg basename of svg
+#' @param svg_url_pfx prefix URL, ie directory, to locate svg
 #' @param color_default default color, defaults to black
 #' @param color_hover default color on hover, defaults to yellow
 #' @param width width of output svg (TODO)
@@ -22,7 +23,7 @@
 #'
 #' @examples
 info_svg <- function(
-  df, svg, 
+  df, svg, svg_url_pfx = "/",
   width = NULL, height = NULL,
   color_default = "black", color_hover = "yellow", 
   modal_id = "modal", modal_html_provided=F, debug = FALSE){
@@ -65,6 +66,7 @@ info_svg <- function(
     data = df, 
     options = list(
       svg           = svg,
+      svg_url_pfx   = svg_url_pfx,
       color_default = color_default,
       color_hover   = color_hover,
       modal_id      = modal_id,
