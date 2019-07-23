@@ -2,31 +2,41 @@
 % Please edit documentation in R/svg.R
 \name{info_svg}
 \alias{info_svg}
-\title{Make SVG interactive with modal (popup) or nonmodal (normal) links based on data.frame linked by id}
+\title{Make SVG interactive with modal (popup) or nonmodal (normal) links based on
+data.frame linked by id}
 \usage{
-info_svg(df, svg, color_default = "black", color_hover = "yellow",
-  width = NULL, height = NULL, modal_id = "modal", debug = FALSE)
+info_svg(df, svg, width = NULL, height = NULL,
+  color_default = "black", color_hover = "yellow",
+  modal_id = "modal", modal_html_provided = F, debug = FALSE)
 }
 \arguments{
-\item{df}{data.frame containing fields \code{id}, \code{title}, \code{link_nonmodal}, \code{link_modal}}
+\item{df}{data.frame containing fields \code{id}, \code{title},
+\code{link_nonmodal}, \code{link_modal}}
 
-\item{svg}{path to svg relative to generated html}
-
-\item{color_default}{default color, defaults to black}
-
-\item{color_hover}{default color on hover, defaults to yellow}
+\item{svg}{url to svg relative to generated html}
 
 \item{width}{width of output svg (TODO)}
 
 \item{height}{height of output svg (TODO)}
 
-\item{modal_id}{used by JavaScript for turning on/off modal window; defaults to "modal"}
+\item{color_default}{default color, defaults to black}
+
+\item{color_hover}{default color on hover, defaults to yellow}
+
+\item{modal_id}{used by JavaScript for turning on/off modal window; defaults
+to "modal"}
+
+\item{modal_html_provided}{if layout gets odd, then set this to \code{TRUE}
+and include html from \code{\link{modal_html}} in the page yourself nearest
+to \code{</body>}}
 
 \item{debug}{add debug messages to JavaScript console; defaults to FALSE}
 }
 \value{
-linked interactive infographic using svg illustration with links included
+linked interactive infographic using svg illustration with links
+  included
 }
 \description{
-Make SVG interactive with modal (popup) or nonmodal (normal) links based on data.frame linked by id
+Make SVG interactive with modal (popup) or nonmodal (normal) links based on
+data.frame linked by id
 }

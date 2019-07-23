@@ -1,15 +1,22 @@
-#' Make SVG interactive with modal (popup) or nonmodal (normal) links based on data.frame linked by id
+#' Make SVG interactive with modal (popup) or nonmodal (normal) links based on
+#' data.frame linked by id
 #'
-#' @param df data.frame containing fields \code{id}, \code{title}, \code{link_nonmodal}, \code{link_modal}
+#' @param df data.frame containing fields \code{id}, \code{title},
+#'   \code{link_nonmodal}, \code{link_modal}
 #' @param svg url to svg relative to generated html
 #' @param color_default default color, defaults to black
 #' @param color_hover default color on hover, defaults to yellow
 #' @param width width of output svg (TODO)
 #' @param height height of output svg (TODO)
-#' @param modal_id used by JavaScript for turning on/off modal window; defaults to "modal"
+#' @param modal_id used by JavaScript for turning on/off modal window; defaults
+#'   to "modal"
 #' @param debug add debug messages to JavaScript console; defaults to FALSE
+#' @param modal_html_provided if layout gets odd, then set this to \code{TRUE}
+#'   and include html from \code{\link{modal_html}} in the page yourself nearest
+#'   to \code{</body>}
 #'
-#' @return linked interactive infographic using svg illustration with links included
+#' @return linked interactive infographic using svg illustration with links
+#'   included
 #' @export
 #' @import r2d3 htmltools bsplus
 #'
@@ -17,7 +24,8 @@
 info_svg <- function(
   df, svg, 
   width = NULL, height = NULL,
-  color_default = "black", color_hover = "yellow", modal_id = "modal", debug = FALSE){
+  color_default = "black", color_hover = "yellow", 
+  modal_id = "modal", modal_html_provided=F, debug = FALSE){
   
   # df = readr::read_csv("~/github/fk-iea/content/svg_links.csv")
   # svg = "file:///Users/bbest/github/fk-iea/content/svg/fl-keys.svg"
@@ -26,7 +34,6 @@ info_svg <- function(
   
   library(r2d3)
   library(htmltools)
-  library(bsplus)
   library(rmarkdown)
   
   # checks
@@ -40,14 +47,8 @@ info_svg <- function(
 
   tags <- list()
   # if only link_nonmodal and no link_modal, skip modal
-  if (sum(as.numeric(!is.na(df$link_modal))) > 0){
-    # setup generic modal, with values to be replaced with infographiq.js
-    
-    tags <- bsplus::bs_modal(
-      id = modal_id, title = "title",
-      body = htmltools::HTML(
-        '<iframe data-src="modal.html" height="100%" width="100%" frameborder="0"></iframe>'), 
-      size="large")
+  if (sum(as.numeric(!is.na(df$link_modal))) > 0 & !modal_html_provided){
+    tags <- modal_html(modal_id)
   }
   
   # operate on svg using data in df
@@ -75,4 +76,25 @@ info_svg <- function(
   w <- htmlwidgets::prependContent(w, tags)
   
   w
+}
+
+#' Get modal html
+#'
+#' @param modal_id id of div tag to use for modal window
+#'
+#' @return HTML tag
+#' @export
+#'
+#' @examples
+#' modal_html()
+modal_html <- function(modal_id = "modal"){
+  library(bsplus)
+  library(htmltools)
+  
+  # setup generic modal, with values to be replaced with infographiq.js
+  bsplus::bs_modal(
+    id = modal_id, title = "title",
+    body = htmltools::HTML(
+      '<iframe data-src="" height="100%" width="100%" frameborder="0"></iframe>'), 
+    size="large")
 }

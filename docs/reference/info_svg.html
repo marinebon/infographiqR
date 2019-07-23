@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Make SVG interactive with modal (popup) or nonmodal (normal) links based on data.frame linked by id — info_svg • infographiq</title>
+<title>Make SVG interactive with modal (popup) or nonmodal (normal) links based on
+data.frame linked by id — info_svg • infographiq</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +31,11 @@
 
 
 
-<meta property="og:title" content="Make SVG interactive with modal (popup) or nonmodal (normal) links based on data.frame linked by id — info_svg" />
+<meta property="og:title" content="Make SVG interactive with modal (popup) or nonmodal (normal) links based on
+data.frame linked by id — info_svg" />
 
-<meta property="og:description" content="Make SVG interactive with modal (popup) or nonmodal (normal) links based on data.frame linked by id" />
+<meta property="og:description" content="Make SVG interactive with modal (popup) or nonmodal (normal) links based on
+data.frame linked by id" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -63,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">infographiq</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -96,6 +99,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -117,30 +123,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Make SVG interactive with modal (popup) or nonmodal (normal) links based on data.frame linked by id</h1>
+    <h1>Make SVG interactive with modal (popup) or nonmodal (normal) links based on
+data.frame linked by id</h1>
     <small class="dont-index">Source: <a href='https://github.com/marinebon/infographiq/blob/master/R/svg.R'><code>R/svg.R</code></a></small>
     <div class="hidden name"><code>info_svg.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Make SVG interactive with modal (popup) or nonmodal (normal) links based on data.frame linked by id</p>
+    <p>Make SVG interactive with modal (popup) or nonmodal (normal) links based on
+data.frame linked by id</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>info_svg</span>(<span class='no'>df</span>, <span class='no'>svg</span>, <span class='kw'>color_default</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>color_hover</span> <span class='kw'>=</span> <span class='st'>"yellow"</span>,
-  <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>modal_id</span> <span class='kw'>=</span> <span class='st'>"modal"</span>)</pre>
+    <pre class="usage"><span class='fu'>info_svg</span>(<span class='no'>df</span>, <span class='no'>svg</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>color_default</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>color_hover</span> <span class='kw'>=</span> <span class='st'>"yellow"</span>,
+  <span class='kw'>modal_id</span> <span class='kw'>=</span> <span class='st'>"modal"</span>, <span class='kw'>modal_html_provided</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>debug</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>data.frame containing fields <code>id</code>, <code>title</code>, <code>link_nonmodal</code>, <code>link_modal</code></p></td>
+      <td><p>data.frame containing fields <code>id</code>, <code>title</code>,
+<code>link_nonmodal</code>, <code>link_modal</code></p></td>
     </tr>
     <tr>
       <th>svg</th>
-      <td><p>path to svg relative to generated html</p></td>
+      <td><p>url to svg relative to generated html</p></td>
+    </tr>
+    <tr>
+      <th>width</th>
+      <td><p>width of output svg (TODO)</p></td>
+    </tr>
+    <tr>
+      <th>height</th>
+      <td><p>height of output svg (TODO)</p></td>
     </tr>
     <tr>
       <th>color_default</th>
@@ -151,18 +169,26 @@
       <td><p>default color on hover, defaults to yellow</p></td>
     </tr>
     <tr>
-      <th>width</th>
-      <td><p>width of output svg (TODO)</p></td>
+      <th>modal_id</th>
+      <td><p>used by JavaScript for turning on/off modal window; defaults
+to "modal"</p></td>
     </tr>
     <tr>
-      <th>height</th>
-      <td><p>height of output svg (TODO)</p></td>
+      <th>modal_html_provided</th>
+      <td><p>if layout gets odd, then set this to <code>TRUE</code>
+and include html from <code><a href='modal_html.html'>modal_html</a></code> in the page yourself nearest
+to <code>&lt;/body&gt;</code></p></td>
+    </tr>
+    <tr>
+      <th>debug</th>
+      <td><p>add debug messages to JavaScript console; defaults to FALSE</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>linked interactive infographic using svg illustration with links included</p>
+    <p>linked interactive infographic using svg illustration with links
+  included</p>
     
 
   </div>

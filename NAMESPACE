@@ -3,6 +3,7 @@
 export(create_info_site)
 export(get_plotting_function_brew)
 export(info_svg)
+export(modal_html)
 export(plot_dygraph_timeseries)
 export(plot_intertidal_nms)
 import(brew)
