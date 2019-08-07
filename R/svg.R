@@ -54,15 +54,15 @@ info_svg <- function(
   
   # operate on svg using data in df
   w <- r2d3::r2d3(
-    script = system.file("infographiq.js", package = "infographiq"),
+    script = system.file("js/infographiq.js", package = "infographiq"),
     d3_version = "5",
     dependencies = list(
       rmarkdown::html_dependency_jquery(),
       rmarkdown::html_dependency_bootstrap("default"),
       htmltools::htmlDependency(
-        'infographiq-css', '0.1', 
-        src = system.file(package = "infographiq"),
-        stylesheet = 'infographiq.css')),
+        name = "infographiq-css", "0.1", 
+        src = system.file("css", package = "infographiq"),
+        stylesheet = "infographiq.css")),
     data = df, 
     options = list(
       svg           = svg,
