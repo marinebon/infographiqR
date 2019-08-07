@@ -1,3 +1,7 @@
+# infographiq 0.1.3
+
+* fixed so only infographiq.css in site_libs not whole package
+
 # infographiq 0.1.2
 
 * fixed modal obscured by gray fade
