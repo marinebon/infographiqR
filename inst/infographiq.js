@@ -106,6 +106,10 @@ d3.svg(options.svg_url_pfx + options.svg).then((f) => {
   }); // end: data.forEach()
 });
 
+// move modal outside problematic children in layout 
+// so modal not obscured by <div class="modal-backdrop fade in"></div>
+// solution: https://github.com/twbs/bootstrap/issues/23916#issuecomment-476794355
+$('#'+ options.modal_id).appendTo('body');
 
 // show/hide questions
 d3.select("#ckbox_questions").on("change", function() {
