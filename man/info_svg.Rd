@@ -7,11 +7,12 @@ data.frame linked by id}
 \usage{
 info_svg(df, svg, svg_url_pfx = "/", width = NULL, height = NULL,
   color_default = "black", color_hover = "yellow",
-  modal_id = "modal", modal_html_provided = F, debug = FALSE)
+  color_visited = "purple", modal_id = "modal",
+  modal_html_provided = F, debug = FALSE)
 }
 \arguments{
 \item{df}{data.frame containing fields \code{id}, \code{title},
-\code{link_nonmodal}, \code{link_modal}}
+\code{link}, \code{notmodal}; OR path to csv file with these fields}
 
 \item{svg}{basename of svg}
 

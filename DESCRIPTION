@@ -23,8 +23,8 @@ Imports:
     futile.logger,
     bsplus,
     htmltools,
-    r2d3
-Suggests: 
+    r2d3,
+    readr
 VignetteBuilder: knitr
 URL: https://github.com/marinebon/infographiq
 BugReports: https://github.com/marinebon/infographiq/issues

@@ -2,7 +2,7 @@
 #' data.frame linked by id
 #'
 #' @param df data.frame containing fields \code{id}, \code{title},
-#'   \code{link_nonmodal}, \code{link_modal}
+#'   \code{link}, \code{notmodal}; OR path to csv file with these fields
 #' @param svg basename of svg
 #' @param svg_url_pfx prefix URL, ie directory, to locate svg
 #' @param color_default default color, defaults to black
@@ -25,7 +25,7 @@
 info_svg <- function(
   df, svg, svg_url_pfx = "/",
   width = NULL, height = NULL,
-  color_default = "black", color_hover = "yellow", 
+  color_default = "black", color_hover = "yellow", color_visited = "purple",
   modal_id = "modal", modal_html_provided=F, debug = FALSE){
   
   # df = readr::read_csv("~/github/fk-iea/content/svg_links.csv")
@@ -36,27 +36,46 @@ info_svg <- function(
   library(r2d3)
   library(htmltools)
   library(rmarkdown)
+  library(dplyr)
+  
+  if (is.character(df)){
+    stopifnot(file.exists(df))
+    df <- readr::read_csv(df)
+  }
+
+  #browser()
+  # df0 <- df
+  if ("svg" %in% names(df)){
+    df <- df %>% 
+      filter(svg == basename(!!svg)) %>% 
+      arrange(id)
+  }
   
   # checks
   #stopifnot(file.exists(svg))
+  #browser()
   stopifnot(nrow(df) > 0)
-  stopifnot(all(c("id", "title", "link_nonmodal", "link_modal") %in% names(df)))
+  #stopifnot(all(c("id", "title", "link_nonmodal", "link_modal") %in% names(df)))
+  stopifnot(all(c("id", "title", "link") %in% names(df)))
   # TODO: c("svg", "modal_before", "modal_after", "status_text", "status_color")
-  if (any(as.numeric(!is.na(df$link_nonmodal)) + as.numeric(!is.na(df$link_modal)) > 1)){
-    stop("The link_nonmodal and link_modal in df are mutually exclusive, so cannot define both; one should be empty, ie NA.")
-  }
+  # if (any(as.numeric(!is.na(df$link_nonmodal)) + as.numeric(!is.na(df$link_modal)) > 1)){
+  #   stop("The link_nonmodal and link_modal in df are mutually exclusive, so cannot define both; one should be empty, ie NA.")
+  # }
 
   tags <- list()
   # if only link_nonmodal and no link_modal, skip modal
-  if (sum(as.numeric(!is.na(df$link_modal))) > 0 & !modal_html_provided){
-    tags <- modal_html(modal_id)
-  }
+  # if (sum(as.numeric(!is.na(df$link_modal))) > 0 & !modal_html_provided){
+  #   tags <- modal_html(modal_id)
+  # }
   
   # operate on svg using data in df
   w <- r2d3::r2d3(
     script = system.file("js/infographiq.js", package = "infographiq"),
+    container = "div",
     d3_version = "5",
+    elementId = "r2d3elementId",
     dependencies = list(
+      #r2d3::html_dependencies_d3(version = "5"),
       rmarkdown::html_dependency_jquery(),
       rmarkdown::html_dependency_bootstrap("default"),
       htmltools::htmlDependency(
@@ -69,6 +88,7 @@ info_svg <- function(
       svg_url_pfx   = svg_url_pfx,
       color_default = color_default,
       color_hover   = color_hover,
+      color_visited = color_visited,
       modal_id      = modal_id,
       width         = width,
       height        = height,
