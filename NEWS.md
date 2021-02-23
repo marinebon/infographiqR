@@ -1,3 +1,5 @@
+# infographiq 0.2.0
+
 # infographiq 0.1.3
 
 * fixed so only infographiq.css in site_libs not whole package
