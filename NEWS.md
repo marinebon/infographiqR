@@ -1,5 +1,7 @@
 # infographiq 0.2.0
 
+* migrating to JS CORS friendly avail in docs/ w/ pkgdown (see #56)
+
 # infographiq 0.1.3
 
 * fixed so only infographiq.css in site_libs not whole package
