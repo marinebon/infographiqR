@@ -1,0 +1,47 @@
+---
+title: "Building a Standalone HTML Infographiq"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Building a Standalone HTML Infographiq}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Pulling from IEA on Drupal CMS example:
+
+```html
+<!-- infographiq: layout -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-9">
+        <div id = "svg"> </div>
+      </div>
+      <div class="col-md-3">
+        <ul id = "svg_list"></ul>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- infographiq: css & js dependencies -->
+  <link rel="stylesheet" href="https://marinebon.org/fk-esr-info/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://marinebon.org/fk-esr-info/assets/css/infographiq.css">
+  <script src="https://marinebon.org/fk-esr-info/assets/js/jquery.min.js"></script>
+  <script src="https://marinebon.org/fk-esr-info/assets/js/bootstrap.min.js"></script>
+  <script src='https://marinebon.org/fk-esr-info/assets/js/d3.v5.min.js'></script>
+  <script src='https://marinebon.org/fk-esr-info/assets/js/infographiq.js'></script>
+ 
+  <!-- infographiq: link_svg() -->
+  <script>
+    link_svg(
+      svg='https://marinebon.org/fk-esr-info/assets/svg/FKIEA_Ecosystem.svg',
+      csv='https://docs.google.com/spreadsheets/d/e/2PACX-1vSAROGVpYB58Zkr8P0iwJdTMRPNLZtJ07IyUn-dQ62C2HMuCEScyl8x7urCD7QbRXQYSIJwDn_wku9G/pub?gid=0&single=true&output=csv',
+    debug=true);
+  </script>
+```
