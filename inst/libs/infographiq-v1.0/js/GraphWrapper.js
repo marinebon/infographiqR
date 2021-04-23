@@ -1,4 +1,4 @@
-    function GraphWrapper({Google_Spreadsheet_Link = "https://docs.google.com/spreadsheets/d/1K05MhN9jdfIU8k4URGVnR3np3BZF1BmYGtvILsL_qPU/edit#gid=949872079", threshold_year = 2011, targetElement = 'chart_div', 
+    function GraphWrapper({Google_Spreadsheet_Link, threshold_year = 2011, targetElement = 'chart_div', 
       YAxisTitle = "Y Axis Title", YAxisTitle2 = "Second Y Axis", twoYAxes = false, SST = false} = {}) {
 
       var query = new google.visualization.Query(Google_Spreadsheet_Link);
@@ -8,14 +8,22 @@
 
         var GoogleData = response.getDataTable();
         var maxValue = 0;
+        var minValue = 10000;
 
         var original_col_number = GoogleData.getNumberOfColumns();
         for (let i = 1; i < original_col_number; i++){
           if (maxValue < GoogleData.getColumnRange(i).max){
             maxValue = GoogleData.getColumnRange(i).max;
           }
+          if (minValue > GoogleData.getColumnRange(i).min){
+            minValue = GoogleData.getColumnRange(i).min;
+          }
+
         }
         maxValue = maxValue*1.1;
+        minValue = minValue*0.9;
+
+        minValue = 0;
 
         GoogleData.addColumn('number','Background');
         GoogleData.addColumn( {role: 'style', type: 'string'});
@@ -26,6 +34,7 @@
         var annotation_text = "Trends since " + threshold_year;
 
         if (SST == false){
+          year_format = "####";
           var beginning_year = GoogleData.getColumnRange(0).min; 
           if (beginning_year <= threshold_year) {
               beginning_row = GoogleData.getFilteredRows([{column: 0, minValue: threshold_year}])[0];
@@ -35,6 +44,7 @@
           }
         }
         else{
+          year_format = null;
           var thisYear = 0;
           do {
             beginning_row = beginning_row + 1;
@@ -61,40 +71,47 @@
         column_format.push({type: "area", color: 'CornflowerBlue', visibleInLegend: false});
 
         var options = {
+          tooltip: {textStyle: {fontSize: 15}},
           annotations: {stem: {length: 0}, 
             textStyle: {
               bold: false,
+              fontSize: 15,
               italic: false,
               color: 'black',
               opacity: 1.0
             }
           },
-          legend: 'bottom', 
+          legend: {position: 'bottom', textStyle: {fontSize: 15}} , 
+          chartArea: {width: '80%', top: 10, height: '80%'},
           animation: {startup: true, duration:500}, // animate the graph
           height: 400, // make the graph 400 pixels high
           seriesType: 'line',//
-         series: column_format,
+          series: column_format,
           hAxis: { // options for the X Axis
               title: "Year", // Set the X Axis title
-              format: "####",
+              format: year_format,
+              textStyle: {fontSize: 15},
               gridlines: {color: 'transparent'}, // no X Axis gridlines
-              titleTextStyle: {bold: false, italic: false }}, // Set how the X Axis title looks
+              titleTextStyle: {bold: true, italic: false, fontSize: 15}}, // Set how the X Axis title looks
           vAxis: {  // options for the Y Axis
-              viewWindow: {max: maxValue}, 
+              viewWindow: {max: maxValue, min: minValue}, 
               title: YAxisTitle,  // Set the Y Axis title
-              titleTextStyle: {bold: false, italic: false }, // Set how the Y Axis title looks
+              textStyle: {fontSize: 15},
+              titleTextStyle: {bold: true, italic: false, fontSize: 15}, // Set how the Y Axis title looks
               minorGridlines: {color: 'transparent'}} // No minor Y Axis gridlines
           };
 
         if (twoYAxes == true) {
+          options.chartArea = {width: '70%', top: 10, height: '80%'};
           options.series = {
             0: {targetAxisIndex: 0},
             1: {targetAxisIndex: 1},
             2: {targetAxisIndex: 0, type: "area", color: 'CornflowerBlue', visibleInLegend: false}};
           options.vAxes = {
-            0: {title: YAxisTitle, viewWindow: {max: maxValue}},
+            textStyle: {fontSize: 15},
+            0: {title: YAxisTitle, viewWindow: {max: maxValue, min: minValue}},
             1: {title: YAxisTitle2}};
-          options.vAxis = {titleTextStyle: {bold: false, italic: false },
+          options.vAxis = {titleTextStyle: {bold: true, italic: false, fontSize: 15 },
             minorGridlines: {color: 'transparent'}};
         }
         // Create a line chart (note the use of LineChart in the command) and put that in the div element 'chart_div'
