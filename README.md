@@ -1,5 +1,6 @@
-[![Build Status](https://travis-ci.org/marinebon/infographiq.svg?branch=master)](https://travis-ci.org/marinebon/infographiq)
-[![Coverage Status](https://codecov.io/gh/marinebon/infographiq/coverage.svg?branch=master)](https://codecov.io/gh/marinebon/infographiq?branch=master)
+# infographiq <a href='https://marinebon.org/infographiq'><img src='man/figures/logo.svg' align="right" height="150" /></a>
+
+[![pkgdown](https://github.com/marinebon/infographiq/workflows/pkgdown/badge.svg)](https://github.com/marinebon/infographiq/actions?query=workflow%3Apkgdown)
 
 # infographiq
 R library for creation of interactive infographics for data-driven storytelling.
@@ -95,6 +96,8 @@ To update the website for the R package, update documentation and regenerate the
 devtools::document()
 pkgdown::deploy_to_branch()
 ```
+
+Then to view the site from RStudio, switch to branch `gh-pages` in the Git pane and in the Files pane click on `index.html` to View in Web Browser.
 
 ### Vignettes
 
