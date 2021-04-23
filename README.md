@@ -93,7 +93,7 @@ To update the website for the R package, update documentation and regenerate the
 
 ```R
 devtools::document()
-pkgdown::build_site()
+pkgdown::deploy_to_branch()
 ```
 
 ### Vignettes
@@ -101,3 +101,25 @@ pkgdown::build_site()
 ```R
 devtools::use_vignette("quick-start")
 ```
+
+### Automatic website update
+
+Setup Github Action to build [pkgdown](https://pkgdown.r-lib.org) website with the following:
+
+```r
+usethis::use_github_action("pkgdown")
+```
+
+The `use_github_action()` injects [`pkgdown.yaml`](https://github.com/r-lib/actions/blob/master/examples/pkgdown.yaml) and displays:
+
+```
+✓ Setting active project to '/Users/bbest/github/infographiq'
+✓ Creating '.github/'
+✓ Adding '^\\.github$' to '.Rbuildignore'
+✓ Adding '*.html' to '.github/.gitignore'
+✓ Creating '.github/workflows/'
+✓ Writing '.github/workflows/pkgdown.yaml'
+```
+
+
+
