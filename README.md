@@ -1,5 +1,6 @@
-[![Build Status](https://travis-ci.org/marinebon/infographiq.svg?branch=master)](https://travis-ci.org/marinebon/infographiq)
-[![Coverage Status](https://codecov.io/gh/marinebon/infographiq/coverage.svg?branch=master)](https://codecov.io/gh/marinebon/infographiq?branch=master)
+# infographiq <a href='https://marinebon.org/infographiq'><img src='man/figures/logo.svg' align="right" height="150" /></a>
+
+[![pkgdown](https://github.com/marinebon/infographiq/workflows/pkgdown/badge.svg)](https://github.com/marinebon/infographiq/actions?query=workflow%3Apkgdown)
 
 # infographiq
 R library for creation of interactive infographics for data-driven storytelling.
@@ -93,11 +94,37 @@ To update the website for the R package, update documentation and regenerate the
 
 ```R
 devtools::document()
-pkgdown::build_site()
+pkgdown::deploy_to_branch()
 ```
+
+Then to view the site from RStudio, switch to branch `gh-pages` in the Git pane and in the Files pane click on `index.html` to View in Web Browser.
 
 ### Vignettes
 
 ```R
 devtools::use_vignette("quick-start")
 ```
+
+### Automatic website update
+
+Setup Github Action to build [pkgdown](https://pkgdown.r-lib.org) website with the following:
+
+```r
+usethis::use_github_action("pkgdown")
+```
+
+The `use_github_action()` injects [`pkgdown.yaml`](https://github.com/r-lib/actions/blob/master/examples/pkgdown.yaml) and displays:
+
+```
+✓ Setting active project to '/Users/bbest/github/infographiq'
+✓ Creating '.github/'
+✓ Adding '^\\.github$' to '.Rbuildignore'
+✓ Adding '*.html' to '.github/.gitignore'
+✓ Creating '.github/workflows/'
+✓ Writing '.github/workflows/pkgdown.yaml'
+```
+
+
+
+
+
