@@ -1,5 +1,5 @@
-    function GraphWrapper({Google_Spreadsheet_Link, threshold_year = 2011, targetElement = 'chart_div', 
-      YAxisTitle = "Y Axis Title", YAxisTitle2 = "Second Y Axis", twoYAxes = false, SST = false} = {}) {
+       function GraphWrapper({Google_Spreadsheet_Link, threshold_year = 2011, targetElement = 'chart_div', 
+      YAxisTitle = "Y Axis Title", YAxisTitle2 = "Second Y Axis", twoYAxes = false, SST = false, YAxisZero = false} = {}) {
 
       var query = new google.visualization.Query(Google_Spreadsheet_Link);
       query.send(handleQueryResponse);
@@ -23,7 +23,7 @@
         maxValue = maxValue*1.1;
         minValue = minValue*0.9;
 
-        minValue = 0;
+        if (YAxisZero == true) {minValue = 0;}
 
         GoogleData.addColumn('number','Background');
         GoogleData.addColumn( {role: 'style', type: 'string'});
@@ -95,6 +95,7 @@
               titleTextStyle: {bold: true, italic: false, fontSize: 15}}, // Set how the X Axis title looks
           vAxis: {  // options for the Y Axis
               viewWindow: {max: maxValue, min: minValue}, 
+              baseline: minValue,
               title: YAxisTitle,  // Set the Y Axis title
               textStyle: {fontSize: 15},
               titleTextStyle: {bold: true, italic: false, fontSize: 15}, // Set how the Y Axis title looks
@@ -109,7 +110,7 @@
             2: {targetAxisIndex: 0, type: "area", color: 'CornflowerBlue', visibleInLegend: false}};
           options.vAxes = {
             textStyle: {fontSize: 15},
-            0: {title: YAxisTitle, viewWindow: {max: maxValue, min: minValue}},
+            0: {title: YAxisTitle, viewWindow: {max: maxValue, min: minValue}, baseline: minValue},
             1: {title: YAxisTitle2}};
           options.vAxis = {titleTextStyle: {bold: true, italic: false, fontSize: 15 },
             minorGridlines: {color: 'transparent'}};
