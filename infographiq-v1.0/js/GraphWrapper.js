@@ -8,7 +8,7 @@
 
         var GoogleData = response.getDataTable();
         var maxValue = 0;
-        var minValue = 10000;
+        var minValue = 100000000;
 
         var original_col_number = GoogleData.getNumberOfColumns();
         for (let i = 1; i < original_col_number; i++){
@@ -81,7 +81,7 @@
               opacity: 1.0
             }
           },
-          legend: {position: 'bottom', textStyle: {fontSize: 15}} , 
+          legend: {position: 'bottom', textStyle: {fontSize: 15, color: 'green'}} , 
           chartArea: {width: '80%', top: 10, height: '80%'},
           animation: {startup: true, duration:500}, // animate the graph
           height: 400, // make the graph 400 pixels high
