@@ -81,7 +81,7 @@
               opacity: 1.0
             }
           },
-          legend: {position: 'bottom', textStyle: {fontSize: 15, color: 'green'}} , 
+          legend: {position: 'bottom', textStyle: {fontSize: 15}} , 
           chartArea: {width: '80%', top: 10, height: '80%'},
           animation: {startup: true, duration:500}, // animate the graph
           height: 400, // make the graph 400 pixels high
