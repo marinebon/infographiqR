@@ -8,7 +8,7 @@
 
         var GoogleData = response.getDataTable();
         var maxValue = 0;
-        var minValue = 100000000;
+        var minValue = 10000000000;
 
         var original_col_number = GoogleData.getNumberOfColumns();
         for (let i = 1; i < original_col_number; i++){
