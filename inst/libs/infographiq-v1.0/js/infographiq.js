@@ -106,6 +106,7 @@ function link_svg({svg, csv, svg_location, csv_location, debug = false,
             .attr("role", "tab");
           if (colored_sections === true){
             d3.select("#" + csv_location + "PanelSub" + i).attr("style", "background-color: " + section_colors[section_color_index] +  ";");
+            hover_color = section_colors[section_color_index];
             section_color_index++;
             if (section_colors.length == section_color_index){section_color_index = 0;}
           }
@@ -162,6 +163,7 @@ function link_svg({svg, csv, svg_location, csv_location, debug = false,
             .text(section_list[i]);
           if (colored_sections === true){
             d3.select("#" + csv_location + "Section" + i).attr("style", "background-color: " + section_colors[section_color_index] +  ";");
+            hover_color = section_colors[section_color_index];
             section_color_index++;
             if (section_colors.length == section_color_index){section_color_index = 0;}
           }
