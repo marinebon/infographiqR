@@ -5,10 +5,19 @@
 \title{Make SVG interactive with modal (popup) or nonmodal (normal) links based on
 data.frame linked by id}
 \usage{
-info_svg(df, svg, svg_url_pfx = "/", width = NULL, height = NULL,
-  color_default = "black", color_hover = "yellow",
-  color_visited = "purple", modal_id = "modal",
-  modal_html_provided = F, debug = FALSE)
+info_svg(
+  df,
+  svg,
+  svg_url_pfx = "/",
+  width = NULL,
+  height = NULL,
+  color_default = "black",
+  color_hover = "yellow",
+  color_visited = "purple",
+  modal_id = "modal",
+  modal_html_provided = F,
+  debug = FALSE
+)
 }
 \arguments{
 \item{df}{data.frame containing fields \code{id}, \code{title},

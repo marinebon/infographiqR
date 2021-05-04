@@ -4,24 +4,26 @@
 \alias{create_info_site}
 \title{Create infographics web site}
 \usage{
-create_info_site(path_root = ".", dir_svg = "svg",
+create_info_site(
+  path_root = ".",
+  dir_svg = "svg",
   elements_csv = "svg_elements.csv",
   indicators_csv = "plot_indicators.csv",
   site_title = "MBON Interactive Infographics",
-  plot_function = "plot_dygraph_timeseries", dir_rmd = "rmd",
-  dir_web = "docs", svg_paths = list.files(file.path(path_root,
-  dir_svg), ".*\\\\.svg$", full.names = T),
+  plot_function = "plot_dygraph_timeseries",
+  dir_rmd = "rmd",
+  dir_web = "docs",
+  svg_paths = list.files(file.path(path_root, dir_svg), ".*\\\\.svg$", full.names = T),
   svg_names = tools::file_path_sans_ext(basename(svg_paths)),
-  site_yml_brew = system.file("site_template/_site.yml.brew", package =
-  "infographiq"),
-  index_md_brew = system.file("site_template/index.md.brew", package =
-  "infographiq"),
-  readme_md_brew = system.file("site_template/README.md.brew", package =
-  "infographiq"), header = system.file("site_template/_header.html",
-  package = "infographiq"),
-  footer = system.file("site_template/_footer.html", package =
-  "infographiq"), styles_css = system.file("site_template/styles.css",
-  package = "infographiq"), render_modals = T, preview_site = T)
+  site_yml_brew = system.file("site_template/_site.yml.brew", package = "infographiq"),
+  index_md_brew = system.file("site_template/index.md.brew", package = "infographiq"),
+  readme_md_brew = system.file("site_template/README.md.brew", package = "infographiq"),
+  header = system.file("site_template/_header.html", package = "infographiq"),
+  footer = system.file("site_template/_footer.html", package = "infographiq"),
+  styles_css = system.file("site_template/styles.css", package = "infographiq"),
+  render_modals = T,
+  preview_site = T
+)
 }
 \arguments{
 \item{path_root}{root path for repository, from which other directories are relatively positioned.}

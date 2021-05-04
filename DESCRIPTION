@@ -1,14 +1,16 @@
-Package: infographiq
-Title: Create interactive infographics for data-driven storytelling
+Package: infographiqR
+Title: Supporting R functions for creating intelligent interactive infographics, ie infographiq
 Version: 0.2.0
 Authors@R: c(person("Ben", "Best", email = "ben@ecoquants.com", role = c("aut", "cre")),
-             person("Tylar", "Murray", email = "tylarmurray@mail.usf.edu", role = c("aut")))
+             person("Tylar", "Murray", email = "tylarmurray@mail.usf.edu", role = c("aut")),
+             person("Jai", "Ranganathan", email = "jai.ranganathan@gmail.com", role = c("aut")),
+             person("Pike", "Spector", email = "pike.spector@noaa.gov", role = c("aut")))
 Description: "Given a scalable vector graphic (*.svg) illustration, link elements, possibly with a modal popup."
 Depends: R (>= 3.4.0)
 License: MIT License
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 Imports: 
     tidyverse,
     brew,

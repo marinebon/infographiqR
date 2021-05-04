@@ -4,9 +4,20 @@
 \alias{plot_dygraph_timeseries}
 \title{plot timeseries given a path (or URL) to csv}
 \usage{
-plot_dygraph_timeseries(csv_tv, title, y_label, x_label = "Year",
-  v_label = y_label, filter = NULL, col_t = NULL, col_y = NULL,
-  skip = 0, use_kmb = T, group_by = NULL, std_err = NULL)
+plot_dygraph_timeseries(
+  csv_tv,
+  title,
+  y_label,
+  x_label = "Year",
+  v_label = y_label,
+  filter = NULL,
+  col_t = NULL,
+  col_y = NULL,
+  skip = 0,
+  use_kmb = T,
+  group_by = NULL,
+  std_err = NULL
+)
 }
 \arguments{
 \item{csv_tv}{csv path or URL with time and value}

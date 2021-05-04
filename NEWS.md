@@ -1,3 +1,7 @@
+# infographiq 0.3.0
+
+* migrating infogrqphiq to infographiqR, seperate from infographiqJS
+
 # infographiq 0.2.0
 
 * migrating to JS CORS friendly avail in docs/ w/ pkgdown (see #56)

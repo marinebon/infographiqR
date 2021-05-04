@@ -1,11 +1,13 @@
-# infographiq <a href='https://marinebon.org/infographiq'><img src='man/figures/logo.svg' align="right" height="150" /></a>
+# infographiq <a href='https://marinebon.org/infographiqR'><img src='man/figures/logo.svg' align="right" height="150" /></a>
 
-[![pkgdown](https://github.com/marinebon/infographiq/workflows/pkgdown/badge.svg)](https://github.com/marinebon/infographiq/actions?query=workflow%3Apkgdown)
+[![pkgdown](https://github.com/marinebon/infographiqR/workflows/pkgdown/badge.svg)](https://github.com/marinebon/infographiqR/actions?query=workflow%3Apkgdown)
 
-# infographiq
-R library for creation of interactive infographics for data-driven storytelling.
+# infographiqR
+R library for supporting... creation of interactive infographics for data-driven storytelling.
 This tool will help you build your own interactive infographics website from only csv files and svg images.
 Please contact us by opening an issue if you need help getting started with this tool.
+
+[ TODO: fix below to integrate with new infographiq, infographiqJS ]
 
 ## Demos
 The following regional infographics were generated using the infographiq package:
