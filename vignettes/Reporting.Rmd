@@ -1,0 +1,42 @@
+---
+title: 'Reporting Functions'
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Reporting Functions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The reporting functions of the **nms4r** package work together to generate HTML files from the 
+R Markdown files known as modal windows. The process of rendering a R Markdown file to HTML is a multi-step process. The initial step is to render all of the R code within the R Markdown
+file, creating a temporary Markdown file. Once that process has completed though, 
+there is a big step remaining before the html can be created from that Markdown file. 
+Namely, any words in the Markdown file that are designated as glossary terms need 
+to be flagged and given necessary html codes. Once this is done, the html is rendered 
+from the Markdown file, with all glossary terms getting a Javascript "tooltip" in the html. 
+
+Here's the steps in the process of rendering the HTML from R Markdown.
+
+1. Call the master rendering function. 
+    1. `generate_html_4_rmd()`: renders a single R Markdown file.
+    1. `render_all_rmd()`: renders all R Markdown files in "modals" directory using `generate_html_4_rmd()`.
+1. `generate_html_4_rmd()` calls `rmd2html()`, which creates a temporary Markdown file in which all of the R code in the R Markdown File has been executed.
+1. `rmd2html()` opens the temporary Markdown file and then calls `glossarize_md()`.
+1. `glossarize_md()` loads up all of the glossary terms in the google sheet where 
+they are stored and then goes through the Markdown file, line by line. Each combination
+of glossary term and line of the Markdown file is fed into `insert_tooltips()`.
+1. If a glossary term is found on a line of the Markdown file, `insert_tooltips()` inserts
+tooltip-related tags around that term.
+1. Once every line of a Markdown file has been gone through, `glossarize_md()` loads 
+the tooltip Javascript library at the bottom of the file (but only if there is at
+least one glossary term in the file).
+1. `generate_html_4_rmd()` then renders the edited Markdown file to html. This
+function also renders the original R Markdown file to a temporary html file using `rmarkdown::render()`, as this is the only way to know what the right Javascript libraries
+are for any interactive elements in the final html. The entire **head** section of the 
+second html file rewrites the **head** section of the first html file. 
+1. All temporary html and Markdown files are deleted.
+
