@@ -42,7 +42,9 @@ render_all_rmd("cinms", interactive_only = T)
 Satellite-derived data is displayed in several of the modal windows, such as in the following example:
 
 ```{r sst_time_series, echo=FALSE}
-infographiqR::plot_metric_timeseries("https://raw.githubusercontent.com/marinebon/cinms/master/data/oceano/statistics_sst_cinms.csv", "sst")
+library(onmsR) # remotes::install_github("noaa-onms/onmsR")
+
+onmsR::plot_metric_timeseries("https://raw.githubusercontent.com/marinebon/cinms/master/data/oceano/statistics_sst_cinms.csv", "sst")
 ```
 
 This data and the resulting figures are auto-updated every month by calling **infographiqR** functions in Github Actions. In the case of the Channel Islands National Marine Sanctuary, the file that controls these actions can be found [on GitHub here](https://github.com/marinebon/cinms/blob/master/.github/workflows/update-oceano.yml).
