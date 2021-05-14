@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 # Getting started
 
-The most straightforward way to get started is to modify the template version of a infographic-based site contained within the nms4r package. To install the website template in a local folder, use the nms4r function `create_website()`. Please note that the template website won't display properly unless it is being served locally. One method of doing so is through the Viewer Pane of R Studio, via the use of the following command (replacing "template_website" with the relative path to your local location of the site): `servr::httd(here::here("template_website"))`
+The most straightforward way to get started is to modify the template version of a infographic-based site contained within the infographiqR package. To install the website template in a local folder, use the infographiqR function `create_website()`. Please note that the template website won't display properly unless it is being served locally. One method of doing so is through the Viewer Pane of R Studio, via the use of the following command (replacing "template_website" with the relative path to your local location of the site): `servr::httd(here::here("template_website"))`
 
 The file structure of the template site can be seen below.
 
@@ -55,7 +55,7 @@ navbar:
 3. The svg folder. The svg folder contains the clickable infographics (see section below on the creation of these images) as well as a csv file that maps the elements of each infographic to a link. Here is that csv file for the the template website ("svg_links_template.csv"):
 
 ```{r csv, echo=FALSE}
-info<-read.csv(here::here("inst/template_website/svg/svg_links_template.csv"), header = T)
+info <- read.csv(here::here("inst/template_website/svg/svg_links_template.csv"), header = T)
 info
 ```
 
@@ -67,7 +67,7 @@ info
 4. The modals folder. The modals folder contains the R Markdown files that primarily exist to display the data and figures for the website.
 
 # Creating infographic images
-Here, we discuss the process of creating images in a format that can be used by nms4r. It is recommended that vector-based graphics software be used to create your images and we provide instructions for two such software packages:
+Here, we discuss the process of creating images in a format that can be used by infographiqR. It is recommended that vector-based graphics software be used to create your images and we provide instructions for two such software packages:
 
 * [Adobe Illustrator](https://www.adobe.com/products/illustrator.html) (commercial software that requires a paid license)
 
@@ -77,7 +77,7 @@ Here, we discuss the process of creating images in a format that can be used by 
 
 A basic knowledge of Illustrator is assumed (if you need to get up to speed, Adobe has some [great tutorials](https://helpx.adobe.com/illustrator/tutorials.html)).
 
-Below, you can see an example infographic created within Illustrator (you can find this example image illustrator-example.svg within the svg folder of the template website). There are two key components to a nms4r infographic, when it is served up on a website. First, key elements of the infographic are clickable. Secondly, within-image captions exist for the infographic that can be toggled on and off. 
+Below, you can see an example infographic created within Illustrator (you can find this example image illustrator-example.svg within the svg folder of the template website). There are two key components to a infographiqR infographic, when it is served up on a website. First, key elements of the infographic are clickable. Secondly, within-image captions exist for the infographic that can be toggled on and off. 
 
 ![](example_image_illustrator.png)
 
@@ -97,7 +97,7 @@ To show how images need to be formatted in order to behave as expected, let's zo
 
 A basic knowledge of Inkscape is assumed (if you need to get up to speed, [here are some great tutorials](https://inkscape.org/learn/tutorials/)).
 
-Below, you can see an example infographic created within Inkscape (you can find this example image inkscape-example.svg in the svg folder within the template website). There are two key components to a nms4r infographic, when it is served up on a website. First, key elements of the infographic are clickable. Secondly, within-image captions exist for the infographic that can be toggled on and off. 
+Below, you can see an example infographic created within Inkscape (you can find this example image inkscape-example.svg in the svg folder within the template website). There are two key components to a infographiqR infographic, when it is served up on a website. First, key elements of the infographic are clickable. Secondly, within-image captions exist for the infographic that can be toggled on and off. 
 
 ![](example_image_inkscape.png)
 

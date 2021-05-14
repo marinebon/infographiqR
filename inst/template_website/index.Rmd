@@ -1,0 +1,15 @@
+---
+title: "Subject 1"
+params:
+  csv: "svg/svg_links_template.csv"
+  svg: "svg/example1.svg"
+---
+
+<script language="JavaScript" src="https://marinebon.org/infographiq/infographiq.js"></script>
+
+
+Replace with your text.
+
+```{r svg, child = '_svg-html_child.Rmd'}
+```
+

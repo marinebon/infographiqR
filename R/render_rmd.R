@@ -17,7 +17,7 @@ create_website <- function(dir_path, open = rlang::is_interactive()){
     stop(paste("Error: the directory -", dir_path, "- already exists."))
     
   }
-  dir_template <- system.file("template_website", package = "nms4r")
+  dir_template <- system.file("template_website", package = "infographiqR")
   
   file.copy(dir_template, dirname(dir_path), recursive = T)
   dir_tmp <- file.path(dirname(dir_path), basename(dir_template))

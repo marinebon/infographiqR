@@ -11,7 +11,7 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-The reporting functions of the **nms4r** package work together to generate HTML files from the 
+The reporting functions of the **infographiqR** package work together to generate HTML files from the 
 R Markdown files known as modal windows. The process of rendering a R Markdown file to HTML is a multi-step process. The initial step is to render all of the R code within the R Markdown
 file, creating a temporary Markdown file. Once that process has completed though, 
 there is a big step remaining before the html can be created from that Markdown file. 
