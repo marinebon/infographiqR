@@ -2,9 +2,12 @@ pandoc: 2.7.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
+  Introduction: Introduction.html
+  Overview: Overview.html
+  Reporting: Reporting.html
   captions: captions.html
   plotting_function_call: plotting_function_call.html
   quick-start: quick-start.html
   standalone-html: standalone-html.html
-last_built: 2021-05-04T22:46Z
+last_built: 2021-05-18T23:47Z
 

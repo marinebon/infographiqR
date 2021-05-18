@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • infographiqR</title>
+<title>Generate the html for R markdown files — generate_html_4_rmd • infographiqR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,18 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Generate the html for R markdown files — generate_html_4_rmd" />
+<meta property="og:description" content="Rmd files with interactive figures present a special problem in terms of rendering
+them into html. The problem is that, if one uses the markdown library to
+create the html, the figures will turn out fine but the glossary tooltip functionality
+will be missing. This tooltip functionality is created by the function rmd2html,
+described in this package. If one uses rmd2html to render a rmd file containing
+interactive figures, the tooltips will turn out fine but the figures won't show
+up. The problem with rmd2html is that the appropriate javascript libraries are
+not loaded into the resulting &amp;lt;head&amp;gt; section of the final html. This function
+solves the problem (thereby producing html with both working figures and tooltips)
+by rendering the rmd using both the markdown and rmd2html approaches and then rewriting
+the &amp;lt;head&amp;gt; section of the rmd2html version with the markdown version." />
 <meta property="og:image" content="/logo.svg" />
 
 
@@ -66,7 +77,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -146,90 +157,53 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Generate the html for R markdown files</h1>
+    <small class="dont-index">Source: <a href='https://github.com/marinebon/infographiq/blob/master/R/render_rmd.R'><code>R/render_rmd.R</code></a></small>
+    <div class="hidden name"><code>generate_html_4_rmd.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Rmd files with interactive figures present a special problem in terms of rendering
+them into html. The problem is that, if one uses the markdown library to
+create the html, the figures will turn out fine but the glossary tooltip functionality
+will be missing. This tooltip functionality is created by the function rmd2html,
+described in this package. If one uses rmd2html to render a rmd file containing
+interactive figures, the tooltips will turn out fine but the figures won't show
+up. The problem with rmd2html is that the appropriate javascript libraries are
+not loaded into the resulting &lt;head&gt; section of the final html. This function
+solves the problem (thereby producing html with both working figures and tooltips)
+by rendering the rmd using both the markdown and rmd2html approaches and then rewriting
+the &lt;head&gt; section of the rmd2html version with the markdown version.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>generate_html_4_rmd</span><span class='op'>(</span><span class='va'>target_rmd</span>, nms <span class='op'>=</span> <span class='st'>"cinms"</span><span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="generate_html_4_rmd.html">generate_html_4_rmd()</a></code> </p>
-        </td>
-        <td><p>Generate the html for R markdown files</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_figure_info.html">get_figure_info()</a></code> </p>
-        </td>
-        <td><p>Generate hyperlinked gray bar above figure</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_modal_info.html">get_modal_info()</a></code> </p>
-        </td>
-        <td><p>Generate introductory info for the html of a modal window</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="glossarize_md.html">glossarize_md()</a></code> </p>
-        </td>
-        <td><p>Insert html tags for glossary tooltips into md files</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="insert_tooltip.html">insert_tooltip()</a></code> </p>
-        </td>
-        <td><p>Insert tooltips into text.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="md_caption.html">md_caption()</a></code> </p>
-        </td>
-        <td><p>Generate the caption for a figure</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="render_all_rmd.html">render_all_rmd()</a></code> </p>
-        </td>
-        <td><p>Render all rmd files in the modals folder that have been changed</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="render_figure.html">render_figure()</a></code> </p>
-        </td>
-        <td><p>Produce full html for static figures, minus tooltips.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rmd2html.html">rmd2html()</a></code> </p>
-        </td>
-        <td><p>Render html for rmd file, including glossary tooltips.</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>target_rmd</th>
+      <td><p>The R markdown file to be rendered</p></td>
+    </tr>
+    <tr>
+      <th>nms</th>
+      <td><p>The NMS sanctuary, with only "cinms" currently doing anything.</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The function outputs a html file that is the rendered version of the input rmd file.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>generate_html_4_rmd</span><span class='op'>(</span><span class='fu'>here</span><span class='fu'>::</span><span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"modals/tar.Rmd"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
+
+</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>

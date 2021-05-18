@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Captions • infographiqR</title>
+<title>Reporting Functions • infographiqR</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Captions">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Reporting Functions">
 <meta property="og:description" content="infographiqR">
 <meta property="og:image" content="/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -104,31 +104,41 @@
 
       
 
-      </header><script src="captions_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="Reporting_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Captions</h1>
-                        <h4 class="author">Tylar Murray, Megan Hepner</h4>
+      <h1 data-toc-skip>Reporting Functions</h1>
             
-            <h4 class="date">2017-07-20</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/marinebon/infographiq/blob/master/vignettes/captions.Rmd"><code>vignettes/captions.Rmd</code></a></small>
-      <div class="hidden name"><code>captions.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/marinebon/infographiq/blob/master/vignettes/Reporting.Rmd"><code>vignettes/Reporting.Rmd</code></a></small>
+      <div class="hidden name"><code>Reporting.Rmd</code></div>
 
     </div>
 
     
     
-<p>There are 3 types of captions that can be included on a modal popup:</p>
+<p>The reporting functions of the <strong>infographiqR</strong> package work together to generate HTML files from the R Markdown files known as modal windows. The process of rendering a R Markdown file to HTML is a multi-step process. The initial step is to render all of the R code within the R Markdown file, creating a temporary Markdown file. Once that process has completed though, there is a big step remaining before the html can be created from that Markdown file. Namely, any words in the Markdown file that are designated as glossary terms need to be flagged and given necessary html codes. Once this is done, the html is rendered from the Markdown file, with all glossary terms getting a Javascript “tooltip” in the html.</p>
+<p>Here’s the steps in the process of rendering the HTML from R Markdown.</p>
 <ol style="list-style-type: decimal">
-<li>modal_top - caption at the top of the popup (before all the plots)</li>
-<li>modal_bottom - caption after all the plots</li>
-<li>plot_caption - caption that immediately follows a particular plot</li>
+<li>Call the master rendering function.
+<ol style="list-style-type: decimal">
+<li>
+<code><a href="../reference/generate_html_4_rmd.html">generate_html_4_rmd()</a></code>: renders a single R Markdown file.</li>
+<li>
+<code><a href="../reference/render_all_rmd.html">render_all_rmd()</a></code>: renders all R Markdown files in “modals” directory using <code><a href="../reference/generate_html_4_rmd.html">generate_html_4_rmd()</a></code>.</li>
 </ol>
-<p>Here are the basic steps for adding captions to an infographic chart modal popup.</p>
-<ol style="list-style-type: decimal">
-<li>create a file for each caption</li>
-<li>include the path to the new file in plot_indicators.csv (for plot_caption) or svg_elements.csv (for modal_top or modal_bottom)</li>
+</li>
+<li>
+<code><a href="../reference/generate_html_4_rmd.html">generate_html_4_rmd()</a></code> calls <code><a href="../reference/rmd2html.html">rmd2html()</a></code>, which creates a temporary Markdown file in which all of the R code in the R Markdown File has been executed.</li>
+<li>
+<code><a href="../reference/rmd2html.html">rmd2html()</a></code> opens the temporary Markdown file and then calls <code><a href="../reference/glossarize_md.html">glossarize_md()</a></code>.</li>
+<li>
+<code><a href="../reference/glossarize_md.html">glossarize_md()</a></code> loads up all of the glossary terms in the google sheet where they are stored and then goes through the Markdown file, line by line. Each combination of glossary term and line of the Markdown file is fed into <code>insert_tooltips()</code>.</li>
+<li>If a glossary term is found on a line of the Markdown file, <code>insert_tooltips()</code> inserts tooltip-related tags around that term.</li>
+<li>Once every line of a Markdown file has been gone through, <code><a href="../reference/glossarize_md.html">glossarize_md()</a></code> loads the tooltip Javascript library at the bottom of the file (but only if there is at least one glossary term in the file).</li>
+<li>
+<code><a href="../reference/generate_html_4_rmd.html">generate_html_4_rmd()</a></code> then renders the edited Markdown file to html. This function also renders the original R Markdown file to a temporary html file using <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html">rmarkdown::render()</a></code>, as this is the only way to know what the right Javascript libraries are for any interactive elements in the final html. The entire <strong>head</strong> section of the second html file rewrites the <strong>head</strong> section of the first html file.</li>
+<li>All temporary html and Markdown files are deleted.</li>
 </ol>
 </div>
 
