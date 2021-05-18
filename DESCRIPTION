@@ -12,21 +12,23 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1.9000
 Imports: 
-    tidyverse,
     brew,
-    knitr,
-    rmarkdown,
-    tools,
-    servr,
-    dygraphs,
-    lubridate,
-    stringr,
-    xts,
-    futile.logger,
     bsplus,
+    dygraphs,
+    futile.logger,
+    glue,
+    here,
     htmltools,
+    knitr,
+    lubridate,
     r2d3,
-    readr
+    readr,
+    rmarkdown,
+    servr,
+    stringr,
+    tidyverse,
+    tools,
+    xts
 VignetteBuilder: knitr
 URL: https://github.com/marinebon/infographiq
 BugReports: https://github.com/marinebon/infographiq/issues

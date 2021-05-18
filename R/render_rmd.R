@@ -120,7 +120,7 @@ get_figure_info <- function (figure_id){
         html,
         htmltools::div(
           .noWS = no_ws,
-          style = glue("text-align:{h$css}; display:table-cell;"),
+          style = glue::glue("text-align:{h$css}; display:table-cell;"),
           htmltools::a(
             .noWS = no_ws,
             href = url, target = '_blank',
