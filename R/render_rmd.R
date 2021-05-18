@@ -500,12 +500,12 @@ render_all_rmd <- function (nms = "cinms", interactive_only = F, render_all = F)
       # Save the new version of the sheet
       sheet_url = paste0(cinms_content_url, sheet_names[i])
       new_sheet <- read.csv(sheet_url)
-      new_filename <- paste0(here("data/saved_cinms_content/new_"),sheet_names[i], ".csv")
+      new_filename <- paste0(here::here("data/saved_cinms_content/new_"),sheet_names[i], ".csv")
       write.csv(new_sheet, file = new_filename)
       
       # Check to see if the new version of the sheet matches the saved version, if it doesn't
       # change cinms_content_changed to TRUE
-      saved_filename <- paste0(here("data/saved_cinms_content/saved_"),sheet_names[i], ".csv")
+      saved_filename <- paste0(here::here("data/saved_cinms_content/saved_"),sheet_names[i], ".csv")
       
       if (tools::md5sum(new_filename) != tools::md5sum(saved_filename)){
         cinms_content_changed = TRUE
