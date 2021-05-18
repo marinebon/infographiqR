@@ -4,11 +4,7 @@
 \alias{get_modal_info}
 \title{Generate introductory info for the html of a modal window}
 \usage{
-get_modal_info(
-  rmd = knitr::current_input(),
- 
-    info_modal_links_csv = "https://docs.google.com/spreadsheets/d/1yEuI7BT9fJEcGAFNPM0mCq16nFsbn0b-bNirYPU5W8c/gviz/tq?tqx=out:csv&sheet=info_modal_links"
-)
+get_modal_info(rmd = knitr::current_input(), info_modal_links_csv)
 }
 \arguments{
 \item{rmd}{The name of an input file passed to knit().}
@@ -25,7 +21,7 @@ will work within a rmd file to be knitted.
 }
 \examples{
 \dontrun{
-get_modal_info()
+get_modal_info(info_modal_links_csv = "https://docs.google.com/spreadsheets/d/1yEuI7BT9fJEcGAFNPM0mCq16nFsbn0b-bNirYPU5W8c/gviz/tq?tqx=out:csv&sheet=info_modal_links")
 }
 
 }

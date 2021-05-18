@@ -52,17 +52,7 @@ navbar:
       href: https://marinebon.org/sanctuaries/
 ```
 
-3. The svg folder. The svg folder contains the clickable infographics (see section below on the creation of these images) as well as a csv file that maps the elements of each infographic to a link. Here is that csv file for the the template website ("svg_links_template.csv"):
-
-```{r csv, echo=FALSE}
-info <- read.csv(here::here("inst/template_website/svg/svg_links_template.csv"), header = T)
-info
-```
-
-* svg: file name of image
-* id: clickable element of image
-* title: text to be displayed over clickable element upon mouseover
-* link: link to modal window
+3. The svg folder. The svg folder contains the clickable infographics (see section below on the creation of these images) as well as a csv file that maps the elements of each infographic to a link. 
 
 4. The modals folder. The modals folder contains the R Markdown files that primarily exist to display the data and figures for the website.
 
