@@ -16,7 +16,7 @@ ocnms_get_modal_info <- function(rmd = knitr::current_input(), link_table_csv){
   
   modal_id <- basename(fs::path_ext_remove(rmd))
   row <- readr::read_csv(link_table_csv) %>%
-    dplyr::filter(modal == modal_id)
+    dplyr::filter(svg == modal_id)
   
   if (nrow(row) == 0) stop("Need link in Master_OCNMS_infographic_content:modals Google Sheet!")
   
