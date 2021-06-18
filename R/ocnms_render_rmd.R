@@ -5,18 +5,17 @@
 #' will work within a rmd file to be knitted.
 #'
 #' @param rmd  The name of an input file passed to knit().
-#' @param info_modal_links_csv A hyperlink to the google sheet, in csv format, that contains the modal links info.
 #' @return The function returns a string that is a set of html tags to be inserted into a html file.
 #' @export
 #' @examples \dontrun{
-#' ocnms_get_modal_info(link_table_csv = "svg/svg_links_ocnms.csv")
+#' ocnms_get_modal_info()
 #' }
 #'
-ocnms_get_modal_info <- function(rmd = knitr::current_input(), link_table_csv){
+ocnms_get_modal_info <- function(rmd = knitr::current_input()){
   
   modal_id <- basename(fs::path_ext_remove(rmd))
   print(modal_id)
-  row <- readr::read_csv(link_table_csv) %>%
+  row <- ocnms_get_sheet(sheets_tab = "pages") %>%
     dplyr::filter(svg == modal_id)
   
   if (nrow(row) == 0) stop("Need link in Master_OCNMS_infographic_content:modals Google Sheet!")

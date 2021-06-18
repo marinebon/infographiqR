@@ -4,12 +4,10 @@
 \alias{ocnms_get_modal_info}
 \title{OCNMS version: generate introductory info for the html of a modal window}
 \usage{
-ocnms_get_modal_info(rmd = knitr::current_input(), link_table_csv)
+ocnms_get_modal_info(rmd = knitr::current_input())
 }
 \arguments{
 \item{rmd}{The name of an input file passed to knit().}
-
-\item{info_modal_links_csv}{A hyperlink to the google sheet, in csv format, that contains the modal links info.}
 }
 \value{
 The function returns a string that is a set of html tags to be inserted into a html file.
@@ -21,7 +19,7 @@ will work within a rmd file to be knitted.
 }
 \examples{
 \dontrun{
-ocnms_get_modal_info(link_table_csv = "svg/svg_links_ocnms.csv")
+ocnms_get_modal_info()
 }
 
 }
