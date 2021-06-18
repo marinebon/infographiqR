@@ -45,7 +45,6 @@ ocnms_get_modal_info <- function(rmd = knitr::current_input()){
 #' @param gsheet Link to the target google sheet.
 #' @param sheets_tab The tab of the google sheet to be returned.
 #' @return The function returns the contents of a tab of a google sheet.
-#' @export
 #' @examples \dontrun{
 #' ocnms_get_sheet(sheets_tab = "figures")
 #' }
