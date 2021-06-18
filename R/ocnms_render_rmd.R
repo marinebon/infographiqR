@@ -14,7 +14,6 @@
 ocnms_get_modal_info <- function(rmd = knitr::current_input()){
   
   modal_id <- basename(fs::path_ext_remove(rmd))
-  print(modal_id)
   row <- ocnms_get_sheet(sheets_tab = "pages") %>%
     dplyr::filter(svg == modal_id)
   
