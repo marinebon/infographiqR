@@ -9,13 +9,13 @@
 #' @return The function returns a string that is a set of html tags to be inserted into a html file.
 #' @export
 #' @examples \dontrun{
-#' ocnms_get_modal_info(info_modal_links_csv = "https://docs.google.com/spreadsheets/d/1yEuI7BT9fJEcGAFNPM0mCq16nFsbn0b-bNirYPU5W8c/gviz/tq?tqx=out:csv&sheet=info_modal_links")
+#' ocnms_get_modal_info(link_table_csv = "svg/svg_links_ocnms.csv")
 #' }
 #'
 ocnms_get_modal_info <- function(rmd = knitr::current_input(), link_table_csv){
   
   modal_id <- basename(fs::path_ext_remove(rmd))
-  row <- readr::read_csv(info_modal_links_csv) %>%
+  row <- readr::read_csv(link_table_csv) %>%
     dplyr::filter(modal == modal_id)
   
   if (nrow(row) == 0) stop("Need link in Master_OCNMS_infographic_content:modals Google Sheet!")

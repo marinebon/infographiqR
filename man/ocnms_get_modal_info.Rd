@@ -21,7 +21,7 @@ will work within a rmd file to be knitted.
 }
 \examples{
 \dontrun{
-ocnms_get_modal_info(info_modal_links_csv = "https://docs.google.com/spreadsheets/d/1yEuI7BT9fJEcGAFNPM0mCq16nFsbn0b-bNirYPU5W8c/gviz/tq?tqx=out:csv&sheet=info_modal_links")
+ocnms_get_modal_info(link_table_csv = "svg/svg_links_ocnms.csv")
 }
 
 }
