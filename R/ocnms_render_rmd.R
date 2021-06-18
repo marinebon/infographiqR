@@ -15,6 +15,7 @@
 ocnms_get_modal_info <- function(rmd = knitr::current_input(), link_table_csv){
   
   modal_id <- basename(fs::path_ext_remove(rmd))
+  print(modal_id)
   row <- readr::read_csv(link_table_csv) %>%
     dplyr::filter(svg == modal_id)
   
