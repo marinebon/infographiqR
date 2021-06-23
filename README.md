@@ -40,14 +40,14 @@ install.packages(c("tidyverse", "stringr", "rmarkdown", "dygraphs", "xts", "lubr
 
 # install infographiq from Github
 if (!require('devtools')) install.packages('devtools')
-devtools::install_github('marinebon/infographiq')
+devtools::install_github('marinebon/infographiqR')
 ```
 
   Load the library and create the site.
 
 ```R
 # load
-library(infographiq)
+library(infographiqR)
 
 # run i.e.
 create_info_site(site_title = "Monterey Bay Infographics", render_modals = T)
@@ -59,10 +59,10 @@ We developed this R package using the excellent [`devtools`](https://www.rstudio
 
 ```R
 library('devtools')
-install_local('../infographiq')
+install_local('../infographiqR')
 
 # or
-install('../infographiq")
+install('../infographiqR")
 ```
 
 To build documentation (using roxygen2, and assuming working directory is in 'infographiq')...
