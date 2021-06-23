@@ -165,11 +165,11 @@
 
 <span class="co"># install infographiq from Github</span>
 <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st">'devtools'</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'devtools'</span><span class="op">)</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">'marinebon/infographiq'</span><span class="op">)</span></code></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">'marinebon/infographiqR'</span><span class="op">)</span></code></pre></div>
 <p>Load the library and create the site.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">infographiq</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/marinebon/infographiq">infographiqR</a></span><span class="op">)</span>
 
 <span class="co"># run i.e.</span>
 <span class="fu">create_info_site</span><span class="op">(</span>site_title <span class="op">=</span> <span class="st">"Monterey Bay Infographics"</span>, render_modals <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
@@ -179,10 +179,10 @@
 <a href="#developer-workflow" class="anchor"></a>Developer workflow</h1>
 <p>We developed this R package using the excellent <a href="https://www.rstudio.com/products/rpackages/devtools/"><code>devtools</code></a> package. If you are actively changing your local copy of the infographiq package, ie functions contained in it, you can reload with:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">library</span>(<span class="st">'devtools'</span>)</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">install_local</span>(<span class="st">'../infographiq'</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">install_local</span>(<span class="st">'../infographiqR'</span>)</span>
 <span id="cb3-3"><a href="#cb3-3"></a></span>
 <span id="cb3-4"><a href="#cb3-4"></a><span class="co"># or</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">install</span>(<span class="st">'../infographiq")</span></span></code></pre></div>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">install</span>(<span class="st">'../infographiqR")</span></span></code></pre></div>
 <p>To build documentation (using roxygen2, and assuming working directory is in ‘infographiq’)…</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">document</span><span class="op">(</span><span class="op">)</span></code></pre></div>
