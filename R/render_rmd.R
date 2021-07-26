@@ -306,6 +306,28 @@ glossarize_md <- function(md, md_out = md){
   }
 }
 
+#' Create new site from template
+#'
+#' This function creates a new website from a template stored within the package.
+#'
+#' @param path The directory path where the new site should be located.
+#' @return The output is a directory containing the template version of a site.
+#' @export
+#' @examples \dontrun{
+#' infographiq_template("test_location")
+#' }
+#'
+infographiq_template <- function(path){
+  if (dir.exists(path)){
+    stop(paste("Error: the directory -", path, "- already exists."))
+  }
+  dir_template <- system.file("template_website", package = "infographiqR")
+  
+  file.copy(dir_template, dirname(path), recursive = T)
+  dir_tmp <- file.path(dirname(path), basename(dir_template))
+  file.rename(dir_tmp, path)
+}
+
 #' Insert tooltips into text.
 #'
 #' The purpose of the following function is, for a provided section of text, to

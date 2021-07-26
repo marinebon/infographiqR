@@ -1,0 +1,21 @@
+name: "Template info"
+output_dir: "."
+description: |
+  Template info
+navbar:
+  title: "Template"
+  icon: fa-info
+  left:
+    - text: "Subject 1"
+      href: index.html
+  right:
+    - text: "About"
+      href: https://marinebon.org/infographiq
+output:
+  html_document:
+    theme: lumen # darkly # cosmo # https://bootswatch.com
+    self_contained: no
+    css: libs/styles.css
+    mathjax: null
+    anchor_sections: FALSE
+    

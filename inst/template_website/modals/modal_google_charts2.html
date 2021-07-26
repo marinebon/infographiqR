@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+    <title>Basic Line Chart in Google Charts with a Trend Bar</title>
+    <meta charset="utf-8" />
+
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://noaa-iea.github.io/plotJS-extra/GoogleChartsWrapper.js"></script>
+
+    <script>
+      google.charts.load('current', {packages: ['corechart']});
+
+      google.charts.setOnLoadCallback(function() {
+        GraphWrapper({
+          Google_Spreadsheet_Link: 'https://docs.google.com/spreadsheets/d/132hWrwSsWLKiiekAteJhO2JbaDlNkrTvmQjXDHi3WiY/edit?usp=sharing',
+          YAxisTitle: 'Number of Tourist Visits',
+          threshold_year: 2011,
+          targetElement: 'chart1',
+          YAxisTitle2: '', 
+          twoYAxes: false, 
+          SST: false
+        });  
+      });
+  </script>
+
+	</head>
+	<body>
+
+    <div>
+      <h3 style = "text-align: center;">A Basic Line Chart in Google Charts with a Trend Bar</h3>
+      <div id="chart1"></div>
+    </div>
+    <p>
+    The data behind this Google Chart is contained within <a href = 'https://docs.google.com/spreadsheets/d/132hWrwSsWLKiiekAteJhO2JbaDlNkrTvmQjXDHi3WiY/edit?usp=sharing' target ="=_parent">this Google Sheet</a>. Here is some sample explanatory text about the chart.                  
+  </body>
+</html>

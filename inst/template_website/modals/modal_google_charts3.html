@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Basic Line Chart in Google Charts Using CSV File as Data Source</title>
+  <meta charset="utf-8"/>
+  <!-- The first thing to do is load the initial Google javascript library for charting -->
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <!-- The next thing to do is to define what our Google Chart will be about, which is what the following script section does -->
+  <script type="application/javascript">
+
+    // Load more Google javascript
+    google.charts.load('current', {packages: ['corechart']});
+
+    // Tell the google javascript what to do when it is loaded - when loaded, run a function called drawGID
+    google.charts.setOnLoadCallback(drawGID);
+
+    // Let's define that function drawGID. The function will:
+    //  1. set up the data query in the way that Google needs it (but don't get  the data yet)
+    //  2. Send that data query to another function (called handleQueryResponse) that will actually pull the data and create the graph 
+    function drawGID() {
+      var queryOptions = {
+        csvColumns: ['number', 'number'], // Or whatever the columns in the CSV file are 
+        csvHasHeader: true // This should be false if your CSV file doesn't have a header
+      }
+      var csv_url = 'modal_google_charts3_data.csv';
+      var query = new google.visualization.Query(csv_url, queryOptions);
+      query.send(handleQueryResponse);
+    }
+
+    // Let's set some options for our graph that are going to differ from the defaults
+    var options = {
+      legend: 'bottom', // put the legend below the graph
+      animation: {startup: true, duration:700}, // animate the graph
+      height: 400, // make the graph 400 pixels high
+      chartArea: {top: 10}, // set the height of the chart
+      hAxis: { // options for the X Axis
+          title: "Year", // Set the X Axis title
+          gridlines: {color: 'transparent'}, // no X Axis gridlines
+          format: '####', // No commas in the X Axis labels
+          titleTextStyle: {bold: false, italic: false }}, // Set how the X Axis title looks
+      vAxis: {  // options for the Y Axis
+          title: "Invasive Species Index",  // Set the Y Axis title
+          titleTextStyle: {bold: false, italic: false }, // Set how the Y Axis title looks
+          minorGridlines: {color: 'transparent'}} // No minor Y Axis gridlines
+      };
+
+    // Let's define the function handleQueryResponse that is called by the function drawGID
+    function handleQueryResponse(response) {
+
+      // If something is wrong with the query of the google spreadsheet, report that
+      if (response.isError()) {
+        alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+        return;
+      }
+
+      // Get the data from the google spreadsheet
+      var data = response.getDataTable();
+
+      // Create a line chart (note the use of LineChart in the command) and put that in the div element 'chart_div'
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
+      // Create the graph using the options that we set above
+      chart.draw(data, options);
+    }
+
+  </script>
+</head>
+<body>
+  <!-- Identify where the chart should be drawn. -->
+  <div>
+    <h3 style="text-align:center;">A Basic Line Chart in Google Charts Using a CSV File as Data Source</h3>
+    <div id="chart_div"/>
+  </div>
+    <p>
+    The data behind this Google Chart is contained within <a href = 'modal_google_charts3_data.csv' target ="=_parent">this comma-delimited data file</a>. Here is some sample explanatory text about the chart.
+</body>
+
+</html>

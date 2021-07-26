@@ -1,0 +1,11 @@
+---
+title: "Subject 1"
+params:
+  csv: "icon_link.csv"
+  svg: "illustrator_example.svg"
+---
+
+Replace with your own text. For more information on how to create your own clickable infographics and modal windows, please consult the [Infographiq guide](https://marinebon.org/infographiq/).
+
+```{r svg, child = '_svg-html_child.Rmd'}
+```

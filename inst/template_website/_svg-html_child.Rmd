@@ -1,0 +1,20 @@
+<div class="row">
+<div class="col-md-9">
+<div id = "svg"> </div>
+</div>
+<div class="col-md-3">
+<div id="toc"></div>
+</div>
+</div>
+
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://marinebon.github.io/infographiqJS/libs/infographiq_latest/infographiq.js"></script>
+<link rel="stylesheet" type="text/css" href="https://marinebon.github.io/infographiqJS/libs/infographiq_latest/infographiq.css" />
+<script>
+  link_svg({
+    svg: "`r params$svg`",
+    csv: "`r params$csv`",
+    svg_filter: "`r params$svg_filter`",   
+    toc_style: 'list',
+    text_toggle: 'toggle_off'});
+</script>

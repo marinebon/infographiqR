@@ -3,6 +3,7 @@
 export(generate_html_4_rmd)
 export(get_figure_info)
 export(get_modal_info)
+export(infographiq_template)
 export(md_caption)
 export(ocnms_create_link_table)
 export(ocnms_get_modal_info)
