@@ -42,7 +42,8 @@ render_all_rmd("cinms", interactive_only = T)
 Satellite-derived data is displayed in several of the modal windows, such as in the following example:
 
 ```{r sst_time_series, echo=FALSE}
-library(onmsR) # remotes::install_github("noaa-onms/onmsR")
+remotes::install_github("noaa-onms/onmsR")
+library(onmsR) 
 
 onmsR::plot_metric_timeseries("https://raw.githubusercontent.com/marinebon/cinms/master/data/oceano/statistics_sst_cinms.csv", "sst")
 ```
